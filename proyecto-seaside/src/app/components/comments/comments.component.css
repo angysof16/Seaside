@@ -1,0 +1,17 @@
+.comments-grid {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.comment-paragraph {
+  color: #400101;
+  margin: 0%;
+  font-size: clamp(15px, 1.5vw, 24px);
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 400;
+  text-align: center;    
+}

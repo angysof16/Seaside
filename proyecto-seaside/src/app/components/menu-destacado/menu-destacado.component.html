@@ -1,0 +1,33 @@
+<section class="menu-section">
+
+<h2 class="general-title">
+Menu Destacado
+</h2>
+
+<section class="gallery">
+
+<app-menu-card
+
+*ngFor="let item of menuItems"
+
+[image]="item.image"
+
+[title]="item.title"
+
+[description]="item.description"
+
+>
+
+</app-menu-card>
+
+</section>
+
+<div class="cta-container">
+
+    <a class="general-cta" routerLink="/menu">
+    Ver Menú
+    </a>
+
+</div>
+
+</section>

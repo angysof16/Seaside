@@ -1,0 +1,14 @@
+.about-section {
+  position: relative;
+  margin: 60px 80px;
+  padding-bottom: 50px;
+}
+
+/* Imagen flotante dentro del texto About */
+.img-float-right {
+  float: right;
+  width: 35%;
+  margin: 0 0 1rem 2rem;
+  border-radius: 8px;
+  object-fit: cover;
+}

@@ -1,0 +1,118 @@
+.gallery-figure {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  width: clamp(240px, 28vw, 400px);
+  height: clamp(320px, 38vw, 540px);
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 1;
+  transform: translateY(0px);
+  border-bottom-right-radius: 60px;
+}
+
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Imagen */
+
+.gallery-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.65s ease;
+}
+
+/* Overlay */
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(64, 1, 1, 0.92) 0%,
+    rgba(115, 2, 2, 0.55) 42%,
+    transparent 70%
+  );
+  z-index: 1;
+  transition: background 0.45s ease;
+}
+
+/* Texto */
+
+.card-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: clamp(18px, 2.2vw, 32px);
+  border-left: 3px solid #F2B705;
+  margin: clamp(16px, 2vw, 28px);
+}
+
+/* Título */
+
+.gallery-caption {
+  margin: 0 0 6px 0;
+  font-family: "Island Moments", cursive;
+  font-size: clamp(26px, 3.2vw, 46px);
+  color: #F2B705;
+}
+
+/* Descripción */
+
+.caption-paragraph {
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+  font-size: clamp(15px, 0.95vw, 14px);
+  color: rgba(255, 248, 230, 0.85);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.35s ease 0.05s,
+              max-height 0.4s ease;
+}
+
+/* Hover */
+
+.gallery-figure:hover {
+  border-bottom-right-radius: 40px;
+  box-shadow:
+    0 20px 60px rgba(64, 1, 1, 0.45),
+    0 0 0 1px rgba(242, 183, 5, 0.35);
+}
+
+.gallery-figure:hover .gallery-image {
+  transform: scale(1.07);
+  filter: saturate(1.05) brightness(0.8);
+}
+
+.gallery-figure:hover .card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(64, 1, 1, 0.96) 0%,
+    rgba(115, 2, 2, 0.65) 50%,
+    transparent 75%
+  );
+}
+
+.gallery-figure:hover .caption-paragraph {
+  opacity: 1;
+  max-height: 80px;
+}
+
+/* Animación */
+
+.gallery-figure.visible {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

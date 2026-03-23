@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f1e0;
+}
+
+.general-title {
+  font-family: "Island Moments", cursive;
+  color: #400101;
+  font-size: clamp(44px, 6vw, 76px);
+  text-align: center;
+  font-weight: 100;
+  margin: 10px;
+}
+
+.general-paragraph {
+  color: #400101;
+  margin: 0%;
+  font-size: clamp(15px, 1.5vw, 24px);
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 400;
+}
+
+.general-cta {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+  display: inline-block;
+  text-align: center;
+  background-color: #400101;
+  color: #F2B705;
+  margin-top: 40px;
+  padding: clamp(12px, 1.6vw, 25px) clamp(20px, 2.8vw, 40px);
+  text-decoration: none;
+  font-size: clamp(14px, 1.6vw, 25px);
+  border-radius: 20px;
+}

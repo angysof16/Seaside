@@ -14,12 +14,20 @@
   z-index: 100;
   background: transparent; /* navbar transparente */
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
 }
 
 .navigation-bar .logo {
   padding: 0;
   margin: 0;
+}
+
+.navigation-bar .logo a {
+  display: block;
+  text-decoration: none;
 }
 
 .navigation-bar .logo img {
@@ -44,11 +52,19 @@
   text-decoration: none;
   font-weight: 500;
   display: block;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   text-shadow: 0 1px 6px rgba(255, 255, 255, 1);
 }
 
 .navigation-bar .nav-links li a:hover {
+  background-color: #400101;
+  color: #ffbc4c;
+  text-shadow: none;
+}
+
+.navigation-bar .nav-links li a.active-link {
   background-color: #400101;
   color: #ffbc4c;
   text-shadow: none;
@@ -67,10 +83,14 @@
   background-color: #400101;
   padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.6vw, 25px);
   border-radius: 10px;
-  color: #F2B705;
+  color: #f2b705;
   text-align: center;
   text-decoration: none;
   font-weight: 500;
   display: block;
   transition: background-color 0.3s ease;
+}
+
+.login-link.active-login {
+  background-color: #2d0000;
 }

@@ -5,10 +5,10 @@
     <p><strong>Nombre:</strong> {{ seleccionado.nombre }}</p>
     <p><strong>Descripción:</strong> {{ seleccionado.descripcion }}</p>
     <p><strong>Precio:</strong> {{ seleccionado.precio | currency }}</p>
-    <p><strong>Categoría:</strong> {{ seleccionado.categoria }}</p>
+    <p><strong>Categoría:</strong> {{ seleccionado.categoriaId }}</p>
     <p>
       <strong>Tiempo de Preparación:</strong>
-      {{ seleccionado.tiempoPreparacion }} min
+      {{ seleccionado.tiempoMinutos }} min
     </p>
     <p>
       <strong>Alergenos:</strong>
@@ -19,7 +19,7 @@
       {{ seleccionado.descripcionAlergenos }}
     </p>
     <img
-      [src]="seleccionado.imagenUrl"
+      [src]="seleccionado.imageUrl"
       alt="{{ seleccionado.nombre }}"
       width="200"
     />

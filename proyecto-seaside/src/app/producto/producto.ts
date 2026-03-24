@@ -3,9 +3,9 @@ export interface Producto {
   nombre: string;
   descripcion: string;
   precio: number;
-  categoria: string;
-  imagenUrl?: string;
-  tiempoPreparacion: number;
+  categoriaId: number;
+  imageUrl?: string;
+  tiempoMinutos: number;
   tieneAlergenos: boolean;
   descripcionAlergenos: string;
 }

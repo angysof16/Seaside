@@ -33,13 +33,13 @@
   </div>
 
   <div class="form-group">
-    <label for="categoria">Categoría:</label>
+    <label for="categoriaId">Categoría:</label>
     <input
       type="text"
       id="categoria"
-      name="categoria"
+      name="categoriaId"
       class="form-control"
-      [(ngModel)]="formProducto.categoria"
+      [(ngModel)]="formProducto.categoriaId"
     />
   </div>
 
@@ -48,9 +48,9 @@
     <input
       type="text"
       id="imagenUrl"
-      name="imagenUrl"
+      name="imageUrl"
       class="form-control"
-      [(ngModel)]="formProducto.imagenUrl"
+      [(ngModel)]="formProducto.imageUrl"
     />
   </div>
 
@@ -59,9 +59,9 @@
     <input
       type="number"
       id="tiempoPreparacion"
-      name="tiempoPreparacion"
+      name="tiempoMinutos"
       class="form-control"
-      [(ngModel)]="formProducto.tiempoPreparacion"
+      [(ngModel)]="formProducto.tiempoMinutos"
     />
   </div>
 
@@ -101,8 +101,8 @@
 {{ formProducto.nombre }}
 {{ formProducto.descripcion }}
 {{ formProducto.precio }}
-{{ formProducto.categoria }}
-{{ formProducto.imagenUrl }}
-{{ formProducto.tiempoPreparacion }}
+{{ formProducto.categoriaId }}
+{{ formProducto.imageUrl }}
+{{ formProducto.tiempoMinutos }}
 {{ formProducto.tieneAlergenos }}
 {{ formProducto.descripcionAlergenos }}

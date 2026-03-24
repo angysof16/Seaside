@@ -20,6 +20,7 @@ import { ProductoTableComponent } from './producto/producto-table/producto-table
 import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
 import { ProductoFormComponent } from './producto/producto-form/producto-form.component';
 import { FormsModule } from '@angular/forms';
+import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     ProductoTableComponent,
     ProductoDetalleComponent,
     ProductoFormComponent,
+    ErrorPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

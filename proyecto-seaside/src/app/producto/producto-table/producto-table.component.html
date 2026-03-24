@@ -20,15 +20,15 @@
       <td>{{ producto.nombre }}</td>
       <td>{{ producto.descripcion }}</td>
       <td>{{ producto.precio | currency }}</td>
-      <td>{{ producto.categoria }}</td>
+      <td>{{ producto.categoriaId }}</td>
       <td>
         <img
-          [src]="producto.imagenUrl"
+          [src]="producto.imageUrl"
           alt="{{ producto.nombre }}"
           width="100"
         />
       </td>
-      <td>{{ producto.tiempoPreparacion }} min</td>
+      <td>{{ producto.tiempoMinutos }} min</td>
       <td>{{ producto.tieneAlergenos ? "Sí" : "No" }}</td>
       <td>{{ producto.descripcionAlergenos }}</td>
       <td>

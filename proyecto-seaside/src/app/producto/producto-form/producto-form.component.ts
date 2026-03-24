@@ -30,8 +30,8 @@ export class ProductoFormComponent implements OnChanges {
     nombre: '',
     descripcion: '',
     precio: 0,
-    categoria: '',
-    tiempoPreparacion: 0,
+    categoriaId: 0,
+    tiempoMinutos: 0,
     tieneAlergenos: false,
     descripcionAlergenos: '',
   };
@@ -67,8 +67,8 @@ export class ProductoFormComponent implements OnChanges {
       nombre: '',
       descripcion: '',
       precio: 0,
-      categoria: '',
-      tiempoPreparacion: 0,
+      categoriaId: 0,
+      tiempoMinutos: 0,
       tieneAlergenos: false,
       descripcionAlergenos: '',
     };

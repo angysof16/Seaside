@@ -12,6 +12,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { MenuDestacadoComponent } from './components/menu-destacado/menu-destacado.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
+import { ProductoTableComponent } from './producto/producto-table/producto-table.component';
+import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
+import { ProductoFormComponent } from './producto/producto-form/producto-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,13 @@ import { MenuCardComponent } from './components/menu-card/menu-card.component';
     FooterComponent,
     LandingComponent,
     MenuDestacadoComponent,
-    MenuCardComponent
+    MenuCardComponent,
+    ProductoTableComponent,
+    ProductoDetalleComponent,
+    ProductoFormComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

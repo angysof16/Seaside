@@ -1,0 +1,108 @@
+<form #productoForm="ngForm" (ngSubmit)="addProducto(productoForm)">
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      class="form-control"
+      [(ngModel)]="formProducto.nombre"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="descripcion">Descripción:</label>
+    <textarea
+      id="descripcion"
+      name="descripcion"
+      class="form-control"
+      required
+      [(ngModel)]="formProducto.descripcion"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="precio">Precio:</label>
+    <input
+      type="number"
+      id="precio"
+      name="precio"
+      class="form-control"
+      [(ngModel)]="formProducto.precio"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="categoria">Categoría:</label>
+    <input
+      type="text"
+      id="categoria"
+      name="categoria"
+      class="form-control"
+      [(ngModel)]="formProducto.categoria"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="imagenUrl">URL de la Imagen:</label>
+    <input
+      type="text"
+      id="imagenUrl"
+      name="imagenUrl"
+      class="form-control"
+      [(ngModel)]="formProducto.imagenUrl"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="tiempoPreparacion">Tiempo de Preparación (min):</label>
+    <input
+      type="number"
+      id="tiempoPreparacion"
+      name="tiempoPreparacion"
+      class="form-control"
+      [(ngModel)]="formProducto.tiempoPreparacion"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="tieneAlergenos">¿Tiene Alérgenos?</label>
+    <input
+      type="checkbox"
+      id="tieneAlergenos"
+      name="tieneAlergenos"
+      class="form-check-input"
+      [(ngModel)]="formProducto.tieneAlergenos"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="descripcionAlergenos">Descripción de Alérgenos:</label>
+    <textarea
+      id="descripcionAlergenos"
+      name="descripcionAlergenos"
+      class="form-control"
+      [(ngModel)]="formProducto.descripcionAlergenos"
+    ></textarea>
+  </div>
+
+  <button type="submit" [disabled]="!productoForm.form.valid">
+    {{ editando ? "Actualizar" : "Guardar" }}
+  </button>
+  <button
+    *ngIf="editando"
+    type="button"
+    class="btn btn-secondary"
+    (click)="cancelarEdicion()"
+  >
+    Cancelar
+  </button>
+</form>
+{{ formProducto.nombre }}
+{{ formProducto.descripcion }}
+{{ formProducto.precio }}
+{{ formProducto.categoria }}
+{{ formProducto.imagenUrl }}
+{{ formProducto.tiempoPreparacion }}
+{{ formProducto.tieneAlergenos }}
+{{ formProducto.descripcionAlergenos }}

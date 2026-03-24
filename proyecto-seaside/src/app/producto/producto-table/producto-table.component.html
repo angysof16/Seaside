@@ -1,0 +1,57 @@
+<h3>Productos</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Categoría</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Tiempo de Preparación</th>
+      <th scope="col">Alergenos</th>
+      <th scope="col">Descripción de Alergenos</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productList">
+      <td>{{ producto.id }}</td>
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td>{{ producto.precio | currency }}</td>
+      <td>{{ producto.categoria }}</td>
+      <td>
+        <img
+          [src]="producto.imagenUrl"
+          alt="{{ producto.nombre }}"
+          width="100"
+        />
+      </td>
+      <td>{{ producto.tiempoPreparacion }} min</td>
+      <td>{{ producto.tieneAlergenos ? "Sí" : "No" }}</td>
+      <td>{{ producto.descripcionAlergenos }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="mostrarProducto(producto)">
+          Ver Detalles
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-warning" (click)="editarProducto(producto)">
+          Actualizar
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="eliminarProducto(producto)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-producto-detalle [seleccionado]="seleccionado"></app-producto-detalle>
+<app-producto-form
+  [productoEditar]="productoEditar"
+  (addProductoEvent)="agregarProducto($event)"
+  (updateProductoEvent)="actualizarProducto($event)"
+></app-producto-form>

@@ -1,0 +1,31 @@
+<div>
+  <h4>Detalles del Producto</h4>
+  <ng-container *ngIf="seleccionado">
+    <p><strong>ID:</strong> {{ seleccionado.id }}</p>
+    <p><strong>Nombre:</strong> {{ seleccionado.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ seleccionado.descripcion }}</p>
+    <p><strong>Precio:</strong> {{ seleccionado.precio | currency }}</p>
+    <p><strong>Categoría:</strong> {{ seleccionado.categoria }}</p>
+    <p>
+      <strong>Tiempo de Preparación:</strong>
+      {{ seleccionado.tiempoPreparacion }} min
+    </p>
+    <p>
+      <strong>Alergenos:</strong>
+      {{ seleccionado.tieneAlergenos ? "Sí" : "No" }}
+    </p>
+    <p>
+      <strong>Descripción de Alergenos:</strong>
+      {{ seleccionado.descripcionAlergenos }}
+    </p>
+    <img
+      [src]="seleccionado.imagenUrl"
+      alt="{{ seleccionado.nombre }}"
+      width="200"
+    />
+  </ng-container>
+
+  <ng-container *ngIf="!seleccionado">
+    <p>Seleccione un producto para ver los detalles.</p>
+  </ng-container>
+</div>

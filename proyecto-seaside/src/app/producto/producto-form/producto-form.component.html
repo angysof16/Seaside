@@ -1,108 +1,117 @@
 <form #productoForm="ngForm" (ngSubmit)="addProducto(productoForm)">
-  <div class="form-group">
-    <label for="nombre">Nombre:</label>
-    <input
-      type="text"
-      id="nombre"
-      name="nombre"
-      class="form-control"
-      [(ngModel)]="formProducto.nombre"
-    />
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label for="nombre">Nombre *</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        required
+        [(ngModel)]="formProducto.nombre"
+        placeholder="Nombre del producto"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Precio *</label>
+      <input
+        type="number"
+        id="precio"
+        name="precio"
+        required
+        min="0"
+        [(ngModel)]="formProducto.precio"
+        placeholder="0"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="categoriaId">Categoría ID *</label>
+      <input
+        type="number"
+        id="categoriaId"
+        name="categoriaId"
+        required
+        min="1"
+        [(ngModel)]="formProducto.categoriaId"
+        placeholder="1"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="tiempoMinutos">Tiempo (min) *</label>
+      <input
+        type="number"
+        id="tiempoMinutos"
+        name="tiempoMinutos"
+        required
+        min="1"
+        [(ngModel)]="formProducto.tiempoMinutos"
+        placeholder="30"
+      />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="descripcion">Descripción *</label>
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        required
+        rows="3"
+        [(ngModel)]="formProducto.descripcion"
+        placeholder="Describe el plato..."
+      ></textarea>
+    </div>
+
+    <div class="form-group full-width">
+      <label for="imageUrl">URL de la imagen</label>
+      <input
+        type="text"
+        id="imageUrl"
+        name="imageUrl"
+        [(ngModel)]="formProducto.imageUrl"
+        placeholder="https://..."
+      />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="descripcionAlergenos">Descripción de alérgenos</label>
+      <input
+        type="text"
+        id="descripcionAlergenos"
+        name="descripcionAlergenos"
+        [(ngModel)]="formProducto.descripcionAlergenos"
+        placeholder="Ej: Gluten, Marisco, Pescado (deja vacío si no aplica)"
+      />
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          name="tieneAlergenos"
+          [(ngModel)]="formProducto.tieneAlergenos"
+        />
+        <span>¿Tiene alérgenos?</span>
+      </label>
+    </div>
+
   </div>
 
-  <div class="form-group">
-    <label for="descripcion">Descripción:</label>
-    <textarea
-      id="descripcion"
-      name="descripcion"
-      class="form-control"
-      required
-      [(ngModel)]="formProducto.descripcion"
-    ></textarea>
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" [disabled]="productoForm.invalid">
+      {{ editando ? '✓ Actualizar' : '+ Guardar' }}
+    </button>
+    <button
+      *ngIf="editando"
+      type="button"
+      class="btn-cancel"
+      (click)="cancelarEdicion()"
+    >
+      Cancelar
+    </button>
   </div>
 
-  <div class="form-group">
-    <label for="precio">Precio:</label>
-    <input
-      type="number"
-      id="precio"
-      name="precio"
-      class="form-control"
-      [(ngModel)]="formProducto.precio"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="categoriaId">Categoría:</label>
-    <input
-      type="text"
-      id="categoria"
-      name="categoriaId"
-      class="form-control"
-      [(ngModel)]="formProducto.categoriaId"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="imagenUrl">URL de la Imagen:</label>
-    <input
-      type="text"
-      id="imagenUrl"
-      name="imageUrl"
-      class="form-control"
-      [(ngModel)]="formProducto.imageUrl"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="tiempoPreparacion">Tiempo de Preparación (min):</label>
-    <input
-      type="number"
-      id="tiempoPreparacion"
-      name="tiempoMinutos"
-      class="form-control"
-      [(ngModel)]="formProducto.tiempoMinutos"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="tieneAlergenos">¿Tiene Alérgenos?</label>
-    <input
-      type="checkbox"
-      id="tieneAlergenos"
-      name="tieneAlergenos"
-      class="form-check-input"
-      [(ngModel)]="formProducto.tieneAlergenos"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="descripcionAlergenos">Descripción de Alérgenos:</label>
-    <textarea
-      id="descripcionAlergenos"
-      name="descripcionAlergenos"
-      class="form-control"
-      [(ngModel)]="formProducto.descripcionAlergenos"
-    ></textarea>
-  </div>
-
-  <button type="submit" [disabled]="!productoForm.form.valid">
-    {{ editando ? "Actualizar" : "Guardar" }}
-  </button>
-  <button
-    *ngIf="editando"
-    type="button"
-    class="btn btn-secondary"
-    (click)="cancelarEdicion()"
-  >
-    Cancelar
-  </button>
 </form>
-{{ formProducto.nombre }}
-{{ formProducto.descripcion }}
-{{ formProducto.precio }}
-{{ formProducto.categoriaId }}
-{{ formProducto.imageUrl }}
-{{ formProducto.tiempoMinutos }}
-{{ formProducto.tieneAlergenos }}
-{{ formProducto.descripcionAlergenos }}

@@ -1,7 +1,7 @@
-<header class="navigation-bar" id="navbar">
+<header class="navigation-bar" id="navbar" [class.scrolled-nav]="isScrolled">
   <figure class="logo">
     <a routerLink="/" aria-label="Ir al inicio">
-      <img src="assets/IMGS/seasideLogo.png" alt="Logo" />
+      <img src="assets/IMGS/seasideLogo.png" alt="Logo SeaSide" />
     </a>
   </figure>
 
@@ -13,50 +13,39 @@
           routerLink="/"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-        >
-          Home
-        </a>
-      </li>
-      <li>
-        <a class="page-link" routerLink="/menu" routerLinkActive="active-link">
-          Menú
-        </a>
+          [class.scrolled]="isScrolled"
+        >Home</a>
       </li>
       <li>
         <a
           class="page-link"
-          routerLink="/productos"
+          routerLink="/menu"
           routerLinkActive="active-link"
-        >
-          Productos
-        </a>
+          [class.scrolled]="isScrolled"
+        >Menú</a>
       </li>
       <li>
         <a
           class="page-link"
           routerLink="/contacto"
           routerLinkActive="active-link"
-        >
-          Contáctanos
-        </a>
+          [class.scrolled]="isScrolled"
+        >Contáctanos</a>
       </li>
       <li>
         <a
           class="page-link"
           routerLink="/visitanos"
           routerLinkActive="active-link"
-        >
-          Visítanos
-        </a>
+          [class.scrolled]="isScrolled"
+        >Visítanos</a>
       </li>
       <li>
         <a
           class="login-link"
           routerLink="/login"
           routerLinkActive="active-login"
-        >
-          Log in
-        </a>
+        >Log in</a>
       </li>
     </ul>
   </nav>

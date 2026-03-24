@@ -1,4 +1,284 @@
-.page-shell {
-  min-height: 60vh;
-  padding: 8rem 1.25rem 2rem;
+/* ── Hero ─────────────────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  width: 100%;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url('/assets/IMGS/mainBackgroundImage2.jpeg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.page-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #F2B705;
+  font-size: clamp(70px, 16vw, 200px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 3;
+}
+
+.hero-wave svg { display: block; width: 100%; height: 80px; }
+.hero-wave path { fill: #f8f1e0; }
+
+/* ── Main ─────────────────────────────────────────────────── */
+.contact-main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+  width: 100%;
+}
+
+.contact-intro {
+  max-width: 700px;
+  margin-bottom: 48px;
+}
+
+.contact-intro p {
+  font-size: clamp(15px, 1.4vw, 20px);
+  line-height: 1.8;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+/* ── Form card ────────────────────────────────────────────── */
+.contact-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.10);
+}
+
+.contact-card-title {
+  font-family: "Island Moments", cursive;
+  font-weight: 100;
+  color: #400101;
+  font-size: clamp(38px, 5vw, 56px);
+  line-height: 1;
+  margin: 0 0 28px 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  font-weight: 700;
+  color: #400101;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  font-weight: 300;
+  color: #400101;
+  background: #f8f1e0;
+  border: 1.5px solid rgba(64, 1, 1, 0.18);
+  border-radius: 10px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #D97904;
+  box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.15);
+  background: #fff;
+}
+
+.form-group textarea { resize: vertical; }
+
+.contact-submit {
+  background: linear-gradient(135deg, #400101, #730202);
+  color: #F2B705;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.contact-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(64, 1, 1, 0.3);
+}
+
+.contact-submit.enviado {
+  background: linear-gradient(135deg, #1a4d00, #2d7a00);
+}
+
+/* ── Info column ──────────────────────────────────────────── */
+.info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: #400101;
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  border: 1px solid rgba(242, 183, 5, 0.15);
+  border-bottom: 3px solid transparent;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(64, 1, 1, 0.35);
+  border-color: #F2B705;
+}
+
+.info-icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(242, 183, 5, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon-wrap svg { width: 20px; height: 20px; }
+
+.info-text { display: flex; flex-direction: column; gap: 4px; }
+
+.info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #F2B705;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.info-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+/* Gold card */
+.info-card-gold {
+  background: #F2B705;
+  border-color: rgba(64, 1, 1, 0.12);
+  align-items: center;
+}
+
+.info-icon-dark { background: rgba(64, 1, 1, 0.12); }
+
+.info-text-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 12px;
+}
+
+.info-label-dark  { color: #400101; }
+.info-value-dark  { color: #400101; opacity: 0.75; font-size: 13px; }
+
+.info-cta-btn {
+  flex-shrink: 0;
+  background: #400101;
+  color: #F2B705;
+  border-radius: 10px;
+  padding: 8px 18px;
+  text-decoration: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.info-cta-btn:hover { opacity: 0.88; }
+
+/* ── Keyframes ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+  .contact-grid   { grid-template-columns: 1fr; }
+  .form-row-2     { grid-template-columns: 1fr; }
+  .contact-main   { padding: 48px 24px 60px; }
 }

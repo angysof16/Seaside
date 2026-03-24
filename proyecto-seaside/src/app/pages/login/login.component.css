@@ -1,27 +1,143 @@
-.login-page {
-  min-height: 60vh;
-  display: grid;
-  place-content: center;
-  gap: 1rem;
-  text-align: center;
-  padding: 8rem 1.25rem 2rem;
+.auth-hero {
+  position: relative;
+  width: 100%;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url('/assets/IMGS/mainBackgroundImage2.jpeg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
-.login-page h1 {
+.auth-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.auth-hero-content { position: relative; z-index: 2; text-align: center; }
+
+.auth-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #F2B705;
+  font-size: clamp(80px, 18vw, 200px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 3; }
+.hero-wave svg { display: block; width: 100%; height: 80px; }
+.hero-wave path { fill: #f8f1e0; }
+
+.auth-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px 24px 80px;
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.10);
+}
+
+.auth-title {
+  font-family: "Island Moments", cursive;
+  font-weight: 100;
   color: #400101;
-  margin: 0;
+  font-size: clamp(38px, 5vw, 52px);
+  line-height: 1;
+  margin: 0 0 28px 0;
 }
 
-.login-page p {
-  margin: 0;
-  color: #2d0000;
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.back-home {
-  justify-self: center;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  font-weight: 700;
+  color: #400101;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  font-weight: 300;
+  color: #400101;
+  background: #f8f1e0;
+  border: 1.5px solid rgba(64, 1, 1, 0.18);
+  border-radius: 10px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #D97904;
+  box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.15);
+  background: #fff;
+}
+
+.auth-btn {
+  margin-top: 6px;
+  background: linear-gradient(135deg, #400101, #730202);
+  color: #F2B705;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(64, 1, 1, 0.3);
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #8a6060;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.auth-switch a {
+  color: #D97904;
+  font-weight: 600;
   text-decoration: none;
-  background-color: #400101;
-  color: #f2b705;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+}
+
+.auth-switch a:hover { text-decoration: underline; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

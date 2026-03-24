@@ -1,31 +1,41 @@
-<div>
-  <h4>Detalles del Producto</h4>
-  <ng-container *ngIf="seleccionado">
-    <p><strong>ID:</strong> {{ seleccionado.id }}</p>
-    <p><strong>Nombre:</strong> {{ seleccionado.nombre }}</p>
-    <p><strong>Descripción:</strong> {{ seleccionado.descripcion }}</p>
-    <p><strong>Precio:</strong> {{ seleccionado.precio | currency }}</p>
-    <p><strong>Categoría:</strong> {{ seleccionado.categoriaId }}</p>
-    <p>
-      <strong>Tiempo de Preparación:</strong>
-      {{ seleccionado.tiempoMinutos }} min
-    </p>
-    <p>
-      <strong>Alergenos:</strong>
-      {{ seleccionado.tieneAlergenos ? "Sí" : "No" }}
-    </p>
-    <p>
-      <strong>Descripción de Alergenos:</strong>
-      {{ seleccionado.descripcionAlergenos }}
-    </p>
-    <img
-      [src]="seleccionado.imageUrl"
-      alt="{{ seleccionado.nombre }}"
-      width="200"
-    />
-  </ng-container>
+<div class="detalle-card" *ngIf="seleccionado">
 
-  <ng-container *ngIf="!seleccionado">
-    <p>Seleccione un producto para ver los detalles.</p>
-  </ng-container>
+  <div class="detalle-img-wrap" *ngIf="seleccionado.imageUrl">
+    <img [src]="seleccionado.imageUrl" [alt]="seleccionado.nombre" class="detalle-img" />
+  </div>
+
+  <div class="detalle-body">
+    <h3 class="detalle-nombre">{{ seleccionado.nombre }}</h3>
+
+    <div class="detalle-grid">
+      <div class="detalle-item">
+        <span class="detalle-label">ID</span>
+        <span class="detalle-value">{{ seleccionado.id }}</span>
+      </div>
+      <div class="detalle-item">
+        <span class="detalle-label">Precio</span>
+        <span class="detalle-value price">{{ seleccionado.precio | currency:'COP':'$':'1.0-0' }}</span>
+      </div>
+      <div class="detalle-item">
+        <span class="detalle-label">Categoría</span>
+        <span class="detalle-value">{{ seleccionado.categoriaId }}</span>
+      </div>
+      <div class="detalle-item">
+        <span class="detalle-label">Tiempo</span>
+        <span class="detalle-value">{{ seleccionado.tiempoMinutos }} min</span>
+      </div>
+      <div class="detalle-item full">
+        <span class="detalle-label">Descripción</span>
+        <span class="detalle-value">{{ seleccionado.descripcion }}</span>
+      </div>
+      <div class="detalle-item full">
+        <span class="detalle-label">Alérgenos</span>
+        <span class="detalle-value alerg" *ngIf="seleccionado.tieneAlergenos">
+          ⚠ {{ seleccionado.descripcionAlergenos || 'Contiene alérgenos' }}
+        </span>
+        <span class="detalle-value" *ngIf="!seleccionado.tieneAlergenos">Sin alérgenos</span>
+      </div>
+    </div>
+  </div>
+
 </div>

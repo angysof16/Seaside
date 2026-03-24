@@ -5,4 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.css'],
 })
-export class ContactoComponent {}
+export class ContactoComponent {
+
+  mensajeEnviado = false;
+
+  enviarMensaje(): void {
+    this.mensajeEnviado = true;
+    setTimeout(() => (this.mensajeEnviado = false), 3000);
+  }
+}

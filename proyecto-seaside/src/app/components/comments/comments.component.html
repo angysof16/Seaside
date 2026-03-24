@@ -1,27 +1,20 @@
 <section id="Comments">
 
-<h3 class="general-title">
-Comentarios
-</h3>
+  <h3 class="general-title">Comentarios</h3>
 
-<p class="comment-paragraph">
-Si nos has visitado y te gustó la experiencia...
-</p>
+  <p class="comment-paragraph">
+    Si nos has visitado y te gustó la experiencia o tienes alguna
+    recomendación que darnos, por favor deja tu comentario:
+  </p>
 
-<div class="comments-grid">
+  <div class="comments-grid">
 
     <app-comment-card
+      *ngFor="let comment of comments"
+      [text]="comment.text"
+      [author]="comment.author"
+    ></app-comment-card>
 
-    *ngFor="let comment of comments"
-
-    [text]="comment.text"
-
-    [author]="comment.author"
-
-    >
-
-    </app-comment-card>
-
-</div>
+  </div>
 
 </section>

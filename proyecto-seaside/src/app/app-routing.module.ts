@@ -9,13 +9,13 @@ import { ProductoTableComponent } from './producto/producto-table/producto-table
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent, pathMatch: 'full' },
-  { path: 'menu', component: MenuComponent },
-  { path: 'productsListing', component: ProductoTableComponent },
-  { path: 'contacto', component: ContactoComponent },
-  { path: 'visitanos', component: VisitanosComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: ErrorPageComponent },
+  { path: '',             component: LandingComponent,      pathMatch: 'full' },
+  { path: 'menu',         component: MenuComponent },
+  { path: 'productos',    component: ProductoTableComponent },
+  { path: 'contacto',     component: ContactoComponent },
+  { path: 'visitanos',    component: VisitanosComponent },
+  { path: 'login',        component: LoginComponent },
+  { path: '**',           component: ErrorPageComponent },
 ];
 
 @NgModule({

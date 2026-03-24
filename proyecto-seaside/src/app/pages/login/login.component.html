@@ -1,5 +1,53 @@
-<section class="login-page">
-  <h1>Iniciar sesion</h1>
-  <p>Esta seccion esta en construccion. Pronto podras acceder a tu cuenta.</p>
-  <a routerLink="/" class="back-home">Volver al inicio</a>
-</section>
+<div class="auth-hero">
+  <div class="auth-hero-overlay"></div>
+  <div class="auth-hero-content">
+    <h1 class="auth-hero-title">Bienvenido</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <h2 class="auth-title">Iniciar sesión</h2>
+
+    <form class="auth-form" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="correo">Correo electrónico</label>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          [(ngModel)]="correo"
+          placeholder="correo&#64;ejemplo.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <input
+          type="password"
+          id="contrasena"
+          name="contrasena"
+          [(ngModel)]="contrasena"
+          placeholder="Tu contraseña"
+          required
+        />
+      </div>
+
+      <button type="submit" class="auth-btn">Ingresar</button>
+    </form>
+
+    <p class="auth-switch">
+      Esta sección está en construcción. Pronto podrás acceder a tu cuenta.
+    </p>
+
+    <p class="auth-switch">
+      <a routerLink="/">← Volver al inicio</a>
+    </p>
+  </div>
+</main>

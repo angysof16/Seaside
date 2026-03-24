@@ -1,0 +1,27 @@
+.login-page {
+  min-height: 60vh;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 8rem 1.25rem 2rem;
+}
+
+.login-page h1 {
+  color: #400101;
+  margin: 0;
+}
+
+.login-page p {
+  margin: 0;
+  color: #2d0000;
+}
+
+.back-home {
+  justify-self: center;
+  text-decoration: none;
+  background-color: #400101;
+  color: #f2b705;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+}

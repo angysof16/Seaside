@@ -10,6 +10,10 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { MenuComponent } from './pages/menu/menu.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+import { VisitanosComponent } from './pages/visitanos/visitanos.component';
+import { LoginComponent } from './pages/login/login.component';
 import { MenuDestacadoComponent } from './components/menu-destacado/menu-destacado.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { ProductoTableComponent } from './producto/producto-table/producto-table.component';
@@ -27,6 +31,10 @@ import { FormsModule } from '@angular/forms';
     CommentCardComponent,
     FooterComponent,
     LandingComponent,
+    MenuComponent,
+    ContactoComponent,
+    VisitanosComponent,
+    LoginComponent,
     MenuDestacadoComponent,
     MenuCardComponent,
     ProductoTableComponent,

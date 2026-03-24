@@ -1,15 +1,63 @@
 <header class="navigation-bar" id="navbar">
   <figure class="logo">
-    <img src="assets/IMGS/seasideLogo.png" alt="Logo" />
+    <a routerLink="/" aria-label="Ir al inicio">
+      <img src="assets/IMGS/seasideLogo.png" alt="Logo" />
+    </a>
   </figure>
 
   <nav>
     <ul class="nav-links">
-      <li><a class="page-link" routerLink="/">Home</a></li>
-      <li><a class="page-link" routerLink="/menu">Menú</a></li>
-      <li><a class="page-link" routerLink="/contacto">Contáctanos</a></li>
-      <li><a class="page-link" routerLink="/visitanos">Visítanos</a></li>
-      <li><a class="login-link" routerLink="/login">Log in</a></li>
+      <li>
+        <a
+          class="page-link"
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a class="page-link" routerLink="/menu" routerLinkActive="active-link">
+          Menú
+        </a>
+      </li>
+      <li>
+        <a
+          class="page-link"
+          routerLink="/productos"
+          routerLinkActive="active-link"
+        >
+          Productos
+        </a>
+      </li>
+      <li>
+        <a
+          class="page-link"
+          routerLink="/contacto"
+          routerLinkActive="active-link"
+        >
+          Contáctanos
+        </a>
+      </li>
+      <li>
+        <a
+          class="page-link"
+          routerLink="/visitanos"
+          routerLinkActive="active-link"
+        >
+          Visítanos
+        </a>
+      </li>
+      <li>
+        <a
+          class="login-link"
+          routerLink="/login"
+          routerLinkActive="active-login"
+        >
+          Log in
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

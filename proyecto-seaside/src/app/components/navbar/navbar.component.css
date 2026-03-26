@@ -71,7 +71,7 @@
   text-shadow: none;
 }
 
-/* Scrolled state (applied via TS) */
+//scrolled
 .navigation-bar .nav-links .page-link.scrolled {
   text-shadow: none;
   color: #400101;

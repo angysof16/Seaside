@@ -172,4 +172,24 @@ export class ProductoService {
   findById(id: number): Producto | undefined {
     return this.productList.find((producto) => producto.id === id);
   }
+  // Añadir estos tres métodos al servicio:
+
+  add(producto: Producto): void {
+    const maxId = this.productList.reduce((max, p) => Math.max(max, p.id), 0);
+    producto.id = maxId + 1;
+    this.productList = [...this.productList, producto];
+  }
+
+  update(producto: Producto): void {
+    const index = this.productList.findIndex(p => p.id === producto.id);
+    if (index !== -1) {
+      const updated = [...this.productList];
+      updated[index] = { ...producto };
+      this.productList = updated;
+    }
+  }
+
+  delete(id: number): void {
+    this.productList = this.productList.filter(p => p.id !== id);
+  }
 }

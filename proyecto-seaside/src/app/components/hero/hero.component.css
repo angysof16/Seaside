@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Usar la carpeta correcta: src/assets/IMGS */
+
   background-image: url('/assets/IMGS/mainBackgroundImage2.jpeg');
   background-attachment: fixed;
   background-size: cover;

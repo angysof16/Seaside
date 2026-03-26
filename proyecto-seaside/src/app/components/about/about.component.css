@@ -8,7 +8,6 @@
   overflow: hidden;
 }
 
-/* Imagen flotante dentro del texto About */
 .img-float-right {
   float: right;
   width: 35%;

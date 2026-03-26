@@ -1,0 +1,60 @@
+.form-page-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.form-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(52px, 8vw, 90px);
+  font-weight: 100;
+  color: #400101;
+  line-height: 1;
+  margin: 0;
+}
+
+.admin-subtitle {
+  font-size: 15px;
+  color: #8a6060;
+  margin: 4px 0 0;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+}
+
+.btn-back {
+  background-color: #400101;
+  color: #F2B705;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 14px;
+  transition: filter 0.2s;
+  white-space: nowrap;
+}
+
+.btn-back:hover { filter: brightness(1.15); }
+
+.form-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.08);
+}
+
+@media (max-width: 600px) {
+  .form-page-wrapper { padding: 100px 20px 60px; }
+  .form-section { padding: 24px 20px; }
+}

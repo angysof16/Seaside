@@ -20,6 +20,7 @@ export class ProductoFormComponent implements OnChanges {
 
   @Output() addProductoEvent    = new EventEmitter<Producto>();
   @Output() updateProductoEvent = new EventEmitter<Producto>();
+  @Output() cancelarEvent = new EventEmitter<void>();
 
   editando = false;
 
@@ -41,7 +42,6 @@ export class ProductoFormComponent implements OnChanges {
       this.updateProductoEvent.emit(producto);
       this.editando = false;
     } else {
-      // Auto-assign a temporary id (the table component can override this)
       producto.id = Date.now();
       this.addProductoEvent.emit(producto);
     }
@@ -51,10 +51,10 @@ export class ProductoFormComponent implements OnChanges {
 
   cancelarEdicion(): void {
     this.editando = false;
-    // resetForm without a NgForm reference – just clear the model
     this.formProducto = this.emptyForm();
+    this.cancelarEvent.emit();   // ← línea nueva
   }
-
+  
   private resetForm(form: NgForm): void {
     this.formProducto = this.emptyForm();
     form.resetForm(this.formProducto);

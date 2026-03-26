@@ -1,27 +1,20 @@
 <div class="admin-wrapper">
 
-  <!-- Header -->
   <div class="admin-header">
     <div>
       <h1 class="admin-title">Gestión de Menú</h1>
       <p class="admin-subtitle">Administra los productos del restaurante</p>
     </div>
-    <a class="btn-back" routerLink="/">← Volver al sitio</a>
+    <div class="header-actions">
+      <a class="btn-nuevo" routerLink="/productos/nuevo">+ Nuevo Producto</a>
+      <a class="btn-back" routerLink="/">← Volver al sitio</a>
+    </div>
   </div>
 
-  <!-- Formulario (crear / editar) -->
-  <section class="form-section">
-    <h2 class="section-heading">{{ productoEditar ? 'Editar Producto' : 'Nuevo Producto' }}</h2>
-    <app-producto-form
-      [productoEditar]="productoEditar"
-      (addProductoEvent)="agregarProducto($event)"
-      (updateProductoEvent)="actualizarProducto($event)"
-    ></app-producto-form>
-  </section>
-
-  <!-- Tabla -->
   <section class="table-section">
-    <h2 class="section-heading">Productos <span class="count-badge">{{ productList?.length }}</span></h2>
+    <h2 class="section-heading">
+      Productos <span class="count-badge">{{ productList.length }}</span>
+    </h2>
 
     <div class="tabla-wrapper">
       <table class="tabla-menu">
@@ -55,29 +48,23 @@
             </td>
             <td class="col-alerg">
               <span class="alerg-yes" *ngIf="producto.tieneAlergenos">⚠ Sí</span>
-              <span class="alerg-no" *ngIf="!producto.tieneAlergenos">—</span>
+              <span class="alerg-no"  *ngIf="!producto.tieneAlergenos">—</span>
             </td>
             <td>
               <div class="action-btns">
-                <button class="btn-ver"   (click)="mostrarProducto(producto)">👁 Ver</button>
-                <button class="btn-edit"  (click)="editarProducto(producto)">✏ Editar</button>
+                <button class="btn-ver"    (click)="verDetalle(producto)">👁 Ver</button>
+                <button class="btn-edit"   (click)="editarProducto(producto)">✏ Editar</button>
                 <button class="btn-delete" (click)="eliminarProducto(producto)">🗑 Eliminar</button>
               </div>
             </td>
           </tr>
 
-          <tr *ngIf="!productList || productList.length === 0">
+          <tr *ngIf="productList.length === 0">
             <td colspan="8" class="empty-state">No hay productos registrados.</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </section>
-
-  <!-- Detalle seleccionado -->
-  <section class="detail-section" *ngIf="seleccionado">
-    <h2 class="section-heading">Detalle del Producto</h2>
-    <app-producto-detalle [seleccionado]="seleccionado"></app-producto-detalle>
   </section>
 
 </div>

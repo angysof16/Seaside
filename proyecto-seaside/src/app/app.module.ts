@@ -28,6 +28,8 @@ import { LoginComponent }          from './pages/login/login.component';
 import { ProductoTableComponent }  from './producto/producto-table/producto-table.component';
 import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
 import { ProductoFormComponent }   from './producto/producto-form/producto-form.component';
+import { ProductoFormPageComponent }    from './producto/producto-form-page/producto-form-page.component';
+import { ProductoDetallePageComponent } from './producto/producto-detalle-page/producto-detalle-page.component';
 
 // Errors
 import { ErrorPageComponent }      from './errors/error-page/error-page.component';
@@ -57,6 +59,9 @@ import { ErrorPageComponent }      from './errors/error-page/error-page.componen
     ProductoFormComponent,
     // Errors
     ErrorPageComponent,
+    
+    ProductoFormPageComponent,
+    ProductoDetallePageComponent,
   ],
   imports: [
     BrowserModule,

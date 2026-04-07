@@ -9,18 +9,25 @@ import { ProductoTableComponent } from './producto/producto-table/producto-table
 import { ProductoFormPageComponent } from './producto/producto-form-page/producto-form-page.component';
 import { ProductoDetallePageComponent } from './producto/producto-detalle-page/producto-detalle-page.component';
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
+import { OperadorTableComponent } from './operador/operador-table/operador-table.component';
+import { OperadorFormPageComponent } from './operador/operador-form-page/operador-form-page.component';
+import { OperadorDetallePageComponent } from './operador/operador-detalle-page/operador-detalle-page.component';
 
 const routes: Routes = [
-  { path: '',                       component: LandingComponent,          pathMatch: 'full' },
-  { path: 'menu',                   component: MenuComponent },
-  { path: 'contacto',               component: ContactoComponent },
-  { path: 'visitanos',              component: VisitanosComponent },
-  { path: 'login',                  component: LoginComponent },
-  { path: 'productos',              component: ProductoTableComponent },
-  { path: 'productos/nuevo',        component: ProductoFormPageComponent },
-  { path: 'productos/editar/:id',   component: ProductoFormPageComponent },
-  { path: 'productos/:id',          component: ProductoDetallePageComponent },
-  { path: '**',                     component: ErrorPageComponent },
+  { path: '', component: LandingComponent, pathMatch: 'full' },
+  { path: 'menu', component: MenuComponent },
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'visitanos', component: VisitanosComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'productos', component: ProductoTableComponent },
+  { path: 'productos/nuevo', component: ProductoFormPageComponent },
+  { path: 'productos/editar/:id', component: ProductoFormPageComponent },
+  { path: 'productos/:id', component: ProductoDetallePageComponent },
+  { path: 'operadores', component: OperadorTableComponent },
+  { path: 'operadores/nuevo', component: OperadorFormPageComponent },
+  { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
+  { path: 'operadores/:id', component: OperadorDetallePageComponent },
+  { path: '**', component: ErrorPageComponent },
 ];
 
 @NgModule({

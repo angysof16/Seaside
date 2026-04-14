@@ -37,6 +37,7 @@ import { OperadorFormComponent } from './operador/operador-form/operador-form.co
 import { OperadorDetalleComponent } from './operador/operador-detalle/operador-detalle.component';
 import { OperadorFormPageComponent } from './operador/operador-form-page/operador-form-page.component';
 import { OperadorDetallePageComponent } from './operador/operador-detalle-page/operador-detalle-page.component';
+import { OperadorCrudTableComponent } from './operador/operador-crud-table/operador-crud-table.component';
 
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
@@ -76,6 +77,7 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     OperadorDetalleComponent,
     OperadorFormPageComponent,
     OperadorDetallePageComponent,
+    OperadorCrudTableComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

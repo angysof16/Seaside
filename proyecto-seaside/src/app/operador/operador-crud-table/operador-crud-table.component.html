@@ -1,0 +1,59 @@
+<div class="admin-wrapper">
+  <div class="admin-header">
+    <div>
+      <h1 class="admin-title">Gestión de Operadores</h1>
+      <p class="admin-subtitle">Administra los operadores del sistema</p>
+    </div>
+    <div class="header-actions">
+      <a class="btn-nuevo" routerLink="/operadores/nuevo">+ Nuevo Operador</a>
+      <a class="btn-back" routerLink="/">← Volver al sitio</a>
+    </div>
+  </div>
+
+  <section class="table-section">
+    <h2 class="section-heading">
+      Operadores <span class="count-badge">{{ operadorList.length }}</span>
+    </h2>
+
+    <div class="tabla-wrapper">
+      <table class="tabla-operadores">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let operador of operadorList" class="operador-row">
+            <td>#{{ operador.id }}</td>
+            <td class="col-name">{{ operador.nombre }}</td>
+            <td>{{ operador.usuario }}</td>
+            <td>••••••••</td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-ver" (click)="verDetalle(operador)">
+                  👁 Ver
+                </button>
+                <button class="btn-edit" (click)="editarOperador(operador)">
+                  ✏ Editar
+                </button>
+                <button class="btn-delete" (click)="eliminarOperador(operador)">
+                  🗑 Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="operadorList.length === 0">
+            <td colspan="5" class="empty-state">
+              No hay operadores registrados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

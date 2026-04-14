@@ -12,6 +12,7 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
 import { OperadorTableComponent } from './operador/operador-table/operador-table.component';
 import { OperadorFormPageComponent } from './operador/operador-form-page/operador-form-page.component';
 import { OperadorDetallePageComponent } from './operador/operador-detalle-page/operador-detalle-page.component';
+import { OperadorCrudTableComponent } from './operador/operador-crud-table/operador-crud-table.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'productos/nuevo', component: ProductoFormPageComponent },
   { path: 'productos/editar/:id', component: ProductoFormPageComponent },
   { path: 'productos/:id', component: ProductoDetallePageComponent },
-  { path: 'operadores', component: OperadorTableComponent },
+  { path: 'pedidos', component: OperadorTableComponent },
+  { path: 'operadores', component: OperadorCrudTableComponent },
   { path: 'operadores/nuevo', component: OperadorFormPageComponent },
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },

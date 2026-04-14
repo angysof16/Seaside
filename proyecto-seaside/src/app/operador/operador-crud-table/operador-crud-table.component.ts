@@ -17,7 +17,11 @@ export class OperadorCrudTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.operadorList = this.operadorService.findAll();
+    this.cargarOperadores();
+  }
+
+  cargarOperadores(): void {
+    this.operadorService.findAll().subscribe((list) => (this.operadorList = list));
   }
 
   verDetalle(operador: Operador): void {
@@ -29,7 +33,8 @@ export class OperadorCrudTableComponent implements OnInit {
   }
 
   eliminarOperador(operador: Operador): void {
-    this.operadorService.delete(operador.id);
-    this.operadorList = this.operadorService.findAll();
+    this.operadorService.delete(operador.id).subscribe(() => {
+      this.cargarOperadores();
+    });
   }
 }

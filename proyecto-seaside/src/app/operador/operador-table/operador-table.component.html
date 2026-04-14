@@ -38,7 +38,7 @@
         <tbody>
           <tr *ngFor="let pedido of pedidos" class="pedido-row">
             <td>#{{ pedido.id }}</td>
-            <td>Cliente {{ pedido.clienteId }}</td>
+            <td>{{ pedido.cliente.nombre }} {{ pedido.cliente.apellido }}</td>
             <td class="col-fecha">{{ pedido.fechaCreacion }}</td>
             <td>
               <span class="price-tag">
@@ -86,7 +86,8 @@
     <h3 class="modal-title">Asignar Domiciliario</h3>
     <p class="modal-sub">
       Pedido #{{ pedidoSeleccionado?.id }} — Cliente
-      {{ pedidoSeleccionado?.clienteId }}
+      {{ pedidoSeleccionado?.cliente?.nombre }} {{ pedidoSeleccionado?.cliente?.apellido }}
+
     </p>
 
     <div class="form-group">

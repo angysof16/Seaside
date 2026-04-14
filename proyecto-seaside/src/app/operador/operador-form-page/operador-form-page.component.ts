@@ -21,22 +21,26 @@ export class OperadorFormPageComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const found = this.operadorService.findById(Number(id));
-      if (found) {
-        this.operadorEditar = { ...found };
-        this.modoEdicion = true;
-      }
+      this.operadorService.findById(Number(id)).subscribe({
+        next: (op) => {
+          this.operadorEditar = { ...op };
+          this.modoEdicion = true;
+        },
+        error: () => this.router.navigate(['/operadores']),
+      });
     }
   }
 
   onGuardar(operador: Operador): void {
-    this.operadorService.add(operador);
-    this.router.navigate(['/operadores']);
+    this.operadorService.add(operador).subscribe(() => {
+      this.router.navigate(['/operadores']);
+    });
   }
 
   onActualizar(operador: Operador): void {
-    this.operadorService.update(operador);
-    this.router.navigate(['/operadores']);
+    this.operadorService.update(operador).subscribe(() => {
+      this.router.navigate(['/operadores']);
+    });
   }
 
   onCancelar(): void {

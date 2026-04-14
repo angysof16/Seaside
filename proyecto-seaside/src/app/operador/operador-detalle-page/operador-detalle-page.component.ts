@@ -20,9 +20,11 @@ export class OperadorDetallePageComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.operador = this.operadorService.findById(Number(id)) ?? null;
-    }
-    if (!this.operador) {
+      this.operadorService.findById(Number(id)).subscribe({
+        next: (op) => (this.operador = op),
+        error: () => this.router.navigate(['/operadores']),
+      });
+    } else {
       this.router.navigate(['/operadores']);
     }
   }
@@ -32,7 +34,8 @@ export class OperadorDetallePageComponent implements OnInit {
   }
 
   eliminar(): void {
-    this.operadorService.delete(this.operador!.id);
-    this.router.navigate(['/operadores']);
+    this.operadorService.delete(this.operador!.id).subscribe(() => {
+      this.router.navigate(['/operadores']);
+    });
   }
 }

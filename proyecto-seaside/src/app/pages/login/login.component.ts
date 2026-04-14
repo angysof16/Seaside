@@ -38,6 +38,8 @@ export class LoginComponent {
         next: (cliente: Cliente) => {
           this.mensaje = `Bienvenido, ${cliente.nombre} ${cliente.apellido}`;
           this.error = '';
+          setTimeout(() => this.router.navigate(['/']), 100);
+
         },
         error: (err) => {
           this.error = err.error?.error || 'Credenciales inválidas';

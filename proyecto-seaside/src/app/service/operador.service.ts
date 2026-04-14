@@ -1,41 +1,34 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Operador } from '../operador/operador';
-import { OperadorCl } from '../model/operador-cl';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OperadorService {
-  operadorList: Operador[] = [
-    new OperadorCl(1, 'Carlos Méndez', 'cmendez', 'pass123'),
-    new OperadorCl(2, 'Laura Gómez', 'lgomez', 'pass456'),
-    new OperadorCl(3, 'Andrés Ruiz', 'aruiz', 'pass789'),
-  ];
+  private apiUrl = `${environment.apiUrl}/api/operadores`;
 
-  findAll(): Operador[] {
-    return this.operadorList;
+  constructor(private http: HttpClient) {}
+
+  findAll(): Observable<Operador[]> {
+    return this.http.get<Operador[]>(this.apiUrl);
   }
 
-  findById(id: number): Operador | undefined {
-    return this.operadorList.find((o) => o.id === id);
+  findById(id: number): Observable<Operador> {
+    return this.http.get<Operador>(`${this.apiUrl}/${id}`);
   }
 
-  add(operador: Operador): void {
-    const maxId = this.operadorList.reduce((max, o) => Math.max(max, o.id), 0);
-    operador.id = maxId + 1;
-    this.operadorList = [...this.operadorList, operador];
+  add(operador: Operador): Observable<Operador> {
+    return this.http.post<Operador>(this.apiUrl, operador);
   }
 
-  update(operador: Operador): void {
-    const index = this.operadorList.findIndex((o) => o.id === operador.id);
-    if (index !== -1) {
-      const updated = [...this.operadorList];
-      updated[index] = { ...operador };
-      this.operadorList = updated;
-    }
+  update(operador: Operador): Observable<Operador> {
+    return this.http.put<Operador>(`${this.apiUrl}/${operador.id}`, operador);
   }
 
-  delete(id: number): void {
-    this.operadorList = this.operadorList.filter((o) => o.id !== id);
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

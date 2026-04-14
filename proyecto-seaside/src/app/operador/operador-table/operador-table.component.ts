@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
-import {
-  DomiciliarioService,
-  Domiciliario,
-} from 'src/app/service/domiciliario.service';
+import { DomiciliarioService, Domiciliario } from 'src/app/service/domiciliario.service';
 
 @Component({
   selector: 'app-operador-table',
@@ -42,14 +39,15 @@ export class OperadorTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarPedidos();
-    this.todosLosDomiciliarios = this.domiciliarioService.findAll();
-    this.domiciliariosDisponibles = this.domiciliarioService.findDisponibles();
+    this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
+    this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
   }
 
   cargarPedidos(): void {
-    this.pedidos = this.soloActivos
+    const obs = this.soloActivos
       ? this.pedidoService.findActivos()
       : this.pedidoService.findAll();
+    obs.subscribe((list) => (this.pedidos = list));
   }
 
   toggleFiltro(): void {
@@ -61,7 +59,11 @@ export class OperadorTableComponent implements OnInit {
   abrirModalAsignar(pedido: Pedido): void {
     this.pedidoSeleccionado = pedido;
     this.domiciliarioElegido = pedido.domiciliarioId ?? null;
-    this.modalAbierto = true;
+    // Refrescar lista de disponibles antes de abrir el modal
+    this.domiciliarioService.findDisponibles().subscribe((list) => {
+      this.domiciliariosDisponibles = list;
+      this.modalAbierto = true;
+    });
   }
 
   cerrarModal(): void {
@@ -72,12 +74,15 @@ export class OperadorTableComponent implements OnInit {
 
   confirmarAsignacion(): void {
     if (!this.pedidoSeleccionado || !this.domiciliarioElegido) return;
-    this.pedidoService.asignarDomiciliario(
-      this.pedidoSeleccionado.id,
-      this.domiciliarioElegido,
-    );
-    this.cargarPedidos();
-    this.cerrarModal();
+    this.pedidoService
+      .asignarDomiciliario(this.pedidoSeleccionado.id, this.domiciliarioElegido)
+      .subscribe(() => {
+        this.cargarPedidos();
+        // Actualizar lista de disponibles tras asignación
+        this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
+        this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
+        this.cerrarModal();
+      });
   }
 
   // ── Actualizar estado ─────────────────────────────────────
@@ -95,22 +100,26 @@ export class OperadorTableComponent implements OnInit {
 
   confirmarEstado(): void {
     if (!this.pedidoEstado || !this.nuevoEstado) return;
-    this.pedidoService.actualizarEstado(this.pedidoEstado.id, this.nuevoEstado);
-    this.cargarPedidos();
-    this.cerrarModalEstado();
+    this.pedidoService
+      .actualizarEstado(this.pedidoEstado.id, this.nuevoEstado)
+      .subscribe(() => {
+        this.cargarPedidos();
+        this.cerrarModalEstado();
+      });
   }
 
   // ── Eliminar ──────────────────────────────────────────────
   eliminarPedido(pedido: Pedido): void {
-    this.pedidoService.delete(pedido.id);
-    this.cargarPedidos();
+    this.pedidoService.delete(pedido.id).subscribe(() => {
+      this.cargarPedidos();
+    });
   }
 
   // ── Helpers ───────────────────────────────────────────────
   getNombreDomiciliario(id?: number): string {
     if (!id) return '—';
     const d = this.todosLosDomiciliarios.find((d) => d.id === id);
-    return d ? d.nombre : '—';
+    return d ? `${d.nombre} ${d.apellido}` : '—';
   }
 
   getEstadoClass(estado: string): string {

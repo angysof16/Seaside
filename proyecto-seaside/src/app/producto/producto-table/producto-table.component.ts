@@ -9,7 +9,6 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: ['./producto-table.component.css'],
 })
 export class ProductoTableComponent implements OnInit {
-
   productList: Producto[] = [];
 
   constructor(
@@ -18,7 +17,13 @@ export class ProductoTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productList = this.productoService.findAll();
+    this.cargarProductos();
+  }
+
+  cargarProductos(): void {
+    this.productoService
+      .findAll()
+      .subscribe((list) => (this.productList = list));
   }
 
   verDetalle(producto: Producto): void {
@@ -30,7 +35,8 @@ export class ProductoTableComponent implements OnInit {
   }
 
   eliminarProducto(producto: Producto): void {
-    this.productoService.delete(producto.id);
-    this.productList = this.productoService.findAll();
+    this.productoService
+      .delete(producto.id)
+      .subscribe(() => this.cargarProductos());
   }
 }

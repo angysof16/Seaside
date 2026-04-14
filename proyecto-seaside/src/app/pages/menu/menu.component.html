@@ -1,3 +1,25 @@
-<section class="page-shell">
-  <app-menu-destacado></app-menu-destacado>
-</section>
+<div class="page-hero">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <h1 class="page-hero-title">Nuestro Menú</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="menu-main">
+  <section *ngFor="let cat of categorias" class="menu-category-section">
+    <h2 class="category-title">{{ cat.nombre }}</h2>
+    <div class="menu-grid" *ngIf="productosPorCategoria[cat.id]">
+      <app-menu-card
+        *ngFor="let producto of productosPorCategoria[cat.id]"
+        [image]="producto.imageUrl || 'assets/IMGS/menuHighlight1.jpeg'"
+        [title]="producto.nombre"
+        [description]="producto.descripcion"
+      ></app-menu-card>
+    </div>
+  </section>
+</main>

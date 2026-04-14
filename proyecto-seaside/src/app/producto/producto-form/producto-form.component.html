@@ -1,7 +1,5 @@
 <form #productoForm="ngForm" (ngSubmit)="addProducto(productoForm)">
-
   <div class="form-grid">
-
     <div class="form-group">
       <label for="nombre">Nombre *</label>
       <input
@@ -35,7 +33,7 @@
         name="categoriaId"
         required
         min="1"
-        [(ngModel)]="formProducto.categoriaId"
+        [(ngModel)]="formProducto.categoria.id"
         placeholder="1"
       />
     </div>
@@ -97,12 +95,11 @@
         <span>¿Tiene alérgenos?</span>
       </label>
     </div>
-
   </div>
 
   <div class="form-actions">
     <button type="submit" class="btn-submit" [disabled]="productoForm.invalid">
-      {{ editando ? '✓ Actualizar' : '+ Guardar' }}
+      {{ editando ? "✓ Actualizar" : "+ Guardar" }}
     </button>
     <button
       *ngIf="editando"
@@ -113,5 +110,4 @@
       Cancelar
     </button>
   </div>
-
 </form>

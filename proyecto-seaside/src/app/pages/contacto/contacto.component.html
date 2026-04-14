@@ -11,7 +11,6 @@
 </div>
 
 <main class="contact-main">
-
   <div class="contact-intro">
     <p>
       ¿Tienes alguna pregunta, comentario o deseas hacer una reserva especial?
@@ -20,12 +19,10 @@
   </div>
 
   <div class="contact-grid">
-
     <!-- Formulario -->
     <div class="contact-card">
       <h2 class="contact-card-title">Escríbenos</h2>
       <form class="contact-form" (ngSubmit)="enviarMensaje()">
-
         <div class="form-row-2">
           <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -39,7 +36,12 @@
 
         <div class="form-group">
           <label for="correo">Correo electrónico</label>
-          <input type="email" id="correo" placeholder="correo&#64;ejemplo.com" required />
+          <input
+            type="email"
+            id="correo"
+            placeholder="correo&#64;ejemplo.com"
+            required
+          />
         </div>
 
         <div class="form-group">
@@ -49,69 +51,109 @@
 
         <div class="form-group">
           <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+          <textarea
+            id="mensaje"
+            rows="5"
+            placeholder="Escribe tu mensaje aquí..."
+          ></textarea>
         </div>
 
-        <button type="submit" class="contact-submit" [class.enviado]="mensajeEnviado">
-          {{ mensajeEnviado ? '✓ Mensaje enviado' : 'Enviar Mensaje' }}
+        <button
+          type="submit"
+          class="contact-submit"
+          [class.enviado]="mensajeEnviado"
+        >
+          {{ mensajeEnviado ? "✓ Mensaje enviado" : "Enviar Mensaje" }}
         </button>
       </form>
     </div>
 
     <!-- Info -->
     <div class="info-col">
-
       <div class="info-card">
         <div class="info-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-            stroke="#F2B705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+            />
           </svg>
         </div>
         <div class="info-text">
           <p class="info-label">Teléfono</p>
-          <p class="info-value">+57 320 587 9412</p>
-          <p class="info-sub">contacto&#64;seasiderestaurante.com</p>
+          <p class="info-value">
+            {{ contacto?.telefono || "+57 320 587 9412" }}
+          </p>
+          <p class="info-sub">
+            {{ contacto?.email || "contacto&#64;seasiderestaurante.com" }}
+          </p>
         </div>
       </div>
 
       <div class="info-card">
         <div class="info-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-            stroke="#F2B705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="0.5" fill="#F2B705"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="0.5" fill="#F2B705" />
           </svg>
         </div>
         <div class="info-text">
           <p class="info-label">Redes sociales</p>
-          <p class="info-value">Instagram: <strong>&#64;SeaSideRestaurante</strong></p>
-          <p class="info-value">X / Twitter: <strong>&#64;SeaSideRestaurantetwt</strong></p>
+          <p class="info-value">
+            Instagram: <strong>&#64;SeaSideRestaurante</strong>
+          </p>
+          <p class="info-value">
+            X / Twitter: <strong>&#64;SeaSideRestaurantetwt</strong>
+          </p>
         </div>
       </div>
 
       <div class="info-card info-card-gold">
         <div class="info-icon-wrap info-icon-dark">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-            stroke="#400101" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-            <circle cx="12" cy="9" r="2.5"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#400101"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+            />
+            <circle cx="12" cy="9" r="2.5" />
           </svg>
         </div>
         <div class="info-text-flex">
           <div>
             <p class="info-label info-label-dark">¿Quieres visitarnos?</p>
-            <p class="info-value info-value-dark">Consulta nuestra ubicación y cómo llegar.</p>
+            <p class="info-value info-value-dark">
+              Consulta nuestra ubicación y cómo llegar.
+            </p>
           </div>
           <a routerLink="/visitanos" class="info-cta-btn">Ver →</a>
         </div>
       </div>
-
     </div>
   </div>
 
   <!-- Comentarios -->
   <app-comments></app-comments>
-
 </main>

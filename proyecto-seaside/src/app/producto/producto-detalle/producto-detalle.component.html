@@ -1,7 +1,10 @@
 <div class="detalle-card" *ngIf="seleccionado">
-
   <div class="detalle-img-wrap" *ngIf="seleccionado.imageUrl">
-    <img [src]="seleccionado.imageUrl" [alt]="seleccionado.nombre" class="detalle-img" />
+    <img
+      [src]="seleccionado.imageUrl"
+      [alt]="seleccionado.nombre"
+      class="detalle-img"
+    />
   </div>
 
   <div class="detalle-body">
@@ -14,11 +17,13 @@
       </div>
       <div class="detalle-item">
         <span class="detalle-label">Precio</span>
-        <span class="detalle-value price">{{ seleccionado.precio | currency:'COP':'$':'1.0-0' }}</span>
+        <span class="detalle-value price">{{
+          seleccionado.precio | currency: "COP" : "$" : "1.0-0"
+        }}</span>
       </div>
       <div class="detalle-item">
         <span class="detalle-label">Categoría</span>
-        <span class="detalle-value">{{ seleccionado.categoriaId }}</span>
+        <span class="detalle-value">{{ seleccionado.categoria.nombre }}</span>
       </div>
       <div class="detalle-item">
         <span class="detalle-label">Tiempo</span>
@@ -31,11 +36,12 @@
       <div class="detalle-item full">
         <span class="detalle-label">Alérgenos</span>
         <span class="detalle-value alerg" *ngIf="seleccionado.tieneAlergenos">
-          ⚠ {{ seleccionado.descripcionAlergenos || 'Contiene alérgenos' }}
+          ⚠ {{ seleccionado.descripcionAlergenos || "Contiene alérgenos" }}
         </span>
-        <span class="detalle-value" *ngIf="!seleccionado.tieneAlergenos">Sin alérgenos</span>
+        <span class="detalle-value" *ngIf="!seleccionado.tieneAlergenos"
+          >Sin alérgenos</span
+        >
       </div>
     </div>
   </div>
-
 </div>

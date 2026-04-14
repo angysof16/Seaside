@@ -6,7 +6,7 @@ export class AdicionalesCl {
   imagenURL: string;
   tiempoPreparacion: number;
   tieneAlergenos: boolean;
-  categoriaId: number;
+  categoria: { id: number; nombre: string };
 
   constructor(
     id: number,
@@ -16,7 +16,7 @@ export class AdicionalesCl {
     imagenURL: string,
     tiempoPreparacion: number,
     tieneAlergenos: boolean,
-    categoriaId: number,
+    categoria: { id: number; nombre: string },
   ) {
     this.id = id;
     this.nombre = nombre;
@@ -25,6 +25,6 @@ export class AdicionalesCl {
     this.imagenURL = imagenURL;
     this.tiempoPreparacion = tiempoPreparacion;
     this.tieneAlergenos = tieneAlergenos;
-    this.categoriaId = categoriaId;
+    this.categoria = categoria;
   }
 }

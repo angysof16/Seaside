@@ -9,7 +9,6 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: ['./producto-form-page.component.css'],
 })
 export class ProductoFormPageComponent implements OnInit {
-
   productoEditar: Producto | null = null;
   modoEdicion = false;
 
@@ -22,25 +21,23 @@ export class ProductoFormPageComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const found = this.productoService.findById(Number(id));
-      if (found) {
-        this.productoEditar = { ...found };
+      this.productoService.findById(Number(id)).subscribe((resp) => {
+        this.productoEditar = { ...resp.product };
         this.modoEdicion = true;
-      }
+      });
     }
   }
 
   onGuardar(producto: Producto): void {
-    const maxId = this.productoService.findAll()
-      .reduce((max, p) => Math.max(max, p.id), 0);
-    producto.id = maxId + 1;
-    this.productoService.add(producto);
-    this.router.navigate(['/productos']);
+    this.productoService.add(producto).subscribe(() => {
+      this.router.navigate(['/productos']);
+    });
   }
 
   onActualizar(producto: Producto): void {
-    this.productoService.update(producto);
-    this.router.navigate(['/productos']);
+    this.productoService.update(producto).subscribe(() => {
+      this.router.navigate(['/productos']);
+    });
   }
 
   onCancelar(): void {

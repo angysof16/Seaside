@@ -9,8 +9,8 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: ['./producto-detalle-page.component.css'],
 })
 export class ProductoDetallePageComponent implements OnInit {
-
   producto: Producto | null = null;
+  adicionales: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,9 +21,14 @@ export class ProductoDetallePageComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.producto = this.productoService.findById(Number(id)) ?? null;
-    }
-    if (!this.producto) {
+      this.productoService.findById(Number(id)).subscribe({
+        next: (resp) => {
+          this.producto = resp.product;
+          this.adicionales = resp.adicionales;
+        },
+        error: () => this.router.navigate(['/productos']),
+      });
+    } else {
       this.router.navigate(['/productos']);
     }
   }
@@ -33,7 +38,8 @@ export class ProductoDetallePageComponent implements OnInit {
   }
 
   eliminar(): void {
-    this.productoService.delete(this.producto!.id);
-    this.router.navigate(['/productos']);
+    this.productoService.delete(this.producto!.id).subscribe(() => {
+      this.router.navigate(['/productos']);
+    });
   }
 }

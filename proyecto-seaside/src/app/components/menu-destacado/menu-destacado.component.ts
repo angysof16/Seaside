@@ -1,34 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductoService } from '../../service/producto.service';
 
 @Component({
   selector: 'app-menu-destacado',
   templateUrl: './menu-destacado.component.html',
-  styleUrls: ['./menu-destacado.component.css']
+  styleUrls: ['./menu-destacado.component.css'],
 })
-export class MenuDestacadoComponent {
-    menuItems = [
+export class MenuDestacadoComponent implements OnInit {
+  menuItems: { image: string; title: string; description: string }[] = [];
 
-    {
-    image: 'assets/IMGS/menuHighlight1.jpeg',
-    title: 'Ceviche SeaSide',
-    description:
-    'Pescado fresco marinado en limón con cebolla morada, cilantro y el toque especial de la casa.'
-    },
+  constructor(private productoService: ProductoService) {}
 
-    {
-    image: 'assets/IMGS/menuHighlight2.jpeg',
-    title: 'Arroz Marinero Especial',
-    description:
-    'Arroz preparado con camarones, calamares y especias que resaltan el sabor del mar.'
-    },
-
-    {
-    image: 'assets/IMGS/menuHighlight3.jpeg',
-    title: 'Picada Marina SeaSide',
-    description:
-    'Selección de mariscos fritos, ideal para compartir.'
-    }
-
-    ];
-
+  ngOnInit(): void {
+    this.productoService.findAll().subscribe((productos) => {
+      this.menuItems = productos.slice(0, 3).map((p) => ({
+        image: p.imageUrl || 'assets/IMGS/menuHighlight1.jpeg',
+        title: p.nombre,
+        description: p.descripcion,
+      }));
+    });
+  }
 }

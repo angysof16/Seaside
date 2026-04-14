@@ -1,5 +1,4 @@
 <div class="admin-wrapper">
-
   <div class="admin-header">
     <div>
       <h1 class="admin-title">Gestión de Menú</h1>
@@ -34,37 +33,52 @@
           <tr *ngFor="let producto of productList" class="product-row">
             <td>
               <div class="img-wrap">
-                <img [src]="producto.imageUrl" [alt]="producto.nombre" class="producto-img" />
+                <img
+                  [src]="producto.imageUrl"
+                  [alt]="producto.nombre"
+                  class="producto-img"
+                />
               </div>
             </td>
             <td class="col-name">{{ producto.nombre }}</td>
             <td class="col-desc">{{ producto.descripcion }}</td>
             <td>
-              <span class="price-tag">{{ producto.precio | currency:'COP':'$':'1.0-0' }}</span>
+              <span class="price-tag">{{
+                producto.precio | currency: "COP" : "$" : "1.0-0"
+              }}</span>
             </td>
-            <td>{{ producto.categoriaId }}</td>
+            <td>{{ producto.categoria.nombre }}</td>
             <td>
               <span class="time-badge">⏱ {{ producto.tiempoMinutos }} min</span>
             </td>
             <td class="col-alerg">
-              <span class="alerg-yes" *ngIf="producto.tieneAlergenos">⚠ Sí</span>
-              <span class="alerg-no"  *ngIf="!producto.tieneAlergenos">—</span>
+              <span class="alerg-yes" *ngIf="producto.tieneAlergenos"
+                >⚠ Sí</span
+              >
+              <span class="alerg-no" *ngIf="!producto.tieneAlergenos">—</span>
             </td>
             <td>
               <div class="action-btns">
-                <button class="btn-ver"    (click)="verDetalle(producto)">👁 Ver</button>
-                <button class="btn-edit"   (click)="editarProducto(producto)">✏ Editar</button>
-                <button class="btn-delete" (click)="eliminarProducto(producto)">🗑 Eliminar</button>
+                <button class="btn-ver" (click)="verDetalle(producto)">
+                  👁 Ver
+                </button>
+                <button class="btn-edit" (click)="editarProducto(producto)">
+                  ✏ Editar
+                </button>
+                <button class="btn-delete" (click)="eliminarProducto(producto)">
+                  🗑 Eliminar
+                </button>
               </div>
             </td>
           </tr>
 
           <tr *ngIf="productList.length === 0">
-            <td colspan="8" class="empty-state">No hay productos registrados.</td>
+            <td colspan="8" class="empty-state">
+              No hay productos registrados.
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
-
 </div>

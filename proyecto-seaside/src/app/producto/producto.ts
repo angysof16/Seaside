@@ -3,7 +3,7 @@ export interface Producto {
   nombre: string;
   descripcion: string;
   precio: number;
-  categoriaId: number;
+  categoria: { id: number; nombre: string };
   imageUrl?: string;
   tiempoMinutos: number;
   tieneAlergenos: boolean;

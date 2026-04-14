@@ -15,10 +15,9 @@ import { Producto } from '../producto';
   styleUrls: ['./producto-form.component.css'],
 })
 export class ProductoFormComponent implements OnChanges {
-
   @Input() productoEditar: Producto | null = null;
 
-  @Output() addProductoEvent    = new EventEmitter<Producto>();
+  @Output() addProductoEvent = new EventEmitter<Producto>();
   @Output() updateProductoEvent = new EventEmitter<Producto>();
   @Output() cancelarEvent = new EventEmitter<void>();
 
@@ -52,9 +51,9 @@ export class ProductoFormComponent implements OnChanges {
   cancelarEdicion(): void {
     this.editando = false;
     this.formProducto = this.emptyForm();
-    this.cancelarEvent.emit();   // ← línea nueva
+    this.cancelarEvent.emit(); // ← línea nueva
   }
-  
+
   private resetForm(form: NgForm): void {
     this.formProducto = this.emptyForm();
     form.resetForm(this.formProducto);
@@ -66,7 +65,7 @@ export class ProductoFormComponent implements OnChanges {
       nombre: '',
       descripcion: '',
       precio: 0,
-      categoriaId: 1,
+      categoria: { id: 1, nombre: '' },
       tiempoMinutos: 0,
       tieneAlergenos: false,
       descripcionAlergenos: '',

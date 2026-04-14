@@ -1,0 +1,53 @@
+<form #operadorForm="ngForm" (ngSubmit)="guardar(operadorForm)">
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="nombre">Nombre *</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        required
+        [(ngModel)]="formOperador.nombre"
+        placeholder="Nombre completo"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="usuario">Usuario *</label>
+      <input
+        type="text"
+        id="usuario"
+        name="usuario"
+        required
+        [(ngModel)]="formOperador.usuario"
+        placeholder="Nombre de usuario"
+      />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="contrasena">Contraseña *</label>
+      <input
+        type="password"
+        id="contrasena"
+        name="contrasena"
+        required
+        [(ngModel)]="formOperador.contrasena"
+        placeholder="Contraseña"
+      />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" [disabled]="operadorForm.invalid">
+      {{ editando ? "✓ Actualizar" : "+ Guardar" }}
+    </button>
+    <button
+      *ngIf="editando"
+      type="button"
+      class="btn-cancel"
+      (click)="cancelarEdicion()"
+    >
+      Cancelar
+    </button>
+  </div>
+</form>

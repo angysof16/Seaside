@@ -1,0 +1,44 @@
+.menu-section {
+  position: relative;
+  width: 100%;
+  padding: 60px 24px 200px;
+  background: linear-gradient(to top, #F2B705, #D97904);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.cta-container {
+  text-align: center;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wave-bottom svg {
+  display: block;
+  width: 100%;
+  height: 180px;
+}
+
+.wave-bottom path {
+  fill: #f8f1e0;
+}
+
+.gallery {
+  display: flex;
+  gap: clamp(16px, 2vw, 32px);
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}

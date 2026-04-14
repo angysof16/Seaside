@@ -1,0 +1,148 @@
+<div class="page-hero">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <h1 class="page-hero-title">Visítanos</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="visit-main">
+  <div class="visit-intro">
+    <p>
+      Estamos ubicados en el corazón de Bogotá, listos para recibirte. Consulta
+      nuestros horarios y cómo llegar para que tu visita sea perfecta.
+    </p>
+  </div>
+
+  <div class="visit-top-grid">
+    <div class="map-wrapper">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3717.900336543899!2d-74.06724478979052!3d4.62848749532684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99a8193f1c9f%3A0xf93431640f134c07!2sPontificia%20Universidad%20Javeriana!5e1!3m2!1ses-419!2sco!4v1772569426288!5m2!1ses-419!2sco"
+        width="100%"
+        height="100%"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
+      </iframe>
+    </div>
+
+    <div class="info-col">
+      <div class="info-card">
+        <div class="info-icon-wrap">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+            />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg>
+        </div>
+        <div class="info-text">
+          <p class="info-label">Dirección</p>
+          <p class="info-value">Carrera 15 #93-48<br />Bogotá, Colombia</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon-wrap">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </div>
+        <div class="info-text">
+          <p class="info-label">Horario</p>
+          <div class="horario-list">
+            <span
+              >Lun - Jue:
+              <span class="horario-hora">12:00 - 9:00 p.m.</span></span
+            >
+            <span
+              >Vie - Sáb:
+              <span class="horario-hora">12:00 - 10:30 p.m.</span></span
+            >
+            <span
+              >Dom y fest:
+              <span class="horario-hora">12:00 - 8:00 p.m.</span></span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon-wrap">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+            />
+          </svg>
+        </div>
+        <div class="info-text">
+          <p class="info-label">Reservas</p>
+          <p class="info-value">+57 320 587 9412</p>
+          <a routerLink="/contacto" class="info-sub-link"
+            >O escríbenos aquí →</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sedes desde API -->
+  <div class="sedes-section" *ngIf="sedes.length > 0">
+    <h2 class="section-heading">Nuestras sedes</h2>
+    <div class="sedes-grid">
+      <div class="info-card" *ngFor="let sede of sedes">
+        <div class="info-icon-wrap">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F2B705"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+            />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg>
+        </div>
+        <div class="info-text">
+          <p class="info-label">{{ sede.nombre }}</p>
+          <p class="info-value">{{ sede.direccion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

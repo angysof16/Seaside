@@ -1,0 +1,32 @@
+<section class="menu-section">
+
+  <h2 class="general-title">Menú Destacado</h2>
+
+  <section class="gallery">
+
+    <app-menu-card
+      *ngFor="let item of menuItems"
+      [image]="item.image"
+      [title]="item.title"
+      [description]="item.description"
+    ></app-menu-card>
+
+  </section>
+
+  <div class="cta-container">
+    <a class="general-cta" routerLink="/menu">Ver Menú</a>
+  </div>
+
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
+      <path d="M0,170
+            C300,200 600,20 900,90
+            C1150,130 1300,60 1440,80
+            L1440,200
+            L0,200
+            Z">
+      </path>
+    </svg>
+  </div>
+
+</section>

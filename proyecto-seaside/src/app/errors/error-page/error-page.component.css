@@ -1,0 +1,49 @@
+.error-page {
+  min-height: 70vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 8rem 1.25rem 2rem;
+}
+
+.error-code {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(100px, 20vw, 200px);
+  font-weight: 100;
+  color: #400101;
+  margin: 0;
+  line-height: 1;
+  opacity: 0.25;
+}
+
+.error-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 100;
+  color: #400101;
+  margin: 0;
+}
+
+.error-msg {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: clamp(14px, 1.4vw, 18px);
+  color: #8a6060;
+  margin: 0;
+}
+
+.error-cta {
+  justify-self: center;
+  text-decoration: none;
+  background-color: #400101;
+  color: #F2B705;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  transition: filter 0.2s;
+  margin-top: 8px;
+}
+
+.error-cta:hover { filter: brightness(1.15); }

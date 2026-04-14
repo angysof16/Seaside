@@ -1,0 +1,155 @@
+<div class="auth-hero">
+  <div class="auth-hero-overlay"></div>
+  <div class="auth-hero-content">
+    <h1 class="auth-hero-title">Bienvenido</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <!-- Mensajes -->
+    <div class="auth-alert auth-error" *ngIf="error">{{ error }}</div>
+    <div class="auth-alert auth-success" *ngIf="mensaje">{{ mensaje }}</div>
+
+    <!-- LOGIN -->
+    <div *ngIf="!mostrarRegistro">
+      <h2 class="auth-title">Iniciar sesión</h2>
+
+      <form class="auth-form" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="correo">Correo electrónico</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            [(ngModel)]="correo"
+            placeholder="correo&#64;ejemplo.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contrasena">Contraseña</label>
+          <input
+            type="password"
+            id="contrasena"
+            name="contrasena"
+            [(ngModel)]="contrasena"
+            placeholder="Tu contraseña"
+            required
+          />
+        </div>
+
+        <button type="submit" class="auth-btn">Ingresar</button>
+      </form>
+
+      <p class="auth-switch">
+        ¿No tienes cuenta?
+        <a
+          (click)="toggleRegistro()"
+          style="cursor: pointer; text-decoration: underline"
+          >Regístrate aquí</a
+        >
+      </p>
+    </div>
+
+    <!-- REGISTRO -->
+    <div *ngIf="mostrarRegistro">
+      <h2 class="auth-title">Crear cuenta</h2>
+
+      <form class="auth-form" (ngSubmit)="onSignup()">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="nombre"
+            placeholder="Tu nombre"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            [(ngModel)]="apellido"
+            placeholder="Tu apellido"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signupCorreo">Correo electrónico</label>
+          <input
+            type="email"
+            id="signupCorreo"
+            name="signupCorreo"
+            [(ngModel)]="signupCorreo"
+            placeholder="correo&#64;ejemplo.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signupContrasena">Contraseña</label>
+          <input
+            type="password"
+            id="signupContrasena"
+            name="signupContrasena"
+            [(ngModel)]="signupContrasena"
+            placeholder="Tu contraseña"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            [(ngModel)]="telefono"
+            placeholder="310 000 0000"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input
+            type="text"
+            id="direccion"
+            name="direccion"
+            [(ngModel)]="direccion"
+            placeholder="Tu dirección"
+            required
+          />
+        </div>
+
+        <button type="submit" class="auth-btn">Registrarse</button>
+      </form>
+
+      <p class="auth-switch">
+        ¿Ya tienes cuenta?
+        <a
+          (click)="toggleRegistro()"
+          style="cursor: pointer; text-decoration: underline"
+          >Inicia sesión</a
+        >
+      </p>
+    </div>
+
+    <p class="auth-switch">
+      <a routerLink="/">← Volver al inicio</a>
+    </p>
+  </div>
+</main>

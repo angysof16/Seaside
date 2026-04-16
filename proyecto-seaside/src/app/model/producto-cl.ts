@@ -3,7 +3,7 @@ export class ProductoCl {
   nombre: string;
   descripcion: string;
   precio: number;
-  categoria: { id: number; nombre: string };
+  categoriaId: number;
   imageUrl?: string;
   tiempoMinutos: number;
   tieneAlergenos: boolean;
@@ -14,7 +14,7 @@ export class ProductoCl {
     nombre: string,
     descripcion: string,
     precio: number,
-    categoria: { id: number; nombre: string },
+    categoriaId: number,
     tiempoMinutos: number,
     tieneAlergenos: boolean,
     descripcionAlergenos: string,
@@ -24,7 +24,7 @@ export class ProductoCl {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.precio = precio;
-    this.categoria = categoria;
+    this.categoriaId = categoriaId;
     this.tiempoMinutos = tiempoMinutos;
     this.tieneAlergenos = tieneAlergenos;
     this.descripcionAlergenos = descripcionAlergenos;

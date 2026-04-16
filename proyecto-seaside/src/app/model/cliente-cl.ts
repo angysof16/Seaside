@@ -1,38 +1,30 @@
-export interface Cliente {
+export class ClienteCl {
   id: number;
   nombre: string;
   apellido: string;
   correo: string;
+  contrasena: string;
   telefono: string;
   direccion: string;
-  carrito?: { id: number; ultimaActualizacion: string };
-  contrasena?: string;
-}
-
-export class ClienteCl implements Cliente {
-  id: number;
-  nombre: string;
-  apellido: string;
-  correo: string;
-  telefono: string;
-  direccion: string;
-  carrito?: { id: number; ultimaActualizacion: string };
+  carritoId?: number;
 
   constructor(
     id: number,
     nombre: string,
     apellido: string,
     correo: string,
+    contrasena: string,
     telefono: string,
     direccion: string,
-    carrito?: { id: number; ultimaActualizacion: string },
+    carritoId?: number,
   ) {
     this.id = id;
     this.nombre = nombre;
     this.apellido = apellido;
     this.correo = correo;
+    this.contrasena = contrasena;
     this.telefono = telefono;
     this.direccion = direccion;
-    this.carrito = carrito;
+    this.carritoId = carritoId;
   }
 }

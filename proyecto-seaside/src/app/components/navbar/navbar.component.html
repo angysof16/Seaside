@@ -40,12 +40,27 @@
           [class.scrolled]="isScrolled"
         >Visítanos</a>
       </li>
-      <li>
+      <li *ngIf="authService.isLoggedIn">
+        <a
+          class="page-link"
+          routerLink="/perfil"
+          routerLinkActive="active-link"
+          [class.scrolled]="isScrolled"
+        >Perfil</a>
+      </li>
+      <li *ngIf="!authService.isLoggedIn">
         <a
           class="login-link"
           routerLink="/login"
           routerLinkActive="active-login"
         >Log in</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn">
+        <a
+          class="login-link"
+          routerLink="/"
+          (click)="authService.logout()"
+        >Cerrar sesión</a>
       </li>
     </ul>
   </nav>

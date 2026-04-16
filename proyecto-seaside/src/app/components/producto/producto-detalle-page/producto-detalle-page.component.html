@@ -1,14 +1,11 @@
 <div class="detalle-page-wrapper" *ngIf="producto">
-
   <div class="detalle-page-header">
     <div>
       <h1 class="admin-title">Detalle del Producto</h1>
       <p class="admin-subtitle">Información completa del plato</p>
     </div>
     <div class="header-actions">
-      <button class="btn-edit"   (click)="editar()">✏ Editar</button>
-      <button class="btn-delete" (click)="eliminar()">🗑 Eliminar</button>
-      <a class="btn-back" routerLink="/productos">← Volver</a>
+      <a class="btn-back" (click)="goBack()" style="cursor:pointer">← Volver</a>
     </div>
   </div>
 
@@ -16,4 +13,19 @@
     <app-producto-detalle [seleccionado]="producto"></app-producto-detalle>
   </section>
 
+  <section class="adicionales-section" *ngIf="adicionales.length > 0">
+    <h2 class="adicionales-title">Acompañamientos disponibles</h2>
+    <div class="adicionales-grid">
+      <div class="adicional-card" *ngFor="let a of adicionales">
+        <div class="adicional-img-wrap" *ngIf="a.imagenURL">
+          <img [src]="a.imagenURL" [alt]="a.nombre" class="adicional-img" />
+        </div>
+        <div class="adicional-body">
+          <span class="adicional-nombre">{{ a.nombre }}</span>
+          <span class="adicional-desc">{{ a.descripcion }}</span>
+          <span class="adicional-precio">{{ a.precio | currency: 'COP' : '$' : '1.0-0' }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

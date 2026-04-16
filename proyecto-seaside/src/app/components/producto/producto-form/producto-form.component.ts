@@ -23,6 +23,14 @@ export class ProductoFormComponent implements OnChanges {
 
   editando = false;
 
+  categorias = [
+    { id: 1, nombre: 'Platos Fuertes' },
+    { id: 2, nombre: 'Acompañamientos' },
+    { id: 3, nombre: 'Bebidas' },
+    { id: 4, nombre: 'Postres' },
+    { id: 5, nombre: 'Entradas' },
+  ];
+
   formProducto: Producto = this.emptyForm();
 
   ngOnChanges(changes: SimpleChanges): void {

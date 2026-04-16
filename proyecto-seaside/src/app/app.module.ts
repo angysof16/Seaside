@@ -48,6 +48,10 @@ import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-
 import { ClienteFormPageComponent } from './components/cliente/cliente-form-page/cliente-form-page.component';
 import { ClienteDetallePageComponent } from './components/cliente/cliente-detalle-page/cliente-detalle-page.component';
 
+// Profile
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
+
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
@@ -90,6 +94,9 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     ClienteFormComponent,
     ClienteFormPageComponent,
     ClienteDetallePageComponent,
+    // Profile
+    ProfileComponent,
+    ProfileEditComponent,
     // Errors
     ErrorPageComponent,
   ],

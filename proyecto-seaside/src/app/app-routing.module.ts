@@ -10,6 +10,8 @@ import { ProductoFormPageComponent } from './components/producto/producto-form-p
 import { ProductoDetallePageComponent } from './components/producto/producto-detalle-page/producto-detalle-page.component';
 import { ProductoCrearComponent } from './components/producto/producto-crear/producto-crear.component';
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 import { OperadorTableComponent } from './components/operador/operador-table/operador-table.component';
 import { OperadorFormPageComponent } from './components/operador/operador-form-page/operador-form-page.component';
 import { OperadorDetallePageComponent } from './components/operador/operador-detalle-page/operador-detalle-page.component';
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'visitanos', component: VisitanosComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'perfil', component: ProfileComponent },
+  { path: 'perfil/editar', component: ProfileEditComponent },
   { path: 'productos', component: ProductoTableComponent },
   { path: 'productos/crear', component: ProductoCrearComponent },
   { path: 'productos/nuevo', component: ProductoFormPageComponent },

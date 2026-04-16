@@ -16,6 +16,7 @@
     <div class="menu-grid" *ngIf="productosPorCategoria[cat.id]">
       <app-menu-card
         *ngFor="let producto of productosPorCategoria[cat.id]"
+        [productId]="producto.id"
         [image]="producto.imageUrl || 'assets/IMGS/menuHighlight1.jpeg'"
         [title]="producto.nombre"
         [description]="producto.descripcion"

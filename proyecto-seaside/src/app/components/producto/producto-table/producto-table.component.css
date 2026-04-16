@@ -297,3 +297,159 @@
   filter: brightness(1.08);
   transform: translateY(-2px);
 }
+
+/* ── Adicionales button ────────────────────────────────────── */
+.btn-adicionales {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  white-space: nowrap;
+  background: rgba(34, 139, 34, 0.12);
+  color: #1a5c1a;
+}
+
+.btn-adicionales:hover {
+  background: #228b22;
+  color: #fff;
+}
+
+/* ── Modal ─────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 48px rgba(64, 1, 1, 0.25);
+}
+
+.modal-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 100;
+  color: #400101;
+  margin: 0 0 4px 0;
+  line-height: 1.1;
+}
+
+.modal-subtitle {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #8a6060;
+  margin: 0 0 24px 0;
+}
+
+.adicional-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adicional-check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #f8f1e0;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  color: #400101;
+}
+
+.adicional-check-item.checked {
+  background: rgba(242, 183, 5, 0.2);
+  border: 1px solid rgba(217, 121, 4, 0.3);
+}
+
+.adicional-check-item:hover {
+  background: rgba(242, 183, 5, 0.12);
+}
+
+.adicional-check-item input[type="checkbox"] {
+  accent-color: #d97904;
+  width: 16px;
+  height: 16px;
+}
+
+.check-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.check-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #730202;
+}
+
+.empty-msg {
+  text-align: center;
+  font-family: "Fuzzy Bubbles", cursive;
+  color: #8a6060;
+  font-size: 14px;
+  padding: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-save {
+  flex: 1;
+  background: linear-gradient(135deg, #400101, #730202);
+  color: #f2b705;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(64, 1, 1, 0.25);
+}
+
+.btn-cancel-modal {
+  flex: 1;
+  background: transparent;
+  color: #400101;
+  border: 1.5px solid rgba(64, 1, 1, 0.2);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-cancel-modal:hover {
+  background: rgba(64, 1, 1, 0.05);
+}

@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuService.getCategorias().subscribe((cats) => {
-      this.categorias = cats;
+      this.categorias = cats.filter((c) => c.id !== 2);
     });
     this.productoService.findAll().subscribe((productos) => {
       productos.forEach((p) => {

@@ -80,4 +80,85 @@
 @media (max-width: 600px) {
   .detalle-page-wrapper { padding: 100px 20px 60px; }
   .detalle-section { padding: 24px 20px; }
+  .adicionales-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Adicionales ──────────────────────────────────────────── */
+
+.adicionales-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.08);
+}
+
+.adicionales-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 100;
+  color: #400101;
+  margin: 0 0 24px 0;
+  line-height: 1;
+}
+
+.adicionales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.adicional-card {
+  background: #f8f1e0;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.adicional-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(64, 1, 1, 0.12);
+}
+
+.adicional-img-wrap {
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+}
+
+.adicional-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.adicional-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adicional-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #400101;
+}
+
+.adicional-desc {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #8a6060;
+  line-height: 1.4;
+}
+
+.adicional-precio {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 14px;
+  color: #730202;
+  margin-top: 4px;
 }

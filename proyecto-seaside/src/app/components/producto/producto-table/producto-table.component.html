@@ -6,6 +6,7 @@
     </div>
     <div class="header-actions">
       <a class="btn-nuevo" routerLink="/productos/nuevo">+ Nuevo Producto</a>
+      <a class="btn-adicionales-page" routerLink="/adicionales">🍽 Acompañamientos</a>
       <a class="btn-back" routerLink="/">← Volver al sitio</a>
     </div>
   </div>
@@ -65,6 +66,13 @@
                 <button class="btn-edit" (click)="editarProducto(producto)">
                   ✏ Editar
                 </button>
+                <button
+                  class="btn-adicionales"
+                  (click)="openAdicionales(producto)"
+                  *ngIf="producto.categoria.id !== 2"
+                >
+                  🍽 Acomp.
+                </button>
                 <button class="btn-delete" (click)="eliminarProducto(producto)">
                   🗑 Eliminar
                 </button>
@@ -81,4 +89,49 @@
       </table>
     </div>
   </section>
+</div>
+
+<!-- Modal Adicionales -->
+<div
+  class="modal-overlay"
+  *ngIf="editingAdicionalesFor"
+  (click)="cancelAdicionales()"
+>
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <h3 class="modal-title">
+      Acompañamientos para: {{ editingAdicionalesFor.nombre }}
+    </h3>
+    <p class="modal-subtitle">
+      Selecciona los acompañamientos que aplican a este plato
+    </p>
+
+    <div class="adicional-checklist">
+      <label
+        class="adicional-check-item"
+        *ngFor="let a of allAdicionales"
+        [class.checked]="currentAdicionalIds.has(a.id)"
+      >
+        <input
+          type="checkbox"
+          [checked]="currentAdicionalIds.has(a.id)"
+          (change)="toggleAdicional(a.id)"
+        />
+        <span class="check-name">{{ a.nombre }}</span>
+        <span class="check-price">{{
+          a.precio | currency: "COP" : "$" : "1.0-0"
+        }}</span>
+      </label>
+
+      <p *ngIf="allAdicionales.length === 0" class="empty-msg">
+        No hay acompañamientos registrados.
+      </p>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-save" (click)="saveAdicionales()">Guardar</button>
+      <button class="btn-cancel-modal" (click)="cancelAdicionales()">
+        Cancelar
+      </button>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,15 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   isScrolled = false;
+
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.updateScrollState();
@@ -36,8 +38,7 @@ export class NavbarComponent implements OnInit {
       rgba(230, 160, 55, ${progress * 0.78})
     )`;
     navbar.style.backdropFilter = `blur(${blurAmount}px)`;
-    navbar.style.boxShadow = shadowAlpha > 0
-      ? `0 2px 16px rgba(64, 1, 1, ${shadowAlpha})`
-      : 'none';
+    navbar.style.boxShadow =
+      shadowAlpha > 0 ? `0 2px 16px rgba(64, 1, 1, ${shadowAlpha})` : 'none';
   }
 }

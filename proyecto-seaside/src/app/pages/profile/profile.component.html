@@ -1,0 +1,45 @@
+<div class="auth-hero">
+  <div class="auth-hero-overlay"></div>
+  <div class="auth-hero-content">
+    <h1 class="auth-hero-title">Mi Perfil</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="auth-main" *ngIf="client">
+  <div class="auth-card profile-card">
+    <div class="profile-row">
+      <span class="profile-label">Nombre</span>
+      <span>{{ client.nombre }}</span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">Apellido</span>
+      <span>{{ client.apellido }}</span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">Correo</span>
+      <span>{{ client.correo }}</span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">Teléfono</span>
+      <span>{{ client.telefono }}</span>
+    </div>
+
+    <div class="profile-row">
+      <span class="profile-label">Dirección</span>
+      <span>{{ client.direccion }}</span>
+    </div>
+
+    <div class="profile-actions">
+      <a class="auth-btn" routerLink="/perfil/editar">Editar Perfil</a>
+      <button class="auth-btn btn-danger" (click)="onDelete()">Eliminar Cuenta</button>
+    </div>
+  </div>
+</main>

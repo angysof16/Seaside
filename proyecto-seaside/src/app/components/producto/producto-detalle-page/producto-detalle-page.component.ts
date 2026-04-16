@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Producto } from '../producto';
 import { ProductoService } from 'src/app/service/producto.service';
 
@@ -15,6 +16,7 @@ export class ProductoDetallePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private productoService: ProductoService,
   ) {}
 
@@ -41,5 +43,9 @@ export class ProductoDetallePageComponent implements OnInit {
     this.productoService.delete(this.producto!.id).subscribe(() => {
       this.router.navigate(['/productos']);
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

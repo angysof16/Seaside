@@ -1,0 +1,130 @@
+.auth-hero {
+  position: relative;
+  width: 100%;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url("/assets/IMGS/mainBackgroundImage2.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.auth-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.auth-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #f2b705;
+  font-size: clamp(80px, 18vw, 200px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 3;
+}
+.hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+.hero-wave path {
+  fill: #f8f1e0;
+}
+
+.auth-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px 24px 80px;
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.1);
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(64, 1, 1, 0.08);
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 15px;
+  color: #400101;
+}
+
+.profile-row:last-of-type {
+  border-bottom: none;
+}
+
+.profile-label {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8a6060;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.auth-btn {
+  background: linear-gradient(135deg, #400101, #730202);
+  color: #f2b705;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(64, 1, 1, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #730202, #c81e1e);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}

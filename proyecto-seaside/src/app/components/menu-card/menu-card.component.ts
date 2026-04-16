@@ -8,6 +8,8 @@ import { Component, Input } from '@angular/core';
 
 export class MenuCardComponent {
 
+  @Input() productId!: number;
+
   @Input() image!: string;
 
   @Input() title!: string;

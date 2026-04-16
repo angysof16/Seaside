@@ -1,0 +1,53 @@
+<!-- cliente-form.component.html -->
+<form #clienteForm="ngForm" (ngSubmit)="guardar(clienteForm)">
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" name="nombre" required
+        [(ngModel)]="formCliente.nombre" placeholder="Nombre" />
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido *</label>
+      <input type="text" id="apellido" name="apellido" required
+        [(ngModel)]="formCliente.apellido" placeholder="Apellido" />
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo electrónico *</label>
+      <input type="email" id="correo" name="correo" required
+        [(ngModel)]="formCliente.correo" placeholder="correo@ejemplo.com" />
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono *</label>
+      <input type="tel" id="telefono" name="telefono" required
+        [(ngModel)]="formCliente.telefono" placeholder="310 000 0000" />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="direccion">Dirección *</label>
+      <input type="text" id="direccion" name="direccion" required
+        [(ngModel)]="formCliente.direccion" placeholder="Calle 1 # 2-3, Bogotá" />
+    </div>
+
+    <!-- Contraseña: solo al crear -->
+    <div class="form-group full-width" *ngIf="!editando">
+      <label for="contrasena">Contraseña *</label>
+      <input type="password" id="contrasena" name="contrasena"
+        [required]="!editando"
+        [(ngModel)]="formCliente.contrasena" placeholder="Contraseña inicial" />
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" [disabled]="clienteForm.invalid">
+      {{ editando ? '✓ Actualizar' : '+ Guardar' }}
+    </button>
+    <button *ngIf="editando" type="button" class="btn-cancel" (click)="cancelarEdicion()">
+      Cancelar
+    </button>
+  </div>
+</form>

@@ -1,0 +1,33 @@
+<!-- cliente-detalle.component.html -->
+<div class="detalle-card" *ngIf="seleccionado">
+  <div class="detalle-body">
+    <h3 class="detalle-nombre">{{ seleccionado.nombre }} {{ seleccionado.apellido }}</h3>
+
+    <div class="detalle-grid">
+      <div class="detalle-item">
+        <span class="detalle-label">ID</span>
+        <span class="detalle-value">{{ seleccionado.id }}</span>
+      </div>
+
+      <div class="detalle-item">
+        <span class="detalle-label">Correo</span>
+        <span class="detalle-value">{{ seleccionado.correo }}</span>
+      </div>
+
+      <div class="detalle-item">
+        <span class="detalle-label">Teléfono</span>
+        <span class="detalle-value">{{ seleccionado.telefono }}</span>
+      </div>
+
+      <div class="detalle-item full">
+        <span class="detalle-label">Dirección</span>
+        <span class="detalle-value">{{ seleccionado.direccion }}</span>
+      </div>
+
+      <div class="detalle-item" *ngIf="seleccionado.carrito">
+        <span class="detalle-label">Carrito ID</span>
+        <span class="detalle-value">#{{ seleccionado.carrito.id }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,11 @@ import { OperadorFormPageComponent } from './operador/operador-form-page/operado
 import { OperadorDetallePageComponent } from './operador/operador-detalle-page/operador-detalle-page.component';
 import { OperadorCrudTableComponent } from './operador/operador-crud-table/operador-crud-table.component';
 
+// ─── CLIENTES ────────────────────────────────────────────────────────────────
+import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
+
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'menu', component: MenuComponent },
@@ -29,6 +34,11 @@ const routes: Routes = [
   { path: 'operadores/nuevo', component: OperadorFormPageComponent },
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },
+  // ─── Clientes ───────────────────────────────────────────────────────────────
+  { path: 'clientes', component: ClienteCrudTableComponent },
+  { path: 'clientes/nuevo', component: ClienteFormPageComponent },
+  { path: 'clientes/editar/:id', component: ClienteFormPageComponent },
+  { path: 'clientes/:id', component: ClienteDetallePageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

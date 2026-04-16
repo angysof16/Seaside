@@ -1,0 +1,64 @@
+<!-- cliente-crud-table.component.html -->
+<div class="admin-wrapper">
+  <div class="admin-header">
+    <div>
+      <h1 class="admin-title">Gestión de Clientes</h1>
+      <p class="admin-subtitle">Administra los clientes registrados</p>
+    </div>
+    <div class="header-actions">
+      <a class="btn-nuevo" routerLink="/clientes/nuevo">+ Nuevo Cliente</a>
+      <a class="btn-back" routerLink="/">← Volver al sitio</a>
+    </div>
+  </div>
+
+  <section class="table-section">
+    <h2 class="section-heading">
+      Clientes <span class="count-badge">{{ clienteList.length }}</span>
+    </h2>
+
+    <div class="tabla-wrapper">
+      <table class="tabla-clientes">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clienteList" class="cliente-row">
+            <td>#{{ cliente.id }}</td>
+            <td class="col-name">{{ cliente.nombre }}</td>
+            <td>{{ cliente.apellido }}</td>
+            <td>{{ cliente.correo }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td class="col-dir">{{ cliente.direccion }}</td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-ver" (click)="verDetalle(cliente)">
+                  👁 Ver
+                </button>
+                <button class="btn-edit" (click)="editarCliente(cliente)">
+                  ✏ Editar
+                </button>
+                <button class="btn-delete" (click)="eliminarCliente(cliente)">
+                  🗑 Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="clienteList.length === 0">
+            <td colspan="7" class="empty-state">
+              No hay clientes registrados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

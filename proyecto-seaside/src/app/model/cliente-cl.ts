@@ -6,6 +6,7 @@ export interface Cliente {
   telefono: string;
   direccion: string;
   carrito?: { id: number; ultimaActualizacion: string };
+  contrasena?: string;
 }
 
 export class ClienteCl implements Cliente {

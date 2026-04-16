@@ -1,0 +1,30 @@
+.about-section {
+  position: relative;
+  margin: 60px 80px;
+  padding-bottom: 50px;
+}
+
+.about-body {
+  overflow: hidden;
+}
+
+.img-float-right {
+  float: right;
+  width: 35%;
+  margin: 0 0 1rem 2rem;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    margin: 40px 24px;
+  }
+
+  .img-float-right {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.2rem 0;
+    display: block;
+  }
+}

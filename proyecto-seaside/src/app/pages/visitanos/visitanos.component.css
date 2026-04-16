@@ -1,0 +1,158 @@
+.page-hero {
+  position: relative;
+  width: 100%;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url('/assets/IMGS/mainBackgroundImage2.jpeg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.page-hero-content { position: relative; z-index: 2; text-align: center; }
+
+.page-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #F2B705;
+  font-size: clamp(70px, 16vw, 200px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 3; }
+.hero-wave svg { display: block; width: 100%; height: 80px; }
+.hero-wave path { fill: #f8f1e0; }
+
+.visit-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+}
+
+.visit-intro {
+  max-width: 700px;
+  margin-bottom: 48px;
+}
+
+.visit-intro p {
+  font-size: clamp(15px, 1.4vw, 20px);
+  line-height: 1.8;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.visit-top-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.map-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.12);
+  height: 420px;
+}
+
+.map-wrapper iframe { display: block; }
+
+.info-col { display: flex; flex-direction: column; gap: 20px; }
+
+.info-card {
+  background: #400101;
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  border: 1px solid rgba(242, 183, 5, 0.15);
+  border-bottom: 3px solid transparent;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(64, 1, 1, 0.35);
+  border-color: #F2B705;
+}
+
+.info-icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(242, 183, 5, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon-wrap svg { width: 20px; height: 20px; }
+
+.info-text { display: flex; flex-direction: column; gap: 4px; }
+
+.info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #F2B705;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.horario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.horario-hora { color: rgba(255, 255, 255, 0.55); }
+
+.info-sub-link {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  transition: color 0.2s;
+}
+
+.info-sub-link:hover { color: #F2B705; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .visit-top-grid { grid-template-columns: 1fr; }
+  .map-wrapper { height: 300px; }
+  .visit-main { padding: 48px 24px 60px; }
+}

@@ -1,0 +1,102 @@
+/* ─── NAVBAR ─────────────────────────────────────────────── */
+.navigation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 50px 0 0;
+  height: clamp(70px, 9vw, 130px);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+.navigation-bar .logo {
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-bar .logo a {
+  display: block;
+  text-decoration: none;
+}
+
+.navigation-bar .logo img {
+  height: clamp(120px, 16vw, 250px);
+  width: auto;
+  filter: drop-shadow(0 1px 5px rgba(64, 1, 1, 0.45));
+}
+
+.navigation-bar .nav-links {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(14px, 1.6vw, 25px);
+  list-style: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation-bar .nav-links .page-link {
+  color: #2d0000;
+  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.6vw, 25px);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 1);
+}
+
+.navigation-bar .nav-links li a:hover,
+.navigation-bar .nav-links .page-link:hover {
+  background-color: #400101;
+  color: #ffbc4c;
+  text-shadow: none;
+}
+
+.navigation-bar .nav-links .page-link.active-link {
+  background-color: #400101;
+  color: #ffbc4c;
+  text-shadow: none;
+}
+
+//scrolled
+.navigation-bar .nav-links .page-link.scrolled {
+  text-shadow: none;
+  color: #400101;
+}
+
+.navigation-bar .nav-links .page-link.scrolled:hover {
+  color: #ffbc4c !important;
+}
+
+.login-link {
+  background-color: #400101;
+  padding: clamp(6px, 0.8vw, 12px) clamp(12px, 1.6vw, 25px);
+  border-radius: 10px;
+  color: #F2B705;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  transition: background-color 0.3s ease, filter 0.2s ease;
+}
+
+.login-link:hover {
+  filter: brightness(1.15);
+}
+
+.login-link.active-login {
+  background-color: #2d0000;
+}

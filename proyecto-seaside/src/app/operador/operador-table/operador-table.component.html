@@ -1,0 +1,150 @@
+<div class="admin-wrapper">
+  <!-- Encabezado -->
+  <div class="admin-header">
+    <div>
+      <h1 class="admin-title">Gestión de Pedidos</h1>
+      <p class="admin-subtitle">
+        Administra y despacha pedidos del restaurante
+      </p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-filtro" (click)="toggleFiltro()">
+        {{ soloActivos ? "👁 Ver todos" : "🔍 Solo activos" }}
+      </button>
+      <a class="btn-back" routerLink="/">← Volver al sitio</a>
+    </div>
+  </div>
+
+  <!-- Tabla de pedidos -->
+  <section class="table-section">
+    <h2 class="section-heading">
+      {{ soloActivos ? "Pedidos Activos" : "Todos los Pedidos" }}
+      <span class="count-badge">{{ pedidos.length }}</span>
+    </h2>
+
+    <div class="tabla-wrapper">
+      <table class="tabla-pedidos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Fecha creación</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Domiciliario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pedidos" class="pedido-row">
+            <td>#{{ pedido.id }}</td>
+            <td>{{ pedido.cliente.nombre }} {{ pedido.cliente.apellido }}</td>
+            <td class="col-fecha">{{ pedido.fechaCreacion }}</td>
+            <td>
+              <span class="price-tag">
+                {{ pedido.total | currency: "COP" : "$" : "1.0-0" }}
+              </span>
+            </td>
+            <td>
+              <span
+                class="estado-badge"
+                [ngClass]="getEstadoClass(pedido.estado)"
+              >
+                {{ pedido.estado }}
+              </span>
+            </td>
+            <td>{{ getNombreDomiciliario(pedido.domiciliarioId) }}</td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-estado" (click)="abrirModalEstado(pedido)">
+                  📋 Estado
+                </button>
+                <button class="btn-asignar" (click)="abrirModalAsignar(pedido)">
+                  🛵 Asignar
+                </button>
+                <button class="btn-delete" (click)="eliminarPedido(pedido)">
+                  🗑 Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="pedidos.length === 0">
+            <td colspan="7" class="empty-state">
+              No hay pedidos para mostrar.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- ── Modal: Asignar domiciliario ────────────────────────── -->
+<div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <h3 class="modal-title">Asignar Domiciliario</h3>
+    <p class="modal-sub">
+      Pedido #{{ pedidoSeleccionado?.id }} — Cliente
+      {{ pedidoSeleccionado?.cliente?.nombre }} {{ pedidoSeleccionado?.cliente?.apellido }}
+
+    </p>
+
+    <div class="form-group">
+      <label>Domiciliarios disponibles</label>
+      <select [(ngModel)]="domiciliarioElegido" name="domiciliario">
+        <option [ngValue]="null" disabled>Selecciona un domiciliario</option>
+        <option *ngFor="let d of domiciliariosDisponibles" [ngValue]="d.id">
+          {{ d.nombre }} {{ d.apellido }} — {{ d.telefono }}
+        </option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button
+        class="btn-confirmar"
+        (click)="confirmarAsignacion()"
+        [disabled]="!domiciliarioElegido"
+      >
+        ✓ Confirmar
+      </button>
+      <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: Actualizar estado ───────────────────────────── -->
+<div
+  class="modal-overlay"
+  *ngIf="modalEstadoAbierto"
+  (click)="cerrarModalEstado()"
+>
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <h3 class="modal-title">Actualizar Estado</h3>
+    <p class="modal-sub">
+      Pedido #{{ pedidoEstado?.id }} — Estado actual:
+      <span
+        class="estado-badge"
+        [ngClass]="getEstadoClass(pedidoEstado?.estado ?? '')"
+      >
+        {{ pedidoEstado?.estado }}
+      </span>
+    </p>
+
+    <div class="form-group">
+      <label>Nuevo estado</label>
+      <select [(ngModel)]="nuevoEstado" name="estado">
+        <option *ngFor="let e of ESTADOS" [value]="e">{{ e }}</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-confirmar" (click)="confirmarEstado()">
+        ✓ Guardar
+      </button>
+      <button class="btn-cancelar" (click)="cerrarModalEstado()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>

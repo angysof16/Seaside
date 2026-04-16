@@ -1,0 +1,83 @@
+.comment-box {
+  position: relative;
+  background: #400101;
+  border-radius: 18px;
+  padding: clamp(28px, 3vw, 44px) clamp(24px, 2.6vw, 38px);
+  max-width: 340px;
+  flex: 1 1 240px;
+  overflow: hidden;
+  color: #fff;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+  border: 1px solid rgba(242, 183, 5, 0.15);
+  border-bottom: 3px solid transparent;
+  opacity: 1;
+  transform: translateY(0);
+  backdrop-filter: blur(2px);
+  transition: border-color 0.35s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.comment-box.visible {
+  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.comment-box:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  border-color: #F2B705;
+  box-shadow: 0 12px 40px rgba(64, 1, 1, 0.35),
+              0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.comment-text {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 22px 0;
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+.comment-author {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F2B705;
+  text-align: left;
+}
+
+.comment-author::before {
+  content: "\201C";
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  font-size: 64px;
+  color: rgba(242, 183, 5, 0.18);
+  font-family: serif;
+  z-index: 0;
+}
+
+.comment-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(242, 183, 5, 0.12),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.comment-box:hover::after {
+  opacity: 1;
+}

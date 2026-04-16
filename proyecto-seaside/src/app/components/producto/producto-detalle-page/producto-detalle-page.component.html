@@ -1,0 +1,19 @@
+<div class="detalle-page-wrapper" *ngIf="producto">
+
+  <div class="detalle-page-header">
+    <div>
+      <h1 class="admin-title">Detalle del Producto</h1>
+      <p class="admin-subtitle">Información completa del plato</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-edit"   (click)="editar()">✏ Editar</button>
+      <button class="btn-delete" (click)="eliminar()">🗑 Eliminar</button>
+      <a class="btn-back" routerLink="/productos">← Volver</a>
+    </div>
+  </div>
+
+  <section class="detalle-section">
+    <app-producto-detalle [seleccionado]="producto"></app-producto-detalle>
+  </section>
+
+</div>

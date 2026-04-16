@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Producto } from '../producto/producto';
+import { Producto } from '../components/producto/producto';
 import { AdicionalesCl } from '../model/adicionales-cl';
 import { environment } from '../../environments/environment';
 
@@ -26,15 +25,17 @@ export class ProductoService {
     );
   }
 
-  add(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(this.apiUrl, producto);
+  add(producto: Producto): Observable<any> {
+    return this.http.post(this.apiUrl, producto, { responseType: 'text' });
   }
 
-  update(producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(`${this.apiUrl}/${producto.id}`, producto);
+  update(producto: Producto): Observable<any> {
+    return this.http.put(this.apiUrl + '/' + producto.id, producto, {
+      responseType: 'text',
+    });
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl + '/' + id, { responseType: 'text' });
   }
 }

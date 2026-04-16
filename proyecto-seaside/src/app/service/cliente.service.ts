@@ -20,15 +20,17 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
   }
 
-  add(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(this.apiUrl, cliente);
+  add(cliente: Cliente): Observable<any> {
+    return this.http.post(this.apiUrl, cliente, { responseType: 'text' });
   }
 
-  update(cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrl}/${cliente.id}`, cliente);
+  update(cliente: Cliente): Observable<any> {
+    return this.http.put(this.apiUrl + '/' + cliente.id, cliente, {
+      responseType: 'text',
+    });
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl + '/' + id, { responseType: 'text' });
   }
 }

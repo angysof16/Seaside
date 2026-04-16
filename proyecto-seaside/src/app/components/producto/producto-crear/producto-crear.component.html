@@ -1,0 +1,18 @@
+<div class="form-page-wrapper">
+  <div class="form-page-header">
+    <div>
+      <h1 class="admin-title">Nuevo Producto</h1>
+      <p class="admin-subtitle">
+        Completa los datos para agregar un plato al menú
+      </p>
+    </div>
+    <a class="btn-back" routerLink="/productos">← Volver a productos</a>
+  </div>
+
+  <section class="form-section">
+    <app-producto-form
+      (addProductoEvent)="onGuardar($event)"
+      (cancelarEvent)="onCancelar()"
+    ></app-producto-form>
+  </section>
+</div>

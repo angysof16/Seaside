@@ -26,26 +26,27 @@ import { VisitanosComponent } from './pages/visitanos/visitanos.component';
 import { LoginComponent } from './pages/login/login.component';
 
 // CRUD Productos
-import { ProductoTableComponent } from './producto/producto-table/producto-table.component';
-import { ProductoDetalleComponent } from './producto/producto-detalle/producto-detalle.component';
-import { ProductoFormComponent } from './producto/producto-form/producto-form.component';
-import { ProductoFormPageComponent } from './producto/producto-form-page/producto-form-page.component';
-import { ProductoDetallePageComponent } from './producto/producto-detalle-page/producto-detalle-page.component';
+import { ProductoTableComponent } from './components/producto/producto-table/producto-table.component';
+import { ProductoDetalleComponent } from './components/producto/producto-detalle/producto-detalle.component';
+import { ProductoFormComponent } from './components/producto/producto-form/producto-form.component';
+import { ProductoFormPageComponent } from './components/producto/producto-form-page/producto-form-page.component';
+import { ProductoDetallePageComponent } from './components/producto/producto-detalle-page/producto-detalle-page.component';
+import { ProductoCrearComponent } from './components/producto/producto-crear/producto-crear.component';
 
 // CRUD Operadores
-import { OperadorTableComponent } from './operador/operador-table/operador-table.component';
-import { OperadorFormComponent } from './operador/operador-form/operador-form.component';
-import { OperadorDetalleComponent } from './operador/operador-detalle/operador-detalle.component';
-import { OperadorFormPageComponent } from './operador/operador-form-page/operador-form-page.component';
-import { OperadorDetallePageComponent } from './operador/operador-detalle-page/operador-detalle-page.component';
-import { OperadorCrudTableComponent } from './operador/operador-crud-table/operador-crud-table.component';
+import { OperadorTableComponent } from './components/operador/operador-table/operador-table.component';
+import { OperadorFormComponent } from './components/operador/operador-form/operador-form.component';
+import { OperadorDetalleComponent } from './components/operador/operador-detalle/operador-detalle.component';
+import { OperadorFormPageComponent } from './components/operador/operador-form-page/operador-form-page.component';
+import { OperadorDetallePageComponent } from './components/operador/operador-detalle-page/operador-detalle-page.component';
+import { OperadorCrudTableComponent } from './components/operador/operador-crud-table/operador-crud-table.component';
 
 // CRUD Clientes ──────────────────────────────────────────────────────────────
-import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
-import { ClienteDetalleComponent } from './cliente/cliente-detalle/cliente-detalle.component';
-import { ClienteFormComponent } from './cliente/cliente-form/cliente-form.component';
-import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
-import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { ClienteCrudTableComponent } from './components/cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cliente-detalle.component';
+import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
+import { ClienteFormPageComponent } from './components/cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent } from './components/cliente/cliente-detalle-page/cliente-detalle-page.component';
 
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
@@ -75,6 +76,7 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     ProductoFormComponent,
     ProductoFormPageComponent,
     ProductoDetallePageComponent,
+    ProductoCrearComponent,
     // CRUD Operadores
     OperadorTableComponent,
     OperadorFormComponent,

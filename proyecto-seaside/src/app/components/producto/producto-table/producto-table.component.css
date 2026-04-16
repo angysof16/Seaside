@@ -1,0 +1,299 @@
+/* ── Wrapper ───────────────────────────────────────────────── */
+.admin-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.admin-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(52px, 8vw, 90px);
+  font-weight: 100;
+  color: #400101;
+  line-height: 1;
+  margin: 0;
+}
+
+.admin-subtitle {
+  font-size: 15px;
+  color: #8a6060;
+  margin: 4px 0 0;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+}
+
+.btn-back {
+  background-color: #400101;
+  color: #F2B705;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 14px;
+  transition: filter 0.2s;
+  white-space: nowrap;
+}
+
+.btn-back:hover {
+  filter: brightness(1.15);
+}
+
+/* ── Section cards ─────────────────────────────────────────── */
+.form-section,
+.table-section,
+.detail-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.08);
+}
+
+.section-heading {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 100;
+  color: #400101;
+  line-height: 1;
+  margin: 0 0 28px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.count-badge {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(64, 1, 1, 0.08);
+  color: #400101;
+  padding: 4px 12px;
+  border-radius: 20px;
+  line-height: 1.4;
+}
+
+/* ── Table ─────────────────────────────────────────────────── */
+.tabla-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(64, 1, 1, 0.08);
+}
+
+.tabla-menu {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.tabla-menu thead tr {
+  background: #400101;
+}
+
+.tabla-menu th {
+  color: #F2B705;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla-menu td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(64, 1, 1, 0.07);
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  color: #400101;
+}
+
+.product-row {
+  transition: background 0.15s ease;
+}
+
+.product-row:hover {
+  background: rgba(242, 183, 5, 0.05);
+}
+
+.product-row:last-child td {
+  border-bottom: none;
+}
+
+/* ── Image ─────────────────────────────────────────────────── */
+.img-wrap {
+  width: 72px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f0e4c8;
+}
+
+.producto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.product-row:hover .producto-img {
+  transform: scale(1.08);
+}
+
+/* ── Text cells ────────────────────────────────────────────── */
+.col-name {
+  font-weight: 600;
+  min-width: 130px;
+}
+
+.col-desc {
+  color: #8a6060;
+  min-width: 180px;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-alerg {
+  text-align: center;
+}
+
+/* ── Badges ────────────────────────────────────────────────── */
+.price-tag {
+  display: inline-block;
+  background: rgba(242, 183, 5, 0.15);
+  color: #400101;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 121, 4, 0.25);
+  white-space: nowrap;
+}
+
+.time-badge {
+  font-size: 13px;
+  color: #8a6060;
+  white-space: nowrap;
+}
+
+.alerg-yes {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(64, 1, 1, 0.07);
+  color: #730202;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(64, 1, 1, 0.12);
+}
+
+.alerg-no {
+  color: #c0a0a0;
+  font-size: 16px;
+}
+
+/* ── Action buttons ────────────────────────────────────────── */
+.action-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-ver,
+.btn-edit,
+.btn-delete {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-ver {
+  background: rgba(64, 1, 1, 0.07);
+  color: #400101;
+}
+
+.btn-edit {
+  background: rgba(242, 183, 5, 0.18);
+  color: #7a5500;
+}
+
+.btn-delete {
+  background: rgba(200, 30, 30, 0.08);
+  color: #c81e1e;
+}
+
+.btn-ver:hover   { background: #400101; color: #F2B705; }
+.btn-edit:hover  { background: #F2B705; color: #400101; }
+.btn-delete:hover { background: #c81e1e; color: #fff; }
+
+/* ── Empty state ───────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  color: #8a6060;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 15px;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-wrapper {
+    padding: 100px 20px 60px;
+  }
+
+  .form-section,
+  .table-section {
+    padding: 24px 20px;
+  }
+}
+
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-nuevo {
+  background: linear-gradient(135deg, #D97904, #F2B705);
+  color: #400101;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 14px;
+  transition: filter 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.btn-nuevo:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}

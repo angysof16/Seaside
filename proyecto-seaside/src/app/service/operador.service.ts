@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Operador } from '../operador/operador';
+import { Operador } from '../components/operador/operador';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -20,15 +20,17 @@ export class OperadorService {
     return this.http.get<Operador>(`${this.apiUrl}/${id}`);
   }
 
-  add(operador: Operador): Observable<Operador> {
-    return this.http.post<Operador>(this.apiUrl, operador);
+  add(operador: Operador): Observable<any> {
+    return this.http.post(this.apiUrl, operador, { responseType: 'text' });
   }
 
-  update(operador: Operador): Observable<Operador> {
-    return this.http.put<Operador>(`${this.apiUrl}/${operador.id}`, operador);
+  update(operador: Operador): Observable<any> {
+    return this.http.put(this.apiUrl + '/' + operador.id, operador, {
+      responseType: 'text',
+    });
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl + '/' + id, { responseType: 'text' });
   }
 }

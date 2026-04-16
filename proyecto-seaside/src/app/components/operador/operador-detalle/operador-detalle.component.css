@@ -1,0 +1,58 @@
+.detalle-card {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.detalle-body {
+  flex: 1;
+  min-width: 260px;
+}
+
+.detalle-nombre {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 100;
+  color: #400101;
+  margin: 0 0 20px 0;
+  line-height: 1;
+}
+
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+.detalle-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.detalle-item.full {
+  grid-column: 1 / -1;
+}
+
+.detalle-label {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 11px;
+  font-weight: 700;
+  color: #8a6060;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.detalle-value {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  font-weight: 400;
+  color: #400101;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .detalle-grid {
+    grid-template-columns: 1fr;
+  }
+}

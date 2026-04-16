@@ -1,0 +1,25 @@
+<!-- cliente-form-page.component.html -->
+<div class="form-page-wrapper">
+  <div class="form-page-header">
+    <div>
+      <h1 class="admin-title">
+        {{ modoEdicion ? 'Editar Cliente' : 'Nuevo Cliente' }}
+      </h1>
+      <p class="admin-subtitle">
+        {{ modoEdicion
+          ? 'Modifica los datos del cliente'
+          : 'Completa los datos para registrar un cliente' }}
+      </p>
+    </div>
+    <a class="btn-back" routerLink="/clientes">← Volver a clientes</a>
+  </div>
+
+  <section class="form-section">
+    <app-cliente-form
+      [clienteEditar]="clienteEditar"
+      (addClienteEvent)="onGuardar($event)"
+      (updateClienteEvent)="onActualizar($event)"
+      (cancelarEvent)="onCancelar()"
+    ></app-cliente-form>
+  </section>
+</div>

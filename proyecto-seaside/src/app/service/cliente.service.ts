@@ -21,7 +21,8 @@ export class ClienteService {
   }
 
   add(cliente: Cliente): Observable<any> {
-    return this.http.post(this.apiUrl, cliente, { responseType: 'text' });
+    const { id, ...body } = cliente;
+    return this.http.post(this.apiUrl, body, { responseType: 'text' });
   }
 
   update(cliente: Cliente): Observable<any> {

@@ -21,9 +21,15 @@ export class ProductoTableComponent implements OnInit {
   }
 
   cargarProductos(): void {
-    this.productoService
-      .findAll()
-      .subscribe((list) => (this.productList = list));
+    this.productoService.findAll().subscribe({
+      next: (list) => {
+        console.log('Productos recibidos:', list);
+        this.productList = list;
+      },
+      error: (err) => {
+        console.error('Error al cargar productos:', err);
+      },
+    });
   }
 
   verDetalle(producto: Producto): void {

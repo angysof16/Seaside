@@ -47,7 +47,7 @@
                 producto.precio | currency: "COP" : "$" : "1.0-0"
               }}</span>
             </td>
-            <td>{{ producto.categoria.nombre }}</td>
+            <td>{{ producto.categoria?.nombre }}</td>
             <td>
               <span class="time-badge">⏱ {{ producto.tiempoMinutos }} min</span>
             </td>

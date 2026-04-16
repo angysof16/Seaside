@@ -21,7 +21,8 @@ export class OperadorService {
   }
 
   add(operador: Operador): Observable<any> {
-    return this.http.post(this.apiUrl, operador, { responseType: 'text' });
+    const { id, ...body } = operador;
+    return this.http.post(this.apiUrl, body, { responseType: 'text' });
   }
 
   update(operador: Operador): Observable<any> {

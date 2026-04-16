@@ -29,8 +29,15 @@ export class ProductoFormPageComponent implements OnInit {
   }
 
   onGuardar(producto: Producto): void {
-    this.productoService.add(producto).subscribe(() => {
-      this.router.navigate(['/productos']);
+    console.log('Enviando producto:', producto);
+    this.productoService.add(producto).subscribe({
+      next: () => {
+        console.log('Producto creado correctamente');
+        this.router.navigate(['/productos']);
+      },
+      error: (err) => {
+        console.error('Error al crear producto:', err);
+      },
     });
   }
 

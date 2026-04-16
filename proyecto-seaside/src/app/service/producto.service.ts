@@ -26,7 +26,8 @@ export class ProductoService {
   }
 
   add(producto: Producto): Observable<any> {
-    return this.http.post(this.apiUrl, producto, { responseType: 'text' });
+    const { id, ...body } = producto;
+    return this.http.post(this.apiUrl, body, { responseType: 'text' });
   }
 
   update(producto: Producto): Observable<any> {

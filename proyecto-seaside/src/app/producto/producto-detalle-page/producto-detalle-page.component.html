@@ -1,15 +1,51 @@
+<!-- producto-detalle-page.component.html -->
 <div class="detalle-page-wrapper" *ngIf="producto">
   <div class="detalle-page-header">
     <div>
-      <h1 class="admin-title">Detalle del Producto</h1>
+      <h1 class="admin-title">{{ producto.nombre }}</h1>
       <p class="admin-subtitle">Información completa del plato</p>
     </div>
     <div class="header-actions">
-      <a class="btn-back" routerLink="/menu">← Volver</a>
+      <a class="btn-back" (click)="goBack()" style="cursor:pointer">← Volver</a>
     </div>
   </div>
 
   <section class="detalle-section">
     <app-producto-detalle [seleccionado]="producto"></app-producto-detalle>
+  </section>
+
+  <!-- Adicionales filtrados por categoría del producto -->
+  <section class="adicionales-section" *ngIf="adicionales.length > 0">
+    <h2 class="adicionales-title">Acompañamientos disponibles</h2>
+    <p class="adicionales-subtitle">
+      Complementa tu {{ producto.nombre }} con alguno de estos acompañamientos
+    </p>
+    <div class="adicionales-grid">
+      <div class="adicional-card" *ngFor="let a of adicionales">
+        <div class="adicional-img-wrap" *ngIf="a.imagenURL">
+          <img [src]="a.imagenURL" [alt]="a.nombre" class="adicional-img" />
+        </div>
+        <div class="adicional-body">
+          <span class="adicional-nombre">{{ a.nombre }}</span>
+          <span class="adicional-desc">{{ a.descripcion }}</span>
+          <div class="adicional-footer">
+            <span class="adicional-precio">
+              {{ a.precio | currency: 'COP' : '$' : '1.0-0' }}
+            </span>
+            <span class="adicional-tiempo" *ngIf="a.tiempoPreparacion">
+              ⏱ {{ a.tiempoPreparacion }} min
+            </span>
+          </div>
+          <span class="adicional-alerg" *ngIf="a.tieneAlergenos">
+            ⚠ Contiene alérgenos
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Si no hay adicionales -->
+  <section class="adicionales-section" *ngIf="adicionales.length === 0 && producto.categoria?.id !== 2">
+    <p class="no-adicionales">No hay acompañamientos registrados para este plato.</p>
   </section>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Producto } from '../producto';
 import { ProductoService } from 'src/app/service/producto.service';
 
@@ -15,6 +16,7 @@ export class ProductoDetallePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private productoService: ProductoService,
   ) {}
 
@@ -24,22 +26,20 @@ export class ProductoDetallePageComponent implements OnInit {
       this.productoService.findById(Number(id)).subscribe({
         next: (resp) => {
           this.producto = resp.product;
-          this.adicionales = resp.adicionales;
+          // La API ya devuelve los adicionales filtrados por la relación ManyToMany
+          // del producto, pero el DataLoader asigna adicionales por categoría
+          // mediante la relación en Adicionales.categoria. Aquí usamos los que
+          // vienen del endpoint para mantener consistencia.
+          this.adicionales = resp.adicionales ?? [];
         },
-        error: () => this.router.navigate(['/productos']),
+        error: () => this.router.navigate(['/menu']),
       });
     } else {
-      this.router.navigate(['/productos']);
+      this.router.navigate(['/menu']);
     }
   }
 
-  editar(): void {
-    this.router.navigate(['/productos/editar', this.producto!.id]);
-  }
-
-  eliminar(): void {
-    this.productoService.delete(this.producto!.id).subscribe(() => {
-      this.router.navigate(['/productos']);
-    });
+  goBack(): void {
+    this.location.back();
   }
 }

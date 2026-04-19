@@ -18,9 +18,10 @@ import { OperadorDetallePageComponent } from './components/operador/operador-det
 import { OperadorCrudTableComponent } from './components/operador/operador-crud-table/operador-crud-table.component';
 
 // ─── CLIENTES ────────────────────────────────────────────────────────────────
-import { ClienteCrudTableComponent } from './components/cliente/cliente-crud-table/cliente-crud-table.component';
-import { ClienteFormPageComponent } from './components/cliente/cliente-form-page/cliente-form-page.component';
-import { ClienteDetallePageComponent } from './components/cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -40,12 +41,14 @@ const routes: Routes = [
   { path: 'operadores/nuevo', component: OperadorFormPageComponent },
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },
+  { path: 'operador/login', component: OperadorLoginComponent },
   // ─── Clientes ───────────────────────────────────────────────────────────────
   { path: 'clientes', component: ClienteCrudTableComponent },
   { path: 'clientes/nuevo', component: ClienteFormPageComponent },
   { path: 'clientes/editar/:id', component: ClienteFormPageComponent },
   { path: 'clientes/:id', component: ClienteDetallePageComponent },
   { path: '**', component: ErrorPageComponent },
+  
 ];
 
 @NgModule({

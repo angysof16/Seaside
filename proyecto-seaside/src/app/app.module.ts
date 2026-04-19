@@ -54,6 +54,7 @@ import { ProfileEditComponent } from './pages/profile-edit/profile-edit.componen
 
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
+import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     OperadorFormPageComponent,
     OperadorDetallePageComponent,
     OperadorCrudTableComponent,
+    OperadorLoginComponent,
     // CRUD Clientes
     ClienteCrudTableComponent,
     ClienteDetalleComponent,

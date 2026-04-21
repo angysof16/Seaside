@@ -53,6 +53,9 @@ import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/clie
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 
+// Pedido crear
+import { PedidoCrearComponent } from './pages/pedido-crear/pedido-crear.component';
+
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
 import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
@@ -101,6 +104,8 @@ import { OperadorLoginComponent } from './pages/operador-login/operador-login.co
     // Profile
     ProfileComponent,
     ProfileEditComponent,
+    // Pedido crear
+    PedidoCrearComponent,
     // Errors
     ErrorPageComponent,
   ],

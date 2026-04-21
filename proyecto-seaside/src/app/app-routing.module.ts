@@ -23,6 +23,7 @@ import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-
 import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
 import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
 import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
+import { PedidoCrearComponent } from './pages/pedido-crear/pedido-crear.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -43,15 +44,15 @@ const routes: Routes = [
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },
   { path: 'operador/login', component: OperadorLoginComponent },
-  { path: 'detallePedido',  component: PedidoDetalleComponent },
-  { path: 'pedidos/:id',    component: PedidoDetalleComponent },
+  { path: 'detallePedido', component: PedidoDetalleComponent },
+  { path: 'pedidos/:id', component: PedidoDetalleComponent },
   // ─── Clientes ───────────────────────────────────────────────────────────────
   { path: 'clientes', component: ClienteCrudTableComponent },
   { path: 'clientes/nuevo', component: ClienteFormPageComponent },
   { path: 'clientes/editar/:id', component: ClienteFormPageComponent },
   { path: 'clientes/:id', component: ClienteDetallePageComponent },
+  { path: 'pedido/nuevo', component: PedidoCrearComponent },
   { path: '**', component: ErrorPageComponent },
-  
 ];
 
 @NgModule({

@@ -24,6 +24,7 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { VisitanosComponent } from './pages/visitanos/visitanos.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PedidoDetalleComponent } from './pages/pedido-detalle/detalle-pedido.component';
 
 // CRUD Productos
 import { ProductoTableComponent } from './components/producto/producto-table/producto-table.component';
@@ -42,11 +43,11 @@ import { OperadorDetallePageComponent } from './components/operador/operador-det
 import { OperadorCrudTableComponent } from './components/operador/operador-crud-table/operador-crud-table.component';
 
 // CRUD Clientes ──────────────────────────────────────────────────────────────
-import { ClienteCrudTableComponent } from './components/cliente/cliente-crud-table/cliente-crud-table.component';
-import { ClienteDetalleComponent } from './components/cliente/cliente-detalle/cliente-detalle.component';
-import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
-import { ClienteFormPageComponent } from './components/cliente/cliente-form-page/cliente-form-page.component';
-import { ClienteDetallePageComponent } from './components/cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteDetalleComponent } from './cliente/cliente-detalle/cliente-detalle.component';
+import { ClienteFormComponent } from './cliente/cliente-form/cliente-form.component';
+import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
 
 // Profile
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -75,6 +76,7 @@ import { OperadorLoginComponent } from './pages/operador-login/operador-login.co
     ContactoComponent,
     VisitanosComponent,
     LoginComponent,
+    PedidoDetalleComponent,
     // CRUD Productos
     ProductoTableComponent,
     ProductoDetalleComponent,

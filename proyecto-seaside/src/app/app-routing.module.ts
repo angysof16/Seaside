@@ -16,6 +16,7 @@ import { OperadorTableComponent } from './components/operador/operador-table/ope
 import { OperadorFormPageComponent } from './components/operador/operador-form-page/operador-form-page.component';
 import { OperadorDetallePageComponent } from './components/operador/operador-detalle-page/operador-detalle-page.component';
 import { OperadorCrudTableComponent } from './components/operador/operador-crud-table/operador-crud-table.component';
+import { PedidoDetalleComponent } from './pages/pedido-detalle/detalle-pedido.component';
 
 // ─── CLIENTES ────────────────────────────────────────────────────────────────
 import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
@@ -42,6 +43,8 @@ const routes: Routes = [
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },
   { path: 'operador/login', component: OperadorLoginComponent },
+  { path: 'detallePedido',  component: PedidoDetalleComponent },
+  { path: 'pedidos/:id',    component: PedidoDetalleComponent },
   // ─── Clientes ───────────────────────────────────────────────────────────────
   { path: 'clientes', component: ClienteCrudTableComponent },
   { path: 'clientes/nuevo', component: ClienteFormPageComponent },

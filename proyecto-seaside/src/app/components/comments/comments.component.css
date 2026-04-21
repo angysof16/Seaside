@@ -3,7 +3,7 @@
   gap: clamp(20px, 3vw, 40px);
   justify-content: center;
   margin-top: 40px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: stretch;
 }
 

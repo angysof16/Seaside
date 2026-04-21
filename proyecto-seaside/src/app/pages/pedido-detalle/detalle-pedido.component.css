@@ -275,3 +275,156 @@
   font-size: 12px;
   color: #400101;
 }
+
+
+/* Agregar al final de detalle-pedido.component.css */
+
+/* ── Item detalle card (reemplaza tabla) ──────────────────── */
+.item-detalle-card {
+  border: 1px solid rgba(64, 1, 1, 0.08);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.item-detalle-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.item-detalle-img-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f0e4c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item-img-placeholder {
+  font-size: 22px;
+}
+
+.item-detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.item-detalle-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #400101;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-detalle-precio-unit {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #8a6060;
+}
+
+.item-detalle-cantidad {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #8a6060;
+  min-width: 36px;
+  text-align: center;
+}
+
+.item-detalle-subtotal {
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ── Adicionales del item ─────────────────────────────────── */
+.item-adicionales-list {
+  background: #f8f1e0;
+  border-top: 1px solid rgba(64, 1, 1, 0.07);
+  padding: 8px 16px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adicional-fila-detalle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #400101;
+  padding: 3px 0;
+}
+
+.adicional-detalle-icon {
+  color: #d97904;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.adicional-detalle-nombre {
+  flex: 1;
+  color: #5a3030;
+}
+
+.adicional-detalle-cantidad {
+  color: #8a6060;
+  min-width: 30px;
+  text-align: center;
+}
+
+.adicional-detalle-subtotal {
+  font-weight: 700;
+  color: #400101;
+  min-width: 80px;
+  text-align: right;
+}
+
+.item-sin-adicionales {
+  background: #f8f1e0;
+  border-top: 1px solid rgba(64, 1, 1, 0.07);
+  padding: 8px 16px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #b09090;
+  font-style: italic;
+}
+
+/* ── Total fila final ─────────────────────────────────────── */
+.items-total-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 4px 4px;
+  border-top: 2px solid rgba(64, 1, 1, 0.12);
+  margin-top: 8px;
+}
+
+.total-label {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a6060;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

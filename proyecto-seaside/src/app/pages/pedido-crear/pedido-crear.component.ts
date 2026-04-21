@@ -1,3 +1,4 @@
+// src/app/pages/pedido-crear/pedido-crear.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../service/producto.service';
@@ -37,8 +38,6 @@ export class PedidoCrearComponent implements OnInit {
   productos: Producto[] = [];
   platoPrincipal: Producto | null = null;
   items: ItemEnPedido[] = [];
-  fechaEntrega = '';
-  fechaMinima = '';
   enviando = false;
   error = '';
   exito = false;
@@ -57,18 +56,13 @@ export class PedidoCrearComponent implements OnInit {
       return;
     }
 
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.fechaMinima = tomorrow.toISOString().split('T')[0];
-    this.fechaEntrega = this.fechaMinima;
-
     this.productoService.findAll().subscribe({
       next: (p) => (this.productos = p),
       error: () => (this.error = 'No se pudieron cargar los productos.'),
     });
   }
 
-  // ── Paso 1 ──────────────────────────────────────────────────────────────
+  // ── Paso 1: Plato principal ──────────────────────────────────────────────
 
   seleccionarPlatoPrincipal(producto: Producto): void {
     this.platoPrincipal = producto;
@@ -80,13 +74,14 @@ export class PedidoCrearComponent implements OnInit {
 
   irPaso2(): void {
     if (!this.platoPrincipal) return;
+    // Add plato principal to items if not already there
     if (!this.items.some((i) => i.productoId === this.platoPrincipal!.id)) {
       this.agregarItem(this.platoPrincipal);
     }
     this.paso = 2;
   }
 
-  // ── Paso 2 ──────────────────────────────────────────────────────────────
+  // ── Paso 2: Productos adicionales ────────────────────────────────────────
 
   agregarItem(producto: Producto): void {
     if (this.items.some((i) => i.productoId === producto.id)) return;
@@ -110,8 +105,8 @@ export class PedidoCrearComponent implements OnInit {
 
   eliminarItem(index: number): void {
     const item = this.items[index];
-    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1)
-      return;
+    // Cannot remove the only item when it's the plato principal
+    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1) return;
     this.items.splice(index, 1);
   }
 
@@ -143,17 +138,12 @@ export class PedidoCrearComponent implements OnInit {
     }
   }
 
-  isAdicionalSeleccionado(
-    item: ItemEnPedido,
-    adicional: AdicionalesCl,
-  ): boolean {
+  isAdicionalSeleccionado(item: ItemEnPedido, adicional: AdicionalesCl): boolean {
     return item.adicionales.some((a) => a.adicionalId === adicional.id);
   }
 
   toggleAdicional(item: ItemEnPedido, adicional: AdicionalesCl): void {
-    const idx = item.adicionales.findIndex(
-      (a) => a.adicionalId === adicional.id,
-    );
+    const idx = item.adicionales.findIndex((a) => a.adicionalId === adicional.id);
     if (idx >= 0) {
       item.adicionales.splice(idx, 1);
     } else {
@@ -167,16 +157,10 @@ export class PedidoCrearComponent implements OnInit {
   }
 
   getAdicionalCantidad(item: ItemEnPedido, adicionalId: number): number {
-    return (
-      item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1
-    );
+    return item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1;
   }
 
-  setAdicionalCantidad(
-    item: ItemEnPedido,
-    adicionalId: number,
-    delta: number,
-  ): void {
+  setAdicionalCantidad(item: ItemEnPedido, adicionalId: number, delta: number): void {
     const a = item.adicionales.find((ad) => ad.adicionalId === adicionalId);
     if (a) a.cantidad = Math.max(1, a.cantidad + delta);
   }
@@ -186,7 +170,7 @@ export class PedidoCrearComponent implements OnInit {
     this.paso = 3;
   }
 
-  // ── Cálculos ────────────────────────────────────────────────────────────
+  // ── Cálculos ─────────────────────────────────────────────────────────────
 
   calcularSubtotalItem(item: ItemEnPedido): number {
     const adicionalesTotales = item.adicionales.reduce(
@@ -197,26 +181,22 @@ export class PedidoCrearComponent implements OnInit {
   }
 
   calcularTotal(): number {
-    return this.items.reduce(
-      (sum, item) => sum + this.calcularSubtotalItem(item),
-      0,
-    );
+    return this.items.reduce((sum, item) => sum + this.calcularSubtotalItem(item), 0);
   }
 
-  // ── Paso 3 ──────────────────────────────────────────────────────────────
+  // ── Paso 3: Confirmar ─────────────────────────────────────────────────────
 
   confirmarPedido(): void {
-    if (!this.fechaEntrega || !this.platoPrincipal) return;
+    if (!this.platoPrincipal) return;
     const cliente = this.authService.currentCliente;
     if (!cliente) return;
 
     this.enviando = true;
     this.error = '';
 
+    // Build request exactly matching backend PedidoRequest DTO
     const request: CrearPedidoRequest = {
       clienteId: cliente.id,
-      platoPrincipalId: this.platoPrincipal.id,
-      fechaEntrega: this.fechaEntrega,
       items: this.items.map((item) => ({
         productoId: item.productoId,
         cantidad: item.cantidad,
@@ -233,9 +213,11 @@ export class PedidoCrearComponent implements OnInit {
         this.exito = true;
         this.pedidoId = response?.id ?? null;
       },
-      error: () => {
+      error: (err) => {
         this.enviando = false;
-        this.error = 'Error al crear el pedido. Por favor intenta de nuevo.';
+        this.error =
+          err?.error?.error ||
+          'Error al crear el pedido. Por favor intenta de nuevo.';
       },
     });
   }

@@ -1,3 +1,4 @@
+<!-- src/app/pages/pedido-detalle/detalle-pedido.component.html -->
 <div class="admin-wrapper">
 
   <!-- Cargando -->
@@ -57,7 +58,9 @@
         <h2 class="section-heading">Cliente</h2>
         <div class="info-row">
           <span class="info-label">Nombre</span>
-          <span class="info-value">{{ pedido.cliente.nombre }} {{ pedido.cliente.apellido }}</span>
+          <span class="info-value">
+            {{ pedido.cliente.nombre }} {{ pedido.cliente.apellido }}
+          </span>
         </div>
         <div class="info-row">
           <span class="info-label">ID</span>
@@ -67,11 +70,13 @@
 
       <!-- Info del domiciliario -->
       <div class="table-section info-card">
-        <h2 class="section-heading"> Domiciliario</h2>
+        <h2 class="section-heading">Domiciliario</h2>
         <ng-container *ngIf="domiciliario; else sinDomiciliario">
           <div class="info-row">
             <span class="info-label">Nombre</span>
-            <span class="info-value">{{ domiciliario.nombre }} {{ domiciliario.apellido }}</span>
+            <span class="info-value">
+              {{ domiciliario.nombre }} {{ domiciliario.apellido }}
+            </span>
           </div>
           <div class="info-row">
             <span class="info-label">Teléfono</span>
@@ -93,59 +98,81 @@
 
     </div>
 
-    <!-- Tabla de items -->
+    <!-- Tabla de items con adicionales -->
     <section class="table-section">
       <h2 class="section-heading">
         Items del Pedido
         <span class="count-badge">{{ items.length }}</span>
       </h2>
 
-      <div class="tabla-wrapper" *ngIf="items.length > 0">
-        <table class="tabla-pedidos">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Precio unitario</th>
-              <th>Cantidad</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of items" class="pedido-row">
-              <td class="col-producto">
-                <img
-                  *ngIf="item.producto.imageUrl"
-                  [src]="item.producto.imageUrl"
-                  [alt]="item.producto.nombre"
-                  class="item-img"
-                />
-                {{ item.producto.nombre }}
-              </td>
-              <td>{{ item.producto.precio | currency:'COP':'$':'1.0-0' }}</td>
-              <td class="col-cantidad">× {{ item.cantidad }}</td>
-              <td>
-                <span class="price-tag">
-                  {{ item.subtotal | currency:'COP':'$':'1.0-0' }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" class="total-label">Total del pedido</td>
-              <td>
-                <span class="price-tag price-tag--lg">
-                  {{ pedido.total | currency:'COP':'$':'1.0-0' }}
-                </span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+      <div *ngIf="items.length > 0">
+        <div *ngFor="let item of items" class="item-detalle-card">
+
+          <!-- Fila principal del producto -->
+          <div class="item-detalle-header">
+            <div class="item-detalle-img-wrap">
+              <img
+                *ngIf="item.producto.imageUrl"
+                [src]="item.producto.imageUrl"
+                [alt]="item.producto.nombre"
+                class="item-img"
+              />
+              <div *ngIf="!item.producto.imageUrl" class="item-img-placeholder">🍽</div>
+            </div>
+
+            <div class="item-detalle-info">
+              <span class="item-detalle-nombre">{{ item.producto.nombre }}</span>
+              <span class="item-detalle-precio-unit">
+                {{ item.producto.precio | currency:'COP':'$':'1.0-0' }} c/u
+              </span>
+            </div>
+
+            <div class="item-detalle-cantidad">
+              × {{ item.cantidad }}
+            </div>
+
+            <div class="item-detalle-subtotal">
+              <span class="price-tag">
+                {{ item.subtotal | currency:'COP':'$':'1.0-0' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Adicionales del item -->
+          <div
+            *ngIf="item.adicionales && item.adicionales.length > 0"
+            class="item-adicionales-list"
+          >
+            <div *ngFor="let a of item.adicionales" class="adicional-fila-detalle">
+              <span class="adicional-detalle-icon">↳</span>
+              <span class="adicional-detalle-nombre">{{ a.nombre }}</span>
+              <span class="adicional-detalle-cantidad">× {{ a.cantidad }}</span>
+              <span class="adicional-detalle-subtotal">
+                +{{ a.subtotal | currency:'COP':'$':'1.0-0' }}
+              </span>
+            </div>
+          </div>
+
+          <div
+            *ngIf="!item.adicionales || item.adicionales.length === 0"
+            class="item-sin-adicionales"
+          >
+            Sin adicionales
+          </div>
+
+        </div>
+
+        <!-- Total -->
+        <div class="items-total-fila">
+          <span class="total-label">Total del pedido</span>
+          <span class="price-tag price-tag--lg">
+            {{ pedido.total | currency:'COP':'$':'1.0-0' }}
+          </span>
+        </div>
       </div>
 
       <div class="empty-state" *ngIf="items.length === 0">
         <p>No hay items disponibles para este pedido.</p>
-        <small>Endpoint esperado: <code>GET /api/pedidos/{{ pedido.id }}/items</code></small>
       </div>
 
     </section>

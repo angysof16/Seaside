@@ -1,9 +1,18 @@
+// src/app/pages/pedido-detalle/detalle-pedido.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
 import { DomiciliarioService, Domiciliario } from 'src/app/service/domiciliario.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+
+export interface AdicionalEnItem {
+  id: number;
+  nombre: string;
+  precio: number;
+  cantidad: number;
+  subtotal: number;
+}
 
 export interface ItemPedido {
   id: number;
@@ -15,6 +24,7 @@ export interface ItemPedido {
     precio: number;
     imageUrl?: string;
   };
+  adicionales: AdicionalEnItem[];
 }
 
 @Component({
@@ -39,7 +49,6 @@ export class PedidoDetalleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Acepta tanto /pedidos/:id como /detallePedido?id=5
     const paramId = this.route.snapshot.paramMap.get('id');
     const queryId = this.route.snapshot.queryParamMap.get('id');
     const raw = paramId ?? queryId;
@@ -58,7 +67,6 @@ export class PedidoDetalleComponent implements OnInit {
       next: (pedido) => {
         this.pedido = pedido;
 
-        // Cargar domiciliario si está asignado
         if (pedido.domiciliarioId) {
           this.domiciliarioService.findById(pedido.domiciliarioId).subscribe({
             next: (d) => (this.domiciliario = d),
@@ -93,10 +101,15 @@ export class PedidoDetalleComponent implements OnInit {
   getEstadoClass(estado: string): string {
     const map: Record<string, string> = {
       PENDIENTE:      'badge-pendiente',
+      Pendiente:      'badge-pendiente',
       EN_PREPARACION: 'badge-preparacion',
+      'En preparación': 'badge-preparacion',
       EN_CAMINO:      'badge-camino',
+      'En camino':    'badge-camino',
       ENTREGADO:      'badge-entregado',
+      Entregado:      'badge-entregado',
       CANCELADO:      'badge-cancelado',
+      Cancelado:      'badge-cancelado',
     };
     return map[estado] ?? '';
   }

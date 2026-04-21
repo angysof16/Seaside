@@ -1,12 +1,9 @@
-// proyecto-seaside/src/app/service/pedido.service.ts
+// src/app/service/pedido.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {
-  CrearPedidoRequest,
-  PedidoDetalleResponse,
-} from '../model/crear-pedido-request';
+import { CrearPedidoRequest } from '../model/crear-pedido-request';
 
 export interface Pedido {
   id: number;
@@ -41,24 +38,19 @@ export class PedidoService {
     return this.http.patch(`${this.apiUrl}/${id}/estado`, { estado });
   }
 
-  asignarDomiciliario(
-    pedidoId: number,
-    domiciliarioId: number,
-  ): Observable<unknown> {
-    return this.http.patch(`${this.apiUrl}/${pedidoId}/domiciliario`, {
-      domiciliarioId,
-    });
+  asignarDomiciliario(pedidoId: number, domiciliarioId: number): Observable<unknown> {
+    return this.http.patch(`${this.apiUrl}/${pedidoId}/domiciliario`, { domiciliarioId });
   }
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  /**
+   * POST /api/pedidos
+   * Body must match backend PedidoRequest: { clienteId, items: [{productoId, cantidad, adicionales:[{adicionalId, cantidad}]}] }
+   */
   crear(request: CrearPedidoRequest): Observable<{ id: number }> {
     return this.http.post<{ id: number }>(this.apiUrl, request);
-  }
-
-  getDetalle(id: number): Observable<PedidoDetalleResponse> {
-    return this.http.get<PedidoDetalleResponse>(`${this.apiUrl}/${id}/detalle`);
   }
 }

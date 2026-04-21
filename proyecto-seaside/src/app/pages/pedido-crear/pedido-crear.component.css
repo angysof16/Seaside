@@ -1,0 +1,742 @@
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+.pedido-hero {
+  position: relative;
+  width: 100%;
+  min-height: 38vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url("/assets/IMGS/mainBackgroundImage2.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.pedido-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.pedido-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.pedido-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #f2b705;
+  font-size: clamp(72px, 16vw, 180px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 3;
+}
+.hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+.hero-wave path {
+  fill: #f8f1e0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Main ───────────────────────────────────────────────────────────────── */
+.pedido-main {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── Stepper ────────────────────────────────────────────────────────────── */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+.step.active {
+  opacity: 1;
+  cursor: pointer;
+}
+.step.done {
+  opacity: 0.65;
+  cursor: pointer;
+}
+.step:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #400101;
+  color: #f2b705;
+  font-size: 16px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s;
+}
+.step.active .step-number {
+  box-shadow: 0 0 0 5px rgba(64, 1, 1, 0.18);
+}
+
+.step-label {
+  font-size: 12px;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+  white-space: nowrap;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(64, 1, 1, 0.18);
+  min-width: 40px;
+  max-width: 80px;
+  margin-bottom: 24px;
+  transition: background 0.3s;
+}
+.step-line.done {
+  background: #400101;
+}
+
+/* ── Paso section ───────────────────────────────────────────────────────── */
+.paso-section {
+  animation: fadeUp 0.35s ease forwards;
+}
+
+.paso-title {
+  font-family: "Island Moments", cursive;
+  color: #400101;
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 100;
+  text-align: center;
+  margin: 0 0 8px;
+}
+.paso-title--left {
+  text-align: left;
+}
+
+.paso-subtitle {
+  text-align: center;
+  color: #6b3a3a;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 15px;
+  margin: 0 0 32px;
+}
+.paso-subtitle--left {
+  text-align: left;
+}
+
+/* ── Product grid ───────────────────────────────────────────────────────── */
+.productos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.productos-grid--sm {
+  gap: 14px;
+  justify-content: flex-start;
+}
+
+.producto-card {
+  width: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(64, 1, 1, 0.09);
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  user-select: none;
+}
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(64, 1, 1, 0.16);
+}
+.producto-card.seleccionado {
+  border-color: #f2b705;
+  box-shadow: 0 0 0 4px rgba(242, 183, 5, 0.28);
+}
+.producto-card.ya-agregado {
+  border-color: #400101;
+}
+.producto-card--sm {
+  width: 155px;
+}
+
+.producto-card-img-wrap {
+  position: relative;
+}
+.producto-card-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+.producto-card--sm .producto-card-img {
+  height: 100px;
+}
+
+.badge-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f2b705;
+  color: #400101;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ya-agregado .badge-check {
+  background: #400101;
+  color: #f2b705;
+}
+
+.producto-card-body {
+  padding: 10px 12px;
+}
+.producto-card-nombre {
+  margin: 0 0 3px;
+  font-size: 13px;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.producto-card-precio {
+  margin: 0;
+  font-size: 12px;
+  color: #6b3a3a;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+.badge-seleccionado {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11px;
+  background: #f2b705;
+  color: #400101;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+}
+
+/* ── Paso actions ───────────────────────────────────────────────────────── */
+.paso-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.paso-actions--right {
+  justify-content: flex-end;
+}
+.paso-actions--col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-cta {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+  display: inline-block;
+  text-align: center;
+  background-color: #400101;
+  color: #f2b705;
+  padding: 12px 32px;
+  text-decoration: none;
+  font-size: clamp(14px, 1.5vw, 20px);
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.2s;
+}
+.btn-cta:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(64, 1, 1, 0.28);
+}
+.btn-cta:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.btn-cta--secondary {
+  background: #6b3a3a;
+}
+.btn-cta--full {
+  width: 100%;
+}
+
+.btn-back {
+  font-family: "Fuzzy Bubbles", cursive;
+  background: none;
+  border: 2px solid #400101;
+  color: #400101;
+  padding: 10px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: clamp(13px, 1.3vw, 18px);
+  transition: background 0.2s;
+}
+.btn-back:hover {
+  background: rgba(64, 1, 1, 0.07);
+}
+
+/* ── Paso 2 layout ──────────────────────────────────────────────────────── */
+.paso2-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.paso2-catalogo {
+  flex: 1;
+  min-width: 0;
+}
+.paso2-pedido {
+  width: 370px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .paso2-layout {
+    flex-direction: column;
+  }
+  .paso2-pedido {
+    width: 100%;
+  }
+}
+
+/* ── Item card ──────────────────────────────────────────────────────────── */
+.item-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(64, 1, 1, 0.08);
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+.item-nombre {
+  margin: 0 0 2px;
+  font-size: 14px;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-principal {
+  display: inline-block;
+  font-size: 11px;
+  background: #400101;
+  color: #f2b705;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+}
+
+.item-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #400101;
+  background: #fff;
+  color: #400101;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+.qty-btn:hover {
+  background: rgba(64, 1, 1, 0.08);
+}
+.qty-btn--xs {
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+}
+
+.qty-val {
+  min-width: 22px;
+  text-align: center;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  color: #400101;
+}
+.qty-val--xs {
+  font-size: 13px;
+}
+
+.item-precio {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  color: #400101;
+  min-width: 56px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: #a00;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.btn-remove:hover {
+  background: rgba(160, 0, 0, 0.1);
+}
+.btn-remove:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ── Adicionales ────────────────────────────────────────────────────────── */
+.btn-adicionales {
+  width: 100%;
+  margin-top: 8px;
+  background: none;
+  border: 1px dashed #c0a080;
+  border-radius: 8px;
+  padding: 7px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #6b3a3a;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+}
+.btn-adicionales:hover {
+  background: rgba(242, 183, 5, 0.1);
+}
+
+.adicionales-panel {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #e8d9b0;
+}
+
+.adicional-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  flex-wrap: wrap;
+}
+.adicional-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+.adicional-label input[type="checkbox"] {
+  accent-color: #400101;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.adicional-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #400101;
+}
+.adicional-precio {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #888;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.adicional-qty {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.msg-cargando,
+.msg-sin {
+  font-size: 13px;
+  color: #888;
+  font-family: "Fuzzy Bubbles", cursive;
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ── Total fila ─────────────────────────────────────────────────────────── */
+.total-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 2px solid #e8d9b0;
+  font-family: "Fuzzy Bubbles", cursive;
+  color: #400101;
+  font-size: 16px;
+  margin-top: 4px;
+}
+.total-fila strong {
+  font-size: 22px;
+}
+
+/* ── Pedido vacío ───────────────────────────────────────────────────────── */
+.pedido-vacio {
+  text-align: center;
+  color: #aaa;
+  font-family: "Fuzzy Bubbles", cursive;
+  padding: 28px 20px;
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 2px dashed #e0cfa0;
+}
+
+/* ── Paso 3 confirm layout ──────────────────────────────────────────────── */
+.confirmar-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: center;
+}
+@media (max-width: 760px) {
+  .confirmar-layout {
+    flex-direction: column;
+  }
+}
+
+.resumen-card,
+.fecha-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: 0 4px 24px rgba(64, 1, 1, 0.1);
+}
+.resumen-card {
+  flex: 1;
+  max-width: 480px;
+}
+.fecha-card {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-family: "Island Moments", cursive;
+  color: #400101;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 100;
+  margin: 0 0 20px;
+}
+
+.resumen-plato {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e8d9b0;
+  margin-bottom: 12px;
+}
+.resumen-plato-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  color: #400101;
+  font-size: 15px;
+}
+
+.resumen-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0e4c0;
+}
+.resumen-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  color: #400101;
+  font-weight: 700;
+}
+.resumen-adicional-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #6b3a3a;
+  padding-left: 14px;
+}
+
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px solid #e8d9b0;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 15px;
+  color: #400101;
+}
+.resumen-total strong {
+  font-size: 24px;
+}
+
+/* ── Fecha input ────────────────────────────────────────────────────────── */
+.fecha-label {
+  display: block;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #6b3a3a;
+  margin-bottom: 8px;
+}
+.fecha-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #d4b480;
+  border-radius: 12px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 16px;
+  color: #400101;
+  background: #fffdf6;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 8px;
+}
+.fecha-input:focus {
+  border-color: #400101;
+}
+.fecha-hint {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #aaa;
+  margin: 0 0 20px;
+}
+
+/* ── Success card ───────────────────────────────────────────────────────── */
+.exito-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 52px 40px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.1);
+}
+.exito-icon {
+  font-size: 52px;
+  margin-bottom: 8px;
+}
+.exito-card h2 {
+  font-family: "Island Moments", cursive;
+  color: #400101;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 100;
+  margin: 0 0 16px;
+}
+.exito-card p {
+  font-family: "Fuzzy Bubbles", cursive;
+  color: #6b3a3a;
+  margin: 0 0 28px;
+}
+.exito-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Error banner ───────────────────────────────────────────────────────── */
+.error-banner {
+  background: #ffe0e0;
+  color: #a00;
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  font-family: "Fuzzy Bubbles", cursive;
+  text-align: center;
+}

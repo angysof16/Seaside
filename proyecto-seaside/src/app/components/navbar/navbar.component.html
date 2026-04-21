@@ -14,7 +14,8 @@
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
           [class.scrolled]="isScrolled"
-        >Home</a>
+          >Home</a
+        >
       </li>
       <li>
         <a
@@ -22,7 +23,8 @@
           routerLink="/menu"
           routerLinkActive="active-link"
           [class.scrolled]="isScrolled"
-        >Menú</a>
+          >Menú</a
+        >
       </li>
       <li>
         <a
@@ -30,7 +32,8 @@
           routerLink="/contacto"
           routerLinkActive="active-link"
           [class.scrolled]="isScrolled"
-        >Contáctanos</a>
+          >Contáctanos</a
+        >
       </li>
       <li>
         <a
@@ -38,7 +41,8 @@
           routerLink="/visitanos"
           routerLinkActive="active-link"
           [class.scrolled]="isScrolled"
-        >Visítanos</a>
+          >Visítanos</a
+        >
       </li>
       <li *ngIf="authService.isLoggedIn">
         <a
@@ -46,21 +50,29 @@
           routerLink="/perfil"
           routerLinkActive="active-link"
           [class.scrolled]="isScrolled"
-        >Perfil</a>
+          >Perfil</a
+        >
+      </li>
+      <li *ngIf="authService.isLoggedIn">
+        <a
+          class="login-link"
+          routerLink="/pedido/nuevo"
+          routerLinkActive="active-login"
+          >Hacer pedido</a
+        >
       </li>
       <li *ngIf="!authService.isLoggedIn">
         <a
           class="login-link"
           routerLink="/login"
           routerLinkActive="active-login"
-        >Log in</a>
+          >Log in</a
+        >
       </li>
       <li *ngIf="authService.isLoggedIn">
-        <a
-          class="login-link"
-          routerLink="/"
-          (click)="authService.logout()"
-        >Cerrar sesión</a>
+        <a class="login-link" routerLink="/" (click)="authService.logout()"
+          >Cerrar sesión</a
+        >
       </li>
     </ul>
   </nav>

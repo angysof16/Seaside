@@ -1,0 +1,430 @@
+.admin-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-title {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(52px, 8vw, 90px);
+  font-weight: 100;
+  color: #400101;
+  line-height: 1;
+  margin: 0;
+}
+
+.admin-subtitle {
+  font-size: 15px;
+  color: #8a6060;
+  margin: 4px 0 0;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 300;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-back {
+  background-color: #400101;
+  color: #f2b705;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: filter 0.2s;
+  white-space: nowrap;
+}
+
+.btn-back:hover {
+  filter: brightness(1.15);
+}
+
+/*Tarjetas de info*/
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.table-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 30px rgba(64, 1, 1, 0.08);
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.section-heading {
+  font-family: "Island Moments", cursive;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 100;
+  color: #400101;
+  line-height: 1;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.count-badge {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(64, 1, 1, 0.08);
+  color: #400101;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(64, 1, 1, 0.06);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row--total {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(64, 1, 1, 0.12);
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #8a6060;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #2d0a0a;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  text-align: right;
+}
+
+.empty-state-sm {
+  font-size: 13px;
+  color: #8a6060;
+  font-style: italic;
+  font-family: "Fuzzy Bubbles", cursive;
+  margin: 0;
+}
+
+.tabla-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(64, 1, 1, 0.08);
+}
+
+.tabla-pedidos {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.tabla-pedidos thead tr {
+  background: #400101;
+}
+
+.tabla-pedidos th {
+  color: #f2b705;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla-pedidos td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(64, 1, 1, 0.07);
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  color: #400101;
+}
+
+.pedido-row:hover {
+  background: rgba(242, 183, 5, 0.05);
+}
+
+.pedido-row:last-child td {
+  border-bottom: none;
+}
+
+.col-producto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.col-cantidad {
+  font-weight: 700;
+  color: #8a6060;
+}
+
+.price-tag {
+  display: inline-block;
+  background: rgba(242, 183, 5, 0.15);
+  color: #400101;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 121, 4, 0.25);
+  white-space: nowrap;
+}
+
+.price-tag--lg {
+  font-size: 16px;
+  padding: 6px 14px;
+}
+
+.tabla-pedidos tfoot td {
+  padding: 14px 16px;
+  border-top: 2px solid rgba(64, 1, 1, 0.12);
+}
+
+.total-label {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a6060;
+  font-family: "Fuzzy Bubbles", cursive;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: "Fuzzy Bubbles", cursive;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.badge-pendiente    { background: rgba(242,183,5,0.2);   color: #7a5500; border: 1px solid rgba(242,183,5,0.4); }
+.badge-preparacion  { background: rgba(217,121,4,0.15);  color: #7a3c00; border: 1px solid rgba(217,121,4,0.35); }
+.badge-camino       { background: rgba(64,1,1,0.08);     color: #400101; border: 1px solid rgba(64,1,1,0.2); }
+.badge-entregado    { background: rgba(34,139,34,0.12);  color: #1a5c1a; border: 1px solid rgba(34,139,34,0.3); }
+.badge-cancelado    { background: rgba(200,30,30,0.1);   color: #c81e1e; border: 1px solid rgba(200,30,30,0.25); }
+
+
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  color: #8a6060;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-state { color: #c81e1e; }
+
+.empty-state code {
+  background: rgba(64, 1, 1, 0.07);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #400101;
+}
+
+
+/* Agregar al final de detalle-pedido.component.css */
+
+/* ── Item detalle card (reemplaza tabla) ──────────────────── */
+.item-detalle-card {
+  border: 1px solid rgba(64, 1, 1, 0.08);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.item-detalle-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.item-detalle-img-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f0e4c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item-img-placeholder {
+  font-size: 22px;
+}
+
+.item-detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.item-detalle-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #400101;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-detalle-precio-unit {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #8a6060;
+}
+
+.item-detalle-cantidad {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: #8a6060;
+  min-width: 36px;
+  text-align: center;
+}
+
+.item-detalle-subtotal {
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ── Adicionales del item ─────────────────────────────────── */
+.item-adicionales-list {
+  background: #f8f1e0;
+  border-top: 1px solid rgba(64, 1, 1, 0.07);
+  padding: 8px 16px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adicional-fila-detalle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #400101;
+  padding: 3px 0;
+}
+
+.adicional-detalle-icon {
+  color: #d97904;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.adicional-detalle-nombre {
+  flex: 1;
+  color: #5a3030;
+}
+
+.adicional-detalle-cantidad {
+  color: #8a6060;
+  min-width: 30px;
+  text-align: center;
+}
+
+.adicional-detalle-subtotal {
+  font-weight: 700;
+  color: #400101;
+  min-width: 80px;
+  text-align: right;
+}
+
+.item-sin-adicionales {
+  background: #f8f1e0;
+  border-top: 1px solid rgba(64, 1, 1, 0.07);
+  padding: 8px 16px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 12px;
+  color: #b09090;
+  font-style: italic;
+}
+
+/* ── Total fila final ─────────────────────────────────────── */
+.items-total-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 4px 4px;
+  border-top: 2px solid rgba(64, 1, 1, 0.12);
+  margin-top: 8px;
+}
+
+.total-label {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a6060;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

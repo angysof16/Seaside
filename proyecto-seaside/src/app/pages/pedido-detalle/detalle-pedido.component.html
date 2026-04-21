@@ -1,0 +1,181 @@
+<!-- src/app/pages/pedido-detalle/detalle-pedido.component.html -->
+<div class="admin-wrapper">
+
+  <!-- Cargando -->
+  <div class="empty-state" *ngIf="cargando">
+    <p>Cargando pedido...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="empty-state error-state" *ngIf="!cargando && error">
+    <p>{{ error }}</p>
+    <button class="btn-back" (click)="volver()">← Volver a pedidos</button>
+  </div>
+
+  <ng-container *ngIf="!cargando && !error && pedido">
+
+    <!-- Encabezado -->
+    <div class="admin-header">
+      <div>
+        <h1 class="admin-title">Pedido #{{ pedido.id }}</h1>
+        <p class="admin-subtitle">Detalle completo del pedido</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-back" (click)="volver()">← Volver</button>
+      </div>
+    </div>
+
+    <!-- Tarjetas de info -->
+    <div class="cards-grid">
+
+      <!-- Info del pedido -->
+      <div class="table-section info-card">
+        <h2 class="section-heading">Pedido</h2>
+        <div class="info-row">
+          <span class="info-label">Estado</span>
+          <span class="estado-badge" [ngClass]="getEstadoClass(pedido.estado)">
+            {{ pedido.estado }}
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Fecha creación</span>
+          <span class="info-value">{{ pedido.fechaCreacion }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Fecha entrega</span>
+          <span class="info-value">{{ pedido.fechaEntrega || '—' }}</span>
+        </div>
+        <div class="info-row info-row--total">
+          <span class="info-label">Total</span>
+          <span class="price-tag price-tag--lg">
+            {{ pedido.total | currency:'COP':'$':'1.0-0' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Info del cliente -->
+      <div class="table-section info-card">
+        <h2 class="section-heading">Cliente</h2>
+        <div class="info-row">
+          <span class="info-label">Nombre</span>
+          <span class="info-value">
+            {{ pedido.cliente.nombre }} {{ pedido.cliente.apellido }}
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">ID</span>
+          <span class="info-value">#{{ pedido.cliente.id }}</span>
+        </div>
+      </div>
+
+      <!-- Info del domiciliario -->
+      <div class="table-section info-card">
+        <h2 class="section-heading">Domiciliario</h2>
+        <ng-container *ngIf="domiciliario; else sinDomiciliario">
+          <div class="info-row">
+            <span class="info-label">Nombre</span>
+            <span class="info-value">
+              {{ domiciliario.nombre }} {{ domiciliario.apellido }}
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Teléfono</span>
+            <span class="info-value">{{ domiciliario.telefono }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Cédula</span>
+            <span class="info-value">{{ domiciliario.cedula }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Disponible</span>
+            <span class="info-value">{{ domiciliario.disponible ? 'Sí' : 'No' }}</span>
+          </div>
+        </ng-container>
+        <ng-template #sinDomiciliario>
+          <p class="empty-state-sm">Sin domiciliario asignado.</p>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <!-- Tabla de items con adicionales -->
+    <section class="table-section">
+      <h2 class="section-heading">
+        Items del Pedido
+        <span class="count-badge">{{ items.length }}</span>
+      </h2>
+
+      <div *ngIf="items.length > 0">
+        <div *ngFor="let item of items" class="item-detalle-card">
+
+          <!-- Fila principal del producto -->
+          <div class="item-detalle-header">
+            <div class="item-detalle-img-wrap">
+              <img
+                *ngIf="item.producto.imageUrl"
+                [src]="item.producto.imageUrl"
+                [alt]="item.producto.nombre"
+                class="item-img"
+              />
+              <div *ngIf="!item.producto.imageUrl" class="item-img-placeholder">🍽</div>
+            </div>
+
+            <div class="item-detalle-info">
+              <span class="item-detalle-nombre">{{ item.producto.nombre }}</span>
+              <span class="item-detalle-precio-unit">
+                {{ item.producto.precio | currency:'COP':'$':'1.0-0' }} c/u
+              </span>
+            </div>
+
+            <div class="item-detalle-cantidad">
+              × {{ item.cantidad }}
+            </div>
+
+            <div class="item-detalle-subtotal">
+              <span class="price-tag">
+                {{ item.subtotal | currency:'COP':'$':'1.0-0' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Adicionales del item -->
+          <div
+            *ngIf="item.adicionales && item.adicionales.length > 0"
+            class="item-adicionales-list"
+          >
+            <div *ngFor="let a of item.adicionales" class="adicional-fila-detalle">
+              <span class="adicional-detalle-icon">↳</span>
+              <span class="adicional-detalle-nombre">{{ a.nombre }}</span>
+              <span class="adicional-detalle-cantidad">× {{ a.cantidad }}</span>
+              <span class="adicional-detalle-subtotal">
+                +{{ a.subtotal | currency:'COP':'$':'1.0-0' }}
+              </span>
+            </div>
+          </div>
+
+          <div
+            *ngIf="!item.adicionales || item.adicionales.length === 0"
+            class="item-sin-adicionales"
+          >
+            Sin adicionales
+          </div>
+
+        </div>
+
+        <!-- Total -->
+        <div class="items-total-fila">
+          <span class="total-label">Total del pedido</span>
+          <span class="price-tag price-tag--lg">
+            {{ pedido.total | currency:'COP':'$':'1.0-0' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="items.length === 0">
+        <p>No hay items disponibles para este pedido.</p>
+      </div>
+
+    </section>
+
+  </ng-container>
+</div>

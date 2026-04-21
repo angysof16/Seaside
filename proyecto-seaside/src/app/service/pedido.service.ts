@@ -1,8 +1,9 @@
-// proyecto-seaside/src/app/service/pedido.service.ts
+// src/app/service/pedido.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { CrearPedidoRequest } from '../model/crear-pedido-request';
 
 export interface Pedido {
   id: number;
@@ -43,5 +44,13 @@ export class PedidoService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  /**
+   * POST /api/pedidos
+   * Body must match backend PedidoRequest: { clienteId, items: [{productoId, cantidad, adicionales:[{adicionalId, cantidad}]}] }
+   */
+  crear(request: CrearPedidoRequest): Observable<{ id: number }> {
+    return this.http.post<{ id: number }>(this.apiUrl, request);
   }
 }

@@ -1,0 +1,80 @@
+<div class="admin-wrapper">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Gestión de Adicionales</h1>
+            <p class="admin-subtitle">Administra los acompañamientos del restaurante</p>
+        </div>
+        <div class="header-actions">
+            <!-- Botón para navegar al formulario de creación -->
+            <a class="btn-nuevo" routerLink="/adicionales/nuevo">+ Nuevo Adicional</a>
+            <a class="btn-back" routerLink="/">← Volver al sitio</a>
+        </div>
+    </div>
+
+    <!-- Tabla principal de adicionales -->
+    <section class="table-section">
+        <h2 class="section-heading">
+            Adicionales <span class="count-badge">{{ adicionalList.length }}</span>
+        </h2>
+
+        <div class="tabla-wrapper">
+            <table class="tabla-adicionales">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Tiempo (min)</th>
+                        <th>Alérgenos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Fila por cada adicional -->
+                    <tr *ngFor="let adicional of adicionalList" class="adicional-row">
+                        <td>
+                            <div class="img-wrap">
+                                <img [src]="adicional.imagenURL || 'assets/IMGS/menuHighlight1.jpeg'"
+                                    [alt]="adicional.nombre" class="adicional-img" />
+                            </div>
+                        </td>
+                        <td class="col-name">{{ adicional.nombre }}</td>
+                        <td class="col-desc">{{ adicional.descripcion }}</td>
+                        <td>
+                            <span class="price-tag">
+                                {{ adicional.precio | currency: 'COP' : '$' : '1.0-0' }}
+                            </span>
+                        </td>
+                        <td>{{ adicional.categoria?.nombre }}</td>
+                        <td>
+                            <span class="time-badge">⏱ {{ adicional.tiempoPreparacion }} min</span>
+                        </td>
+                        <td class="col-alerg">
+                            <span class="alerg-yes" *ngIf="adicional.tieneAlergenos">⚠ Sí</span>
+                            <span class="alerg-no" *ngIf="!adicional.tieneAlergenos">—</span>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-edit" (click)="editarAdicional(adicional)">
+                                    ✏ Editar
+                                </button>
+                                <button class="btn-delete" (click)="eliminarAdicional(adicional)">
+                                    🗑 Eliminar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Estado vacío -->
+                    <tr *ngIf="adicionalList.length === 0">
+                        <td colspan="8" class="empty-state">
+                            No hay adicionales registrados.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

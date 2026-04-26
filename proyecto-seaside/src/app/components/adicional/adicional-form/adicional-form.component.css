@@ -1,0 +1,143 @@
+/* Grid de dos columnas para los campos del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Elemento que ocupa las dos columnas */
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Grupo de campo (label + input) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-family: "Fuzzy Bubbles", cursive;
+    font-size: 12px;
+    font-weight: 700;
+    color: #400101;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Estilos compartidos para inputs, textarea y select */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    font-family: "Fuzzy Bubbles", cursive;
+    font-weight: 300;
+    font-size: 14px;
+    color: #400101;
+    background: #f8f1e0;
+    border: 1.5px solid rgba(64, 1, 1, 0.18);
+    border-radius: 10px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a08080;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #d97904;
+    box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.15);
+    background: #ffffff;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Grupo del checkbox de alérgenos */
+.checkbox-group {
+    justify-content: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-family: "Fuzzy Bubbles", cursive;
+    font-weight: 400;
+    font-size: 14px;
+    color: #400101;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    cursor: pointer;
+    accent-color: #400101;
+}
+
+/* Fila de botones de acción */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Botón principal de envío */
+.btn-submit {
+    background: linear-gradient(135deg, #400101, #730202);
+    color: #f2b705;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-family: "Fuzzy Bubbles", cursive;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(64, 1, 1, 0.3);
+}
+
+.btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Botón de cancelar (solo en modo edición) */
+.btn-cancel {
+    background: rgba(64, 1, 1, 0.07);
+    color: #400101;
+    border: 1.5px solid rgba(64, 1, 1, 0.2);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-family: "Fuzzy Bubbles", cursive;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+    background: rgba(64, 1, 1, 0.12);
+}
+
+/* Responsive: una sola columna en móvil */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,68 @@
+<form #adicionalForm="ngForm" (ngSubmit)="guardar(adicionalForm)">
+    <div class="form-grid">
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" required [(ngModel)]="formAdicional.nombre"
+                placeholder="Ej: Porción extra de camarones" />
+        </div>
+
+        <!-- Precio -->
+        <div class="form-group">
+            <label for="precio">Precio *</label>
+            <input type="number" id="precio" name="precio" required min="0" [(ngModel)]="formAdicional.precio"
+                placeholder="0" />
+        </div>
+
+        <!-- Categoría -->
+        <div class="form-group">
+            <label for="categoriaId">Categoría *</label>
+            <select id="categoriaId" name="categoriaId" required [(ngModel)]="formAdicional.categoria.id">
+                <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+                    {{ cat.nombre }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Tiempo de preparación -->
+        <div class="form-group">
+            <label for="tiempoPreparacion">Tiempo preparación (min) *</label>
+            <input type="number" id="tiempoPreparacion" name="tiempoPreparacion" required min="1"
+                [(ngModel)]="formAdicional.tiempoPreparacion" placeholder="10" />
+        </div>
+
+        <!-- Descripción (ocupa fila completa) -->
+        <div class="form-group full-width">
+            <label for="descripcion">Descripción *</label>
+            <textarea id="descripcion" name="descripcion" required rows="3" [(ngModel)]="formAdicional.descripcion"
+                placeholder="Describe el adicional..."></textarea>
+        </div>
+
+        <!-- URL de imagen (ocupa fila completa) -->
+        <div class="form-group full-width">
+            <label for="imagenURL">URL de la imagen</label>
+            <input type="text" id="imagenURL" name="imagenURL" [(ngModel)]="formAdicional.imagenURL"
+                placeholder="https://..." />
+        </div>
+
+        <!-- Checkbox de alérgenos -->
+        <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+                <input type="checkbox" name="tieneAlergenos" [(ngModel)]="formAdicional.tieneAlergenos" />
+                <span>¿Tiene alérgenos?</span>
+            </label>
+        </div>
+
+    </div>
+
+    <!-- Acciones del formulario -->
+    <div class="form-actions">
+        <button type="submit" class="btn-submit" [disabled]="adicionalForm.invalid">
+            {{ editando ? '✓ Actualizar' : '+ Guardar' }}
+        </button>
+        <button *ngIf="editando" type="button" class="btn-cancel" (click)="cancelarEdicion()">
+            Cancelar
+        </button>
+    </div>
+</form>

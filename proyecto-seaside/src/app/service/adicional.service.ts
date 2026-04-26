@@ -15,4 +15,24 @@ export class AdicionalService {
   findAll(): Observable<AdicionalesCl[]> {
     return this.http.get<AdicionalesCl[]>(this.apiUrl);
   }
+
+  findById(id: number): Observable<AdicionalesCl> {
+    return this.http.get<AdicionalesCl>(`${this.apiUrl}/${id}`);
+  }
+
+  add(adicional: AdicionalesCl): Observable<AdicionalesCl> {
+    const { id, ...body } = adicional;
+    return this.http.post<AdicionalesCl>(this.apiUrl, body);
+  }
+
+  update(adicional: AdicionalesCl): Observable<AdicionalesCl> {
+    return this.http.put<AdicionalesCl>(
+      `${this.apiUrl}/${adicional.id}`,
+      adicional
+    );
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

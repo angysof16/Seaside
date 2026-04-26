@@ -1,0 +1,24 @@
+<!-- adicional-form-page.component.html -->
+<!-- Página que envuelve el formulario de adicional con encabezado y navegación -->
+<div class="form-page-wrapper">
+    <div class="form-page-header">
+        <div>
+            <!-- Título dinámico según si es creación o edición -->
+            <h1 class="admin-title">
+                {{ modoEdicion ? 'Editar Adicional' : 'Nuevo Adicional' }}
+            </h1>
+            <p class="admin-subtitle">
+                {{ modoEdicion
+                ? 'Modifica los datos del adicional'
+                : 'Completa los datos para registrar un nuevo adicional' }}
+            </p>
+        </div>
+        <a class="btn-back" routerLink="/adicionales">← Volver a adicionales</a>
+    </div>
+
+    <!-- Sección del formulario reutilizable -->
+    <section class="form-section">
+        <app-adicional-form [adicionalEditar]="adicionalEditar" (addAdicionalEvent)="onGuardar($event)"
+            (updateAdicionalEvent)="onActualizar($event)" (cancelarEvent)="onCancelar()"></app-adicional-form>
+    </section>
+</div>

@@ -1,29 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './pages/landing/landing.component';
-import { MenuComponent } from './pages/menu/menu.component';
-import { ContactoComponent } from './pages/contacto/contacto.component';
-import { VisitanosComponent } from './pages/visitanos/visitanos.component';
-import { LoginComponent } from './pages/login/login.component';
-import { ProductoTableComponent } from './components/producto/producto-table/producto-table.component';
-import { ProductoFormPageComponent } from './components/producto/producto-form-page/producto-form-page.component';
-import { ProductoDetallePageComponent } from './components/producto/producto-detalle-page/producto-detalle-page.component';
-import { ProductoCrearComponent } from './components/producto/producto-crear/producto-crear.component';
-import { ErrorPageComponent } from './errors/error-page/error-page.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
-import { OperadorTableComponent } from './components/operador/operador-table/operador-table.component';
-import { OperadorFormPageComponent } from './components/operador/operador-form-page/operador-form-page.component';
-import { OperadorDetallePageComponent } from './components/operador/operador-detalle-page/operador-detalle-page.component';
-import { OperadorCrudTableComponent } from './components/operador/operador-crud-table/operador-crud-table.component';
-import { PedidoDetalleComponent } from './pages/pedido-detalle/detalle-pedido.component';
 
-// ─── CLIENTES ────────────────────────────────────────────────────────────────
-import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
-import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
-import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
-import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
-import { PedidoCrearComponent } from './pages/pedido-crear/pedido-crear.component';
+import { LandingComponent }              from './pages/landing/landing.component';
+import { MenuComponent }                 from './pages/menu/menu.component';
+import { ContactoComponent }             from './pages/contacto/contacto.component';
+import { VisitanosComponent }            from './pages/visitanos/visitanos.component';
+import { LoginComponent }                from './pages/login/login.component';
+import { ProductoTableComponent }        from './components/producto/producto-table/producto-table.component';
+import { ProductoFormPageComponent }     from './components/producto/producto-form-page/producto-form-page.component';
+import { ProductoDetallePageComponent }  from './components/producto/producto-detalle-page/producto-detalle-page.component';
+import { ProductoCrearComponent }        from './components/producto/producto-crear/producto-crear.component';
+import { ErrorPageComponent }            from './errors/error-page/error-page.component';
+import { ProfileComponent }              from './pages/profile/profile.component';
+import { ProfileEditComponent }          from './pages/profile-edit/profile-edit.component';
+import { OperadorTableComponent }        from './components/operador/operador-table/operador-table.component';
+import { OperadorFormPageComponent }     from './components/operador/operador-form-page/operador-form-page.component';
+import { OperadorDetallePageComponent }  from './components/operador/operador-detalle-page/operador-detalle-page.component';
+import { OperadorCrudTableComponent }    from './components/operador/operador-crud-table/operador-crud-table.component';
+import { PedidoDetalleComponent }        from './pages/pedido-detalle/detalle-pedido.component';
+import { ClienteCrudTableComponent }     from './cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteFormPageComponent }      from './cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent }   from './cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { OperadorLoginComponent }        from './pages/operador-login/operador-login.component';
+import { PedidoCrearComponent }          from './pages/pedido-crear/pedido-crear.component';
+
+import { AdicionalCrudTableComponent }  from './components/adicional/adicional-crud-table/adicional-crud-table.component';
+import { AdicionalFormPageComponent }   from './components/adicional/adicional-form-page/adicional-form-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -46,12 +48,16 @@ const routes: Routes = [
   { path: 'operador/login', component: OperadorLoginComponent },
   { path: 'detallePedido', component: PedidoDetalleComponent },
   { path: 'pedidos/:id', component: PedidoDetalleComponent },
-  // ─── Clientes ───────────────────────────────────────────────────────────────
   { path: 'clientes', component: ClienteCrudTableComponent },
   { path: 'clientes/nuevo', component: ClienteFormPageComponent },
   { path: 'clientes/editar/:id', component: ClienteFormPageComponent },
   { path: 'clientes/:id', component: ClienteDetallePageComponent },
   { path: 'pedido/nuevo', component: PedidoCrearComponent },
+
+  { path: 'adicionales',            component: AdicionalCrudTableComponent },
+  { path: 'adicionales/nuevo',      component: AdicionalFormPageComponent },
+  { path: 'adicionales/editar/:id', component: AdicionalFormPageComponent },
+
   { path: '**', component: ErrorPageComponent },
 ];
 

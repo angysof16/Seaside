@@ -8,6 +8,7 @@ export interface Domiciliario {
   nombre: string;
   apellido: string;
   correo: string;
+  contrasena: string;
   telefono: string;
   direccion: string;
   activo: boolean;
@@ -22,12 +23,10 @@ export class DomiciliarioService {
 
   constructor(private http: HttpClient) {}
 
-  /** Devuelve todos los domiciliarios */
   findAll(): Observable<Domiciliario[]> {
     return this.http.get<Domiciliario[]>(this.apiUrl);
   }
 
-  /** Devuelve solo los domiciliarios con disponible=true */
   findDisponibles(): Observable<Domiciliario[]> {
     const params = new HttpParams().set('disponibles', 'true');
     return this.http.get<Domiciliario[]>(this.apiUrl, { params });
@@ -37,8 +36,23 @@ export class DomiciliarioService {
     return this.http.get<Domiciliario>(`${this.apiUrl}/${id}`);
   }
 
-  /** Actualiza la disponibilidad de un domiciliario */
+  create(domiciliario: Partial<Domiciliario>): Observable<Domiciliario> {
+    return this.http.post<Domiciliario>(this.apiUrl, domiciliario);
+  }
+
+  update(id: number, domiciliario: Partial<Domiciliario>): Observable<Domiciliario> {
+    return this.http.put<Domiciliario>(`${this.apiUrl}/${id}`, domiciliario);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   setDisponibilidad(id: number, disponible: boolean): Observable<unknown> {
     return this.http.patch(`${this.apiUrl}/${id}/disponibilidad`, { disponible });
+  }
+
+  setActivo(id: number, activo: boolean): Observable<unknown> {
+    return this.http.patch(`${this.apiUrl}/${id}/activo`, { activo });
   }
 }

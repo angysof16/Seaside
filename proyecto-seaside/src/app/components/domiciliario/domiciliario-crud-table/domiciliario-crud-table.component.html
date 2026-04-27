@@ -1,0 +1,64 @@
+<div class="admin-wrapper">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Domiciliarios</h1>
+            <p class="admin-subtitle">Gestiona los repartidores del restaurante</p>
+        </div>
+        <div class="header-actions">
+            <a class="btn-nuevo" routerLink="/admin/domiciliarios/nuevo">+ Nuevo</a>
+            <a class="btn-back" routerLink="/admin/dashboard">← Dashboard</a>
+        </div>
+    </div>
+
+    <section class="table-section">
+        <h2 class="section-heading">
+            Domiciliarios <span class="count-badge">{{ domiciliarioList.length }}</span>
+        </h2>
+
+        <div class="tabla-wrapper">
+            <table class="tabla-dom">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Cédula</th>
+                        <th>Activo</th>
+                        <th>Disponible</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let d of domiciliarioList" class="dom-row">
+                        <td>#{{ d.id }}</td>
+                        <td class="col-name">{{ d.nombre }} {{ d.apellido }}</td>
+                        <td>{{ d.telefono }}</td>
+                        <td>{{ d.cedula }}</td>
+                        <td>
+                            <!-- Toggle activo/inactivo -->
+                            <button class="toggle-btn" [class.toggle-on]="d.activo" [class.toggle-off]="!d.activo"
+                                (click)="toggleActivo(d)" [title]="d.activo ? 'Desactivar' : 'Activar'">
+                                {{ d.activo ? '✓ Activo' : '✗ Inactivo' }}
+                            </button>
+                        </td>
+                        <td>
+                            <span class="disp-badge" [class.disp-yes]="d.disponible" [class.disp-no]="!d.disponible">
+                                {{ d.disponible ? 'Disponible' : 'Ocupado' }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-edit" (click)="editar(d)">✏ Editar</button>
+                                <button class="btn-delete" (click)="eliminar(d)">🗑 Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="domiciliarioList.length === 0">
+                        <td colspan="7" class="empty-state">No hay domiciliarios registrados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

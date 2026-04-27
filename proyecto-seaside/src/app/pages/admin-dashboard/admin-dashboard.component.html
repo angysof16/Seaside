@@ -1,0 +1,43 @@
+<div class="dashboard-wrapper">
+    <header class="dash-header">
+        <div class="dash-brand">
+            <h1 class="dash-title">Portal Administrador</h1>
+            <p class="dash-sub">Bienvenido, {{ admin?.nombre }} {{ admin?.apellido }}</p>
+        </div>
+        <button class="btn-logout" (click)="logout()">Cerrar sesión</button>
+    </header>
+
+    <div class="dash-grid">
+
+        <a routerLink="/productos" class="dash-card">
+            <h3 class="dash-card-title">Gestión de Menú</h3>
+            <p class="dash-card-desc">Crear, editar y eliminar productos del menú</p>
+        </a>
+
+        <a routerLink="/adicionales" class="dash-card">
+            <h3 class="dash-card-title">Adicionales</h3>
+            <p class="dash-card-desc">Administrar acompañamientos disponibles</p>
+        </a>
+
+        <a routerLink="/operadores" class="dash-card">
+            <h3 class="dash-card-title">Operadores</h3>
+            <p class="dash-card-desc">Gestionar usuarios operadores del sistema</p>
+        </a>
+
+        <a routerLink="/admin/domiciliarios" class="dash-card">
+            <h3 class="dash-card-title">Domiciliarios</h3>
+            <p class="dash-card-desc">Registrar y activar/desactivar domiciliarios</p>
+        </a>
+
+        <a routerLink="/clientes" class="dash-card">
+            <h3 class="dash-card-title">Clientes</h3>
+            <p class="dash-card-desc">Ver y gestionar clientes registrados</p>
+        </a>
+
+        <a routerLink="/pedidos" class="dash-card dash-card--accent">
+            <h3 class="dash-card-title">Todos los Pedidos</h3>
+            <p class="dash-card-desc">Historial completo: activos y completados</p>
+        </a>
+
+    </div>
+</div>

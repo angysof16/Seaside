@@ -23,9 +23,16 @@ import { ClienteFormPageComponent }      from './cliente/cliente-form-page/clien
 import { ClienteDetallePageComponent }   from './cliente/cliente-detalle-page/cliente-detalle-page.component';
 import { OperadorLoginComponent }        from './pages/operador-login/operador-login.component';
 import { PedidoCrearComponent }          from './pages/pedido-crear/pedido-crear.component';
+import { AdicionalCrudTableComponent }   from './components/adicional/adicional-crud-table/adicional-crud-table.component';
+import { AdicionalFormPageComponent }    from './components/adicional/adicional-form-page/adicional-form-page.component';
 
-import { AdicionalCrudTableComponent }  from './components/adicional/adicional-crud-table/adicional-crud-table.component';
-import { AdicionalFormPageComponent }   from './components/adicional/adicional-form-page/adicional-form-page.component';
+// Admin
+import { AdminLoginComponent }           from './pages/admin-login/admin-login.component';
+import { AdminDashboardComponent }       from './pages/admin-dashboard/admin-dashboard.component';
+
+// Domiciliarios CRUD
+import { DomiciliarioCrudTableComponent }  from './components/domiciliario/domiciliario-crud-table/domiciliario-crud-table.component';
+import { DomiciliarioFormPageComponent }   from './components/domiciliario/domiciliario-form-page/domiciliario-form-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
@@ -35,28 +42,48 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: ProfileComponent },
   { path: 'perfil/editar', component: ProfileEditComponent },
+
+  // Productos
   { path: 'productos', component: ProductoTableComponent },
   { path: 'productos/crear', component: ProductoCrearComponent },
   { path: 'productos/nuevo', component: ProductoFormPageComponent },
   { path: 'productos/editar/:id', component: ProductoFormPageComponent },
   { path: 'productos/:id', component: ProductoDetallePageComponent },
+
+  // Pedidos (operador)
   { path: 'pedidos', component: OperadorTableComponent },
+  { path: 'pedidos/:id', component: PedidoDetalleComponent },
+  { path: 'pedido/nuevo', component: PedidoCrearComponent },
+  { path: 'detallePedido', component: PedidoDetalleComponent },
+
+  // Operadores
   { path: 'operadores', component: OperadorCrudTableComponent },
   { path: 'operadores/nuevo', component: OperadorFormPageComponent },
   { path: 'operadores/editar/:id', component: OperadorFormPageComponent },
   { path: 'operadores/:id', component: OperadorDetallePageComponent },
+
+  // Login portal operador
   { path: 'operador/login', component: OperadorLoginComponent },
-  { path: 'detallePedido', component: PedidoDetalleComponent },
-  { path: 'pedidos/:id', component: PedidoDetalleComponent },
+
+  // Clientes
   { path: 'clientes', component: ClienteCrudTableComponent },
   { path: 'clientes/nuevo', component: ClienteFormPageComponent },
   { path: 'clientes/editar/:id', component: ClienteFormPageComponent },
   { path: 'clientes/:id', component: ClienteDetallePageComponent },
-  { path: 'pedido/nuevo', component: PedidoCrearComponent },
 
+  // Adicionales
   { path: 'adicionales',            component: AdicionalCrudTableComponent },
   { path: 'adicionales/nuevo',      component: AdicionalFormPageComponent },
   { path: 'adicionales/editar/:id', component: AdicionalFormPageComponent },
+
+  // Portal Admin
+  { path: 'admin/login',      component: AdminLoginComponent },
+  { path: 'admin/dashboard',  component: AdminDashboardComponent },
+
+  // CRUD Domiciliarios (admin)
+  { path: 'admin/domiciliarios',           component: DomiciliarioCrudTableComponent },
+  { path: 'admin/domiciliarios/nuevo',     component: DomiciliarioFormPageComponent },
+  { path: 'admin/domiciliarios/editar/:id', component: DomiciliarioFormPageComponent },
 
   { path: '**', component: ErrorPageComponent },
 ];

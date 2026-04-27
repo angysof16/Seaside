@@ -25,6 +25,7 @@ import { OperadorLoginComponent }        from './pages/operador-login/operador-l
 import { PedidoCrearComponent }          from './pages/pedido-crear/pedido-crear.component';
 import { AdicionalCrudTableComponent }   from './components/adicional/adicional-crud-table/adicional-crud-table.component';
 import { AdicionalFormPageComponent }    from './components/adicional/adicional-form-page/adicional-form-page.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 // Admin
 import { AdminLoginComponent }           from './pages/admin-login/admin-login.component';
@@ -56,6 +57,9 @@ const routes: Routes = [
   { path: 'pedido/nuevo', component: PedidoCrearComponent },
   { path: 'detallePedido', component: PedidoDetalleComponent },
 
+  // Carrito de compras
+  { path: 'carrito', component: CarritoComponent },
+  
   // Operadores
   { path: 'operadores', component: OperadorCrudTableComponent },
   { path: 'operadores/nuevo', component: OperadorFormPageComponent },

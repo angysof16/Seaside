@@ -1,0 +1,325 @@
+/* src/app/pages/carrito/carrito.component.css */
+
+/* ── Hero ─────────────────────────────────────────────────────────────────── */
+.carrito-hero {
+  position: relative;
+  width: 100%;
+  min-height: 32vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url("/assets/IMGS/mainBackgroundImage2.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.carrito-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.carrito-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.carrito-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #f2b705;
+  font-size: clamp(60px, 14vw, 150px);
+  font-weight: 100;
+  margin: 0;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Sección principal ────────────────────────────────────────────────────── */
+.carrito-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ── Vacío / Éxito ────────────────────────────────────────────────────────── */
+.carrito-vacio,
+.carrito-exito {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.vacio-icon,
+.exito-icon {
+  font-size: 72px;
+  margin-bottom: 16px;
+}
+
+.carrito-vacio h2,
+.carrito-exito h2 {
+  font-size: 2rem;
+  color: #400101;
+  margin-bottom: 12px;
+}
+
+.carrito-vacio p,
+.carrito-exito p {
+  color: #666;
+  margin-bottom: 28px;
+}
+
+.exito-acciones {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Layout contenido ─────────────────────────────────────────────────────── */
+.carrito-contenido {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .carrito-contenido {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Ítems ────────────────────────────────────────────────────────────────── */
+.carrito-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(64, 1, 1, 0.08);
+}
+
+.item-imagen {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-nombre {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1.1rem;
+  color: #400101;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-precio {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.item-controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-cantidad {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e16e2d;
+  background: transparent;
+  color: #e16e2d;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-cantidad:hover {
+  background: #e16e2d;
+  color: #fff;
+}
+
+.item-cantidad {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1.1rem;
+  min-width: 24px;
+  text-align: center;
+  color: #400101;
+}
+
+.item-subtotal {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #400101;
+  min-width: 80px;
+  text-align: right;
+}
+
+.btn-quitar {
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.btn-quitar:hover {
+  color: #e16e2d;
+}
+
+/* ── Resumen ──────────────────────────────────────────────────────────────── */
+.carrito-resumen {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(64, 1, 1, 0.1);
+  position: sticky;
+  top: 100px;
+}
+
+.resumen-titulo {
+  font-family: "Island Moments", cursive;
+  font-size: 2rem;
+  color: #400101;
+  margin: 0 0 20px;
+}
+
+.resumen-linea {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.resumen-total {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #400101;
+  border-top: 2px solid #f2b705;
+  margin: 16px 0 24px;
+  padding-top: 14px;
+}
+
+/* ── Botones ──────────────────────────────────────────────────────────────── */
+.btn-primario {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e16e2d, #f2b705);
+  color: #fff;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-primario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primario:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-confirmar {
+  margin-bottom: 12px;
+}
+
+.btn-secundario {
+  display: inline-block;
+  padding: 12px 28px;
+  background: transparent;
+  color: #e16e2d;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 1rem;
+  border: 2px solid #e16e2d;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+.btn-secundario:hover {
+  background: #e16e2d;
+  color: #fff;
+}
+
+.btn-vaciar {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 8px;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.btn-vaciar:hover {
+  color: #e16e2d;
+}
+
+.aviso-login {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.aviso-login a {
+  color: #e16e2d;
+  text-decoration: underline;
+}
+
+.error-msg {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}

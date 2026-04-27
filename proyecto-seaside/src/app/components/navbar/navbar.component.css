@@ -100,3 +100,41 @@
 .login-link.active-login {
   background-color: #2d0000;
 }
+
+.carrito-icon-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 50px;
+  transition: background 0.2s;
+}
+ 
+.carrito-icon-link:hover {
+  background: rgba(64, 1, 1, 0.1);
+}
+ 
+.carrito-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+ 
+.carrito-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #e16e2d;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  font-family: sans-serif;
+  pointer-events: none;
+}

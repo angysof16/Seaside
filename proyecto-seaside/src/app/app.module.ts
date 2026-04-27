@@ -17,6 +17,7 @@ import { MenuDestacadoComponent } from './components/menu-destacado/menu-destaca
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 // Pages
 import { LandingComponent } from './pages/landing/landing.component';
@@ -100,6 +101,8 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     ProductoFormPageComponent,
     ProductoDetallePageComponent,
     ProductoCrearComponent,
+    //carrito
+    CarritoComponent,
     // Operadores
     OperadorTableComponent,
     OperadorFormComponent,

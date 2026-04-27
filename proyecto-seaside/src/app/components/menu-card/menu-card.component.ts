@@ -15,5 +15,6 @@ export class MenuCardComponent {
   @Input() title!: string;
 
   @Input() description!: string;
+  
 
 }

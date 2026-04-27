@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-
+import { CarritoService } from '../../service/carrito.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +9,7 @@ import { AuthService } from '../../service/auth.service';
 export class NavbarComponent implements OnInit {
   isScrolled = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, public carritoService: CarritoService, ) {}
 
   ngOnInit(): void {
     this.updateScrollState();

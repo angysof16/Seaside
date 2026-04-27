@@ -95,7 +95,7 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/pedidos']);
+    this.router.navigate(['/']);
   }
 
   getEstadoClass(estado: string): string {

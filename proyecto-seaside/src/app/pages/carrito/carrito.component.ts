@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarritoService, ItemCarrito } from '../../service/carrito.service';
 import { AuthService } from '../../service/auth.service';
-import { PedidoService } from '../../service/pedido.service';
-import { CrearPedidoRequest } from '../../model/crear-pedido-request';
 
 @Component({
   selector: 'app-carrito',
@@ -13,83 +11,58 @@ import { CrearPedidoRequest } from '../../model/crear-pedido-request';
 })
 export class CarritoComponent implements OnInit {
   items: ItemCarrito[] = [];
-  enviando = false;
-  error = '';
-  exito = false;
-  pedidoId: number | null = null;
 
   constructor(
     public carritoService: CarritoService,
     public authService: AuthService,
-    private pedidoService: PedidoService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.carritoService.items$.subscribe((items) => (this.items = items));
-  }
-
-  incrementar(item: ItemCarrito): void {
-    this.carritoService.actualizarCantidad(item.producto.id, item.cantidad + 1);
-  }
-
-  decrementar(item: ItemCarrito): void {
-    this.carritoService.actualizarCantidad(item.producto.id, item.cantidad - 1);
-  }
-
-  quitar(productoId: number): void {
-    this.carritoService.quitarProducto(productoId);
-  }
-
-  vaciar(): void {
-    this.carritoService.vaciarCarrito();
+    this.carritoService.estado$.subscribe(estado => {
+      this.items = estado.items;
+    });
   }
 
   get total(): number {
     return this.carritoService.totalPrecio;
   }
 
-  confirmarPedido(): void {
-    const cliente = this.authService.currentCliente;
-    if (!cliente) {
-      this.router.navigate(['/login']);
-      return;
+  get paso(): number {
+    return this.carritoService.estado.paso;
+  }
+
+  incrementar(item: ItemCarrito): void {
+    item.cantidad++;
+    this.carritoService.guardarEstado(this.carritoService.estado);
+  }
+
+  decrementar(item: ItemCarrito): void {
+    if (item.cantidad > 1) {
+      item.cantidad--;
+      this.carritoService.guardarEstado(this.carritoService.estado);
     }
+  }
 
-    this.enviando = true;
-    this.error = '';
+  quitar(productoId: number): void {
+    const estado = this.carritoService.estado;
+    estado.items = estado.items.filter(i => i.productoId !== productoId);
+    if (estado.platoPrincipalId === productoId) {
+      estado.platoPrincipalId = null;
+      estado.paso = 1;
+    }
+    this.carritoService.guardarEstado(estado);
+  }
 
-    const request: CrearPedidoRequest = {
-      clienteId: cliente.id,
-      items: this.items.map((i) => ({
-        productoId: i.producto.id,
-        cantidad: i.cantidad,
-        adicionales: [],
-      })),
-    };
+  vaciar(): void {
+    this.carritoService.vaciarCarrito();
+  }
 
-    this.pedidoService.crear(request).subscribe({
-      next: (res) => {
-        this.enviando = false;
-        this.exito = true;
-        this.pedidoId = res?.id ?? null;
-        this.carritoService.vaciarCarrito();
-      },
-      error: (err) => {
-        this.enviando = false;
-        this.error =
-          err?.error?.error || 'Error al crear el pedido. Intenta de nuevo.';
-      },
-    });
+  continuarPedido(): void {
+    this.router.navigate(['/pedido/nuevo']);
   }
 
   irAHacerPedido(): void {
     this.router.navigate(['/pedido/nuevo']);
-  }
-
-  irAlPedido(): void {
-    if (this.pedidoId) {
-      this.router.navigate(['/pedidos', this.pedidoId]);
-    }
   }
 }

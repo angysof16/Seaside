@@ -1,3 +1,5 @@
+<!-- src/app/pages/carrito/carrito.component.html -->
+
 <section class="carrito-hero">
   <div class="carrito-hero-overlay"></div>
   <div class="carrito-hero-content">
@@ -7,40 +9,40 @@
 
 <section class="carrito-section">
 
-  <div *ngIf="exito" class="carrito-exito">
-    <div class="exito-icon">🎉</div>
-    <h2>¡Pedido confirmado!</h2>
-    <p>Tu pedido ha sido creado exitosamente.</p>
-    <div class="exito-acciones">
-      <button class="btn-primario" (click)="irAlPedido()" *ngIf="pedidoId">
-        Ver mi pedido
-      </button>
-      <button class="btn-secundario" (click)="irAHacerPedido()">
-        Seguir comprando
-      </button>
-    </div>
-  </div>
-
-  <div *ngIf="!exito && items.length === 0" class="carrito-vacio">
+  <!-- Carrito vacío -->
+  <div *ngIf="items.length === 0" class="carrito-vacio">
     <div class="vacio-icon">🛒</div>
     <h2>Tu carrito está vacío</h2>
-    <p>Explora nuestro menú y agrega los productos que deseas.</p>
+    <p>Ve a "Hacer pedido" para armar tu pedido.</p>
     <button class="btn-primario" (click)="irAHacerPedido()">Hacer pedido</button>
   </div>
 
-  <div *ngIf="!exito && items.length > 0" class="carrito-contenido">
+  <!-- Ítems del pedido en progreso -->
+  <div *ngIf="items.length > 0" class="carrito-contenido">
 
     <div class="carrito-items">
+
+      <!-- Banner indicando que es un pedido en progreso -->
+      <div class="banner-progreso">
+        <span>📋</span>
+        <span>
+          Pedido en progreso — paso {{ paso }} de 3.
+          <a (click)="continuarPedido()" class="link-continuar">Continuar donde lo dejaste →</a>
+        </span>
+      </div>
+
       <div class="carrito-item" *ngFor="let item of items">
         <img
-          [src]="item.producto.imageUrl || 'assets/IMGS/menuHighlight1.jpeg'"
-          [alt]="item.producto.nombre"
+          [src]="item.imagen || 'assets/IMGS/menuHighlight1.jpeg'"
+          [alt]="item.nombre"
           class="item-imagen"
         />
         <div class="item-info">
-          <h3 class="item-nombre">{{ item.producto.nombre }}</h3>
-          <p class="item-precio">
-            ${{ item.producto.precio | number:'1.0-0' }} c/u
+          <h3 class="item-nombre">{{ item.nombre }}</h3>
+          <p class="item-precio">${{ item.precio | number:'1.0-0' }} c/u</p>
+          <!-- Adicionales seleccionados -->
+          <p class="item-adicionales" *ngIf="item.adicionales.length > 0">
+            + {{ item.adicionales.length }} adicional(es)
           </p>
         </div>
         <div class="item-controles">
@@ -49,44 +51,33 @@
           <button class="btn-cantidad" (click)="incrementar(item)">+</button>
         </div>
         <div class="item-subtotal">
-          ${{ item.producto.precio * item.cantidad | number:'1.0-0' }}
+          ${{ carritoService.calcularSubtotalItem(item) | number:'1.0-0' }}
         </div>
-        <button class="btn-quitar" (click)="quitar(item.producto.id)" title="Quitar">
-          ✕
-        </button>
+        <button class="btn-quitar" (click)="quitar(item.productoId)" title="Quitar">✕</button>
       </div>
     </div>
 
+    <!-- Resumen -->
     <div class="carrito-resumen">
       <h2 class="resumen-titulo">Resumen</h2>
 
       <div class="resumen-linea" *ngFor="let item of items">
-        <span>{{ item.producto.nombre }} × {{ item.cantidad }}</span>
-        <span>${{ item.producto.precio * item.cantidad | number:'1.0-0' }}</span>
+        <span>{{ item.nombre }} × {{ item.cantidad }}</span>
+        <span>${{ carritoService.calcularSubtotalItem(item) | number:'1.0-0' }}</span>
       </div>
 
       <div class="resumen-total">
-        <span>Total</span>
+        <span>Total estimado</span>
         <span>${{ total | number:'1.0-0' }}</span>
       </div>
 
-      <p class="error-msg" *ngIf="error">{{ error }}</p>
-
-      <button
-        class="btn-primario btn-confirmar"
-        (click)="confirmarPedido()"
-        [disabled]="enviando || !authService.isLoggedIn"
-      >
-        <span *ngIf="!enviando">Confirmar pedido</span>
-        <span *ngIf="enviando">Procesando…</span>
+      <button class="btn-primario btn-confirmar" (click)="continuarPedido()">
+        Continuar pedido →
       </button>
 
-      <p class="aviso-login" *ngIf="!authService.isLoggedIn">
-        <a routerLink="/login">Inicia sesión</a> para confirmar tu pedido.
-      </p>
-
-      <button class="btn-vaciar" (click)="vaciar()">Vaciar carrito</button>
+      <button class="btn-vaciar" (click)="vaciar()">Cancelar y vaciar carrito</button>
     </div>
+
   </div>
 
 </section>

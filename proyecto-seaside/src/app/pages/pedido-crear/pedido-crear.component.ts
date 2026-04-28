@@ -4,19 +4,28 @@ import { Router } from '@angular/router';
 import { ProductoService } from '../../service/producto.service';
 import { PedidoService } from '../../service/pedido.service';
 import { AuthService } from '../../service/auth.service';
-import { CarritoService, ItemCarrito, EstadoCarrito } from '../../service/carrito.service';
+import {
+  CarritoService,
+  ItemCarrito,
+  EstadoCarrito,
+} from '../../service/carrito.service';
 import { Producto } from '../../components/producto/producto';
 import { AdicionalesCl } from '../../model/adicionales-cl';
 import { CrearPedidoRequest } from '../../model/crear-pedido-request';
 import { Subscription } from 'rxjs';
 
+/**
+ * Página de creación de pedidos.
+ * Guia al cliente en 3 pasos: selección del plato principal,
+ * elección de acompañamientos/adicionales y confirmación del pedido.
+ * Persiste el estado del carrito en localStorage para retomar después.
+ */
 @Component({
   selector: 'app-pedido-crear',
   templateUrl: './pedido-crear.component.html',
   styleUrls: ['./pedido-crear.component.css'],
 })
 export class PedidoCrearComponent implements OnInit, OnDestroy {
-
   paso = 1;
   platoPrincipal: Producto | null = null;
   items: ItemCarrito[] = [];
@@ -67,7 +76,8 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     this.paso = estado.paso;
     this.items = estado.items;
     if (estado.platoPrincipalId) {
-      this.platoPrincipal = this.productos.find(p => p.id === estado.platoPrincipalId) ?? null;
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === estado.platoPrincipalId) ?? null;
     }
   }
 
@@ -91,7 +101,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
 
   irPaso2(): void {
     if (!this.platoPrincipal) return;
-    if (!this.items.some(i => i.productoId === this.platoPrincipal!.id)) {
+    if (!this.items.some((i) => i.productoId === this.platoPrincipal!.id)) {
       this.agregarItem(this.platoPrincipal);
     }
     this.paso = 2;
@@ -99,7 +109,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   agregarItem(producto: Producto): void {
-    if (this.items.some(i => i.productoId === producto.id)) return;
+    if (this.items.some((i) => i.productoId === producto.id)) return;
     this.items.push({
       productoId: producto.id,
       nombre: producto.nombre,
@@ -116,12 +126,13 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   estaEnPedido(producto: Producto): boolean {
-    return this.items.some(i => i.productoId === producto.id);
+    return this.items.some((i) => i.productoId === producto.id);
   }
 
   eliminarItem(index: number): void {
     const item = this.items[index];
-    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1) return;
+    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1)
+      return;
     this.items.splice(index, 1);
     this.persistirEstado();
   }
@@ -156,27 +167,46 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     }
   }
 
-  isAdicionalSeleccionado(item: ItemCarrito, adicional: AdicionalesCl): boolean {
-    return item.adicionales.some(a => a.adicionalId === adicional.id);
+  isAdicionalSeleccionado(
+    item: ItemCarrito,
+    adicional: AdicionalesCl,
+  ): boolean {
+    return item.adicionales.some((a) => a.adicionalId === adicional.id);
   }
 
   toggleAdicional(item: ItemCarrito, adicional: AdicionalesCl): void {
-    const idx = item.adicionales.findIndex(a => a.adicionalId === adicional.id);
+    const idx = item.adicionales.findIndex(
+      (a) => a.adicionalId === adicional.id,
+    );
     if (idx >= 0) {
       item.adicionales.splice(idx, 1);
     } else {
-      item.adicionales.push({ adicionalId: adicional.id, nombre: adicional.nombre, precio: adicional.precio, cantidad: 1 });
+      item.adicionales.push({
+        adicionalId: adicional.id,
+        nombre: adicional.nombre,
+        precio: adicional.precio,
+        cantidad: 1,
+      });
     }
     this.persistirEstado();
   }
 
   getAdicionalCantidad(item: ItemCarrito, adicionalId: number): number {
-    return item.adicionales.find(a => a.adicionalId === adicionalId)?.cantidad ?? 1;
+    return (
+      item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1
+    );
   }
 
-  setAdicionalCantidad(item: ItemCarrito, adicionalId: number, delta: number): void {
-    const a = item.adicionales.find(ad => ad.adicionalId === adicionalId);
-    if (a) { a.cantidad = Math.max(1, a.cantidad + delta); this.persistirEstado(); }
+  setAdicionalCantidad(
+    item: ItemCarrito,
+    adicionalId: number,
+    delta: number,
+  ): void {
+    const a = item.adicionales.find((ad) => ad.adicionalId === adicionalId);
+    if (a) {
+      a.cantidad = Math.max(1, a.cantidad + delta);
+      this.persistirEstado();
+    }
   }
 
   irPaso3(): void {
@@ -186,7 +216,10 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   irPaso(n: number): void {
-    if (n < this.paso) { this.paso = n; this.persistirEstado(); }
+    if (n < this.paso) {
+      this.paso = n;
+      this.persistirEstado();
+    }
   }
 
   calcularSubtotalItem(item: ItemCarrito): number {
@@ -207,10 +240,13 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
 
     const request: CrearPedidoRequest = {
       clienteId: cliente.id,
-      items: this.items.map(item => ({
+      items: this.items.map((item) => ({
         productoId: item.productoId,
         cantidad: item.cantidad,
-        adicionales: item.adicionales.map(a => ({ adicionalId: a.adicionalId, cantidad: a.cantidad })),
+        adicionales: item.adicionales.map((a) => ({
+          adicionalId: a.adicionalId,
+          cantidad: a.cantidad,
+        })),
       })),
     };
 
@@ -224,7 +260,9 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.enviando = false;
-        this.error = err?.error?.error || 'Error al crear el pedido. Por favor intenta de nuevo.';
+        this.error =
+          err?.error?.error ||
+          'Error al crear el pedido. Por favor intenta de nuevo.';
       },
     });
   }

@@ -4,6 +4,11 @@ import { AuthService } from '../../service/auth.service';
 import { ClienteService } from '../../service/cliente.service';
 import { Cliente } from '../../model/cliente-cl';
 
+/**
+ * Página de perfil del cliente autenticado.
+ * Carga los datos frescos del cliente desde el backend al inicializar.
+ * Permite eliminar la cuenta y cerrar sesión.
+ */
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -36,7 +41,12 @@ export class ProfileComponent implements OnInit {
 
   onDelete(): void {
     if (!this.client) return;
-    if (!confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) return;
+    if (
+      !confirm(
+        '¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.',
+      )
+    )
+      return;
 
     this.clienteService.delete(this.client.id).subscribe({
       next: () => {

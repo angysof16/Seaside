@@ -1,0 +1,41 @@
+<div class="auth-hero">
+  <div class="auth-hero-overlay"></div>
+  <div class="auth-hero-content">
+    <h1 class="auth-hero-title">Mis Pedidos</h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</div>
+
+<main class="auth-main">
+  <div class="pedidos-wrapper">
+    <a class="back-link" routerLink="/perfil">← Volver al perfil</a>
+
+    <p *ngIf="cargando" class="estado-msg">Cargando pedidos…</p>
+    <p *ngIf="error" class="estado-msg error-msg">{{ error }}</p>
+
+    <p *ngIf="!cargando && !error && pedidos.length === 0" class="estado-msg">
+      Aún no tienes pedidos registrados.
+    </p>
+
+    <div
+      *ngFor="let p of pedidos"
+      class="pedido-card"
+      (click)="verDetalle(p.id)"
+    >
+      <div class="pedido-header">
+        <span class="pedido-id">#{{ p.id }}</span>
+        <span class="pedido-estado" [ngClass]="estadoClass(p.estado)">{{
+          p.estado
+        }}</span>
+      </div>
+      <div class="pedido-info">
+        <span>{{ p.fechaCreacion | date: "dd/MM/yyyy HH:mm" }}</span>
+        <span class="pedido-total">${{ p.total | number: "1.2-2" }}</span>
+      </div>
+    </div>
+  </div>
+</main>

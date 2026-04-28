@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../producto';
 import { ProductoService } from 'src/app/service/producto.service';
 
+/**
+ * Página contenedora del formulario de producto.
+ * Detecta si está en modo creación o edición según la ruta.
+ */
 @Component({
   selector: 'app-producto-form-page',
   templateUrl: './producto-form-page.component.html',

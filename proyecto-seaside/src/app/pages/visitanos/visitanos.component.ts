@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VisitanosService, Sede } from '../../service/visitanos.service';
 
+/**
+ * Página "Vísítanos" que muestra las sedes del restaurante.
+ * Los datos de las sedes se obtienen desde VisitanosService.
+ */
 @Component({
   selector: 'app-visitanos',
   templateUrl: './visitanos.component.html',

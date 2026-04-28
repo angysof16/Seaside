@@ -1,9 +1,13 @@
 // cliente-form-page.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cliente } from '../../model/cliente-cl';
+import { Cliente } from '../../../model/cliente-cl';
 import { ClienteService } from 'src/app/service/cliente.service';
 
+/**
+ * Página contenedora del formulario de cliente.
+ * Detecta si está en modo creación o edición según la ruta.
+ */
 @Component({
   selector: 'app-cliente-form-page',
   templateUrl: './cliente-form-page.component.html',

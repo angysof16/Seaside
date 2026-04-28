@@ -4,6 +4,11 @@ import { Location } from '@angular/common';
 import { Producto } from '../producto';
 import { ProductoService } from 'src/app/service/producto.service';
 
+/**
+ * Página de detalle de un producto.
+ * Carga el producto y sus adicionales por id desde la ruta.
+ * Permite editar o eliminar el producto.
+ */
 @Component({
   selector: 'app-producto-detalle-page',
   templateUrl: './producto-detalle-page.component.html',

@@ -1,9 +1,13 @@
 // cliente-detalle-page.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cliente } from '../../model/cliente-cl';
+import { Cliente } from '../../../model/cliente-cl';
 import { ClienteService } from 'src/app/service/cliente.service';
 
+/**
+ * Página de detalle de un cliente.
+ * Carga el cliente por id desde la ruta y permite editarlo o eliminarlo.
+ */
 @Component({
   selector: 'app-cliente-detalle-page',
   templateUrl: './cliente-detalle-page.component.html',

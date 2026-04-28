@@ -15,35 +15,57 @@ export interface Pedido {
   domiciliarioId?: number;
 }
 
+/**
+ * Servicio para la gestión de pedidos desde el frontend.
+ * Consume la API REST de pedidos del backend:
+ * obtención, filtrado, actualización de estado, asignación de domiciliario y creación.
+ */
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
   private apiUrl = `${environment.apiUrl}/api/pedidos`;
 
   constructor(private http: HttpClient) {}
 
+  /** Devuelve todos los pedidos registrados. */
   findAll(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(this.apiUrl);
   }
 
+  /** Devuelve solo los pedidos activos (no Entregado ni Cancelado). */
   findActivos(): Observable<Pedido[]> {
     const params = new HttpParams().set('activos', 'true');
     return this.http.get<Pedido[]>(this.apiUrl, { params });
   }
 
+  /** Busca un pedido por su id. */
   findById(id: number): Observable<Pedido> {
     return this.http.get<Pedido>(`${this.apiUrl}/${id}`);
   }
 
+  /** Actualiza el estado de un pedido. */
   actualizarEstado(id: number, estado: string): Observable<unknown> {
     return this.http.patch(`${this.apiUrl}/${id}/estado`, { estado });
   }
 
-  asignarDomiciliario(pedidoId: number, domiciliarioId: number): Observable<unknown> {
-    return this.http.patch(`${this.apiUrl}/${pedidoId}/domiciliario`, { domiciliarioId });
+  /** Asigna un domiciliario disponible a un pedido. */
+  asignarDomiciliario(
+    pedidoId: number,
+    domiciliarioId: number,
+  ): Observable<unknown> {
+    return this.http.patch(`${this.apiUrl}/${pedidoId}/domiciliario`, {
+      domiciliarioId,
+    });
   }
 
+  /** Elimina un pedido por su id. */
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  /** Devuelve los pedidos de un cliente específico por su id. */
+  findByClienteId(clienteId: number): Observable<Pedido[]> {
+    const params = new HttpParams().set('clienteId', clienteId.toString());
+    return this.http.get<Pedido[]>(this.apiUrl, { params });
   }
 
   /**

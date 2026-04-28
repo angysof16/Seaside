@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { Producto } from '../producto';
 import { ProductoService } from 'src/app/service/producto.service';
 
+/**
+ * Componente para crear un nuevo producto.
+ * Llama al servicio al guardar y redirige a la lista de productos.
+ */
 @Component({
   selector: 'app-producto-crear',
   templateUrl: './producto-crear.component.html',

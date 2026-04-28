@@ -1,0 +1,168 @@
+.auth-hero {
+  position: relative;
+  width: 100%;
+  min-height: 42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-image: url("/assets/IMGS/mainBackgroundImage2.jpeg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(64, 1, 1, 0.55);
+  z-index: 1;
+}
+
+.auth-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.auth-hero-title {
+  font-family: "Island Moments", cursive;
+  color: #f2b705;
+  font-size: clamp(80px, 18vw, 200px);
+  font-weight: 100;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 3;
+}
+.hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+.hero-wave path {
+  fill: #f8f1e0;
+}
+
+.auth-main {
+  display: flex;
+  justify-content: center;
+  padding: 64px 24px 80px;
+  background: #f8f1e0;
+  min-height: 40vh;
+}
+
+.pedidos-wrapper {
+  width: 100%;
+  max-width: 640px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #400101;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  text-decoration: none;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.estado-msg {
+  font-family: "Fuzzy Bubbles", cursive;
+  color: #400101;
+  text-align: center;
+  padding: 24px 0;
+}
+.error-msg {
+  color: #c0392b;
+}
+
+.pedido-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(64, 1, 1, 0.08);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.pedido-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(64, 1, 1, 0.14);
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pedido-id {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 700;
+  font-size: 16px;
+  color: #400101;
+}
+
+.pedido-estado {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.estado-pendiente {
+  background: #fff3cd;
+  color: #856404;
+}
+.estado-preparacion {
+  background: #cce5ff;
+  color: #004085;
+}
+.estado-camino {
+  background: #d4edda;
+  color: #155724;
+}
+.estado-entregado {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+.estado-cancelado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.pedido-info {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 14px;
+  color: #666;
+}
+
+.pedido-total {
+  font-weight: 700;
+  color: #400101;
+}

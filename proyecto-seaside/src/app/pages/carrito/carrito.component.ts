@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { CarritoService, ItemCarrito } from '../../service/carrito.service';
 import { AuthService } from '../../service/auth.service';
 
+/**
+ * Página del carrito de compras.
+ * Muestra los ítems seleccionados y permite modificar cantidades,
+ * eliminar productos o vaciar el carrito antes de ir a confirmar el pedido.
+ */
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -19,7 +24,7 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carritoService.estado$.subscribe(estado => {
+    this.carritoService.estado$.subscribe((estado) => {
       this.items = estado.items;
     });
   }
@@ -46,7 +51,7 @@ export class CarritoComponent implements OnInit {
 
   quitar(productoId: number): void {
     const estado = this.carritoService.estado;
-    estado.items = estado.items.filter(i => i.productoId !== productoId);
+    estado.items = estado.items.filter((i) => i.productoId !== productoId);
     if (estado.platoPrincipalId === productoId) {
       estado.platoPrincipalId = null;
       estado.paso = 1;

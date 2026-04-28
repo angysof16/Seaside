@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
-import { DomiciliarioService, Domiciliario } from 'src/app/service/domiciliario.service';
+import {
+  DomiciliarioService,
+  Domiciliario,
+} from 'src/app/service/domiciliario.service';
 
+/**
+ * Vista principal del portal de operador.
+ * Muestra los pedidos activos (o todos) y permite:
+ * - Asignar un domiciliario disponible a un pedido.
+ * - Actualizar el estado de un pedido.
+ * - Eliminar un pedido.
+ * Usa modales para confirmar la asignación y el cambio de estado.
+ */
 @Component({
   selector: 'app-operador-table',
   templateUrl: './operador-table.component.html',
@@ -39,8 +50,12 @@ export class OperadorTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarPedidos();
-    this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
-    this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
+    this.domiciliarioService
+      .findAll()
+      .subscribe((list) => (this.todosLosDomiciliarios = list));
+    this.domiciliarioService
+      .findDisponibles()
+      .subscribe((list) => (this.domiciliariosDisponibles = list));
   }
 
   cargarPedidos(): void {
@@ -79,8 +94,12 @@ export class OperadorTableComponent implements OnInit {
       .subscribe(() => {
         this.cargarPedidos();
         // Actualizar lista de disponibles tras asignación
-        this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
-        this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
+        this.domiciliarioService
+          .findDisponibles()
+          .subscribe((list) => (this.domiciliariosDisponibles = list));
+        this.domiciliarioService
+          .findAll()
+          .subscribe((list) => (this.todosLosDomiciliarios = list));
         this.cerrarModal();
       });
   }

@@ -1,6 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { CarritoService } from '../../service/carrito.service';
+
+/**
+ * Barra de navegación principal del sitio.
+ * Se adapta visualmente con un efecto de desplazamiento al hacer scroll:
+ * aplica fondo degradado, blur y sombra progresivamente.
+ * Muestra el número de ítems en el carrito y el estado de sesión del cliente.
+ */
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +16,10 @@ import { CarritoService } from '../../service/carrito.service';
 export class NavbarComponent implements OnInit {
   isScrolled = false;
 
-  constructor(public authService: AuthService, public carritoService: CarritoService, ) {}
+  constructor(
+    public authService: AuthService,
+    public carritoService: CarritoService,
+  ) {}
 
   ngOnInit(): void {
     this.updateScrollState();

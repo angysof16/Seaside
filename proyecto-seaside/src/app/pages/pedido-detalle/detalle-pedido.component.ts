@@ -2,9 +2,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
-import { DomiciliarioService, Domiciliario } from 'src/app/service/domiciliario.service';
+import {
+  DomiciliarioService,
+  Domiciliario,
+} from 'src/app/service/domiciliario.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+
+/**
+ * Página de detalle de un pedido.
+ * Carga el pedido por id (param o query), sus ítems con adicionales,
+ * y el domiciliario asignado si corresponde.
+ * Normaliza la forma de los ítems para manejar distintas respuestas del backend.
+ */
 
 export interface AdicionalEnItem {
   id: number;
@@ -100,16 +110,16 @@ export class PedidoDetalleComponent implements OnInit {
 
   getEstadoClass(estado: string): string {
     const map: Record<string, string> = {
-      PENDIENTE:      'badge-pendiente',
-      Pendiente:      'badge-pendiente',
+      PENDIENTE: 'badge-pendiente',
+      Pendiente: 'badge-pendiente',
       EN_PREPARACION: 'badge-preparacion',
       'En preparación': 'badge-preparacion',
-      EN_CAMINO:      'badge-camino',
-      'En camino':    'badge-camino',
-      ENTREGADO:      'badge-entregado',
-      Entregado:      'badge-entregado',
-      CANCELADO:      'badge-cancelado',
-      Cancelado:      'badge-cancelado',
+      EN_CAMINO: 'badge-camino',
+      'En camino': 'badge-camino',
+      ENTREGADO: 'badge-entregado',
+      Entregado: 'badge-entregado',
+      CANCELADO: 'badge-cancelado',
+      Cancelado: 'badge-cancelado',
     };
     return map[estado] ?? '';
   }

@@ -9,6 +9,11 @@ import {
 import { NgForm } from '@angular/forms';
 import { Producto } from '../producto';
 
+/**
+ * Formulario reactivo de creación y edición de productos.
+ * Detecta si hay un producto a editar mediante @Input y emite el resultado
+ * al componente padre mediante @Output.
+ */
 @Component({
   selector: 'app-producto-form',
   templateUrl: './producto-form.component.html',

@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../service/producto.service';
 
+/**
+ * Componente de la sección "Menú Destacado" en la landing page.
+ * Carga los primeros 3 productos que no sean Acompañamientos
+ * para mostrarlos como destacados del restaurante.
+ */
 @Component({
   selector: 'app-menu-destacado',
   templateUrl: './menu-destacado.component.html',
   styleUrls: ['./menu-destacado.component.css'],
 })
 export class MenuDestacadoComponent implements OnInit {
-  menuItems: { id: number; image: string; title: string; description: string }[] = [];
+  menuItems: {
+    id: number;
+    image: string;
+    title: string;
+    description: string;
+  }[] = [];
 
   constructor(private productoService: ProductoService) {}
 

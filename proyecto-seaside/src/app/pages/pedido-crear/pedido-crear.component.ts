@@ -26,7 +26,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./pedido-crear.component.css'],
 })
 export class PedidoCrearComponent implements OnInit, OnDestroy {
-  paso = 1;
+  paso = 2;
   platoPrincipal: Producto | null = null;
   items: ItemCarrito[] = [];
   productos: Producto[] = [];
@@ -73,11 +73,15 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   private restaurarEstado(): void {
     const estado = this.carritoService.estado;
     if (estado.items.length === 0) return;
-    this.paso = estado.paso;
+    this.paso = Math.max(2, estado.paso);
     this.items = estado.items;
     if (estado.platoPrincipalId) {
       this.platoPrincipal =
         this.productos.find((p) => p.id === estado.platoPrincipalId) ?? null;
+    }
+    if (!this.platoPrincipal && this.items.length > 0) {
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === this.items[0].productoId) ?? null;
     }
   }
 
@@ -88,24 +92,6 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
       items: this.items,
     };
     this.carritoService.guardarEstado(estado);
-  }
-
-  seleccionarPlatoPrincipal(producto: Producto): void {
-    this.platoPrincipal = producto;
-    this.persistirEstado();
-  }
-
-  esPlatoPrincipal(producto: Producto): boolean {
-    return this.platoPrincipal?.id === producto.id;
-  }
-
-  irPaso2(): void {
-    if (!this.platoPrincipal) return;
-    if (!this.items.some((i) => i.productoId === this.platoPrincipal!.id)) {
-      this.agregarItem(this.platoPrincipal);
-    }
-    this.paso = 2;
-    this.persistirEstado();
   }
 
   agregarItem(producto: Producto): void {
@@ -122,6 +108,9 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
       mostrarAdicionales: false,
       cargandoAdicionales: false,
     });
+    if (!this.platoPrincipal) {
+      this.platoPrincipal = producto;
+    }
     this.persistirEstado();
   }
 
@@ -131,9 +120,14 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
 
   eliminarItem(index: number): void {
     const item = this.items[index];
-    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1)
-      return;
     this.items.splice(index, 1);
+    if (this.platoPrincipal?.id === item.productoId) {
+      this.platoPrincipal =
+        this.items.length > 0
+          ? (this.productos.find((p) => p.id === this.items[0].productoId) ??
+            null)
+          : null;
+    }
     this.persistirEstado();
   }
 
@@ -216,7 +210,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   irPaso(n: number): void {
-    if (n < this.paso) {
+    if (n >= 2 && n < this.paso) {
       this.paso = n;
       this.persistirEstado();
     }
@@ -231,7 +225,10 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   confirmarPedido(): void {
-    if (!this.platoPrincipal) return;
+    if (this.items.length === 0) return;
+    if (!this.platoPrincipal)
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === this.items[0].productoId) ?? null;
     const cliente = this.authService.currentCliente;
     if (!cliente) return;
 

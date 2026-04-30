@@ -73,9 +73,17 @@
   max-width: 640px;
 }
 
+.acciones-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
 .back-link {
   display: inline-block;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   color: #400101;
   font-family: "Fuzzy Bubbles", cursive;
   font-size: 14px;
@@ -83,6 +91,28 @@
 }
 .back-link:hover {
   text-decoration: underline;
+}
+
+.btn-filtro {
+  border: 1px solid rgba(64, 1, 1, 0.2);
+  background: #fff;
+  color: #400101;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    background-color 0.15s;
+}
+
+.btn-filtro:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 1, 1, 0.14);
+  background: #fff8ea;
 }
 
 .estado-msg {

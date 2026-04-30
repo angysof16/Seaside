@@ -15,6 +15,7 @@ import { PedidoService, Pedido } from '../../service/pedido.service';
 })
 export class MisPedidosComponent implements OnInit {
   pedidos: Pedido[] = [];
+  ocultarEntregados = false;
   cargando = true;
   error = '';
 
@@ -48,6 +49,15 @@ export class MisPedidosComponent implements OnInit {
 
   verDetalle(id: number): void {
     this.router.navigate(['/pedidos', id]);
+  }
+
+  toggleFiltroEntregados(): void {
+    this.ocultarEntregados = !this.ocultarEntregados;
+  }
+
+  get pedidosVisibles(): Pedido[] {
+    if (!this.ocultarEntregados) return this.pedidos;
+    return this.pedidos.filter((p) => p.estado?.toUpperCase() !== 'ENTREGADO');
   }
 
   estadoClass(estado: string): string {

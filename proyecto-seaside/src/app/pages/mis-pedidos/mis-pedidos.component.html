@@ -12,17 +12,25 @@
 
 <main class="auth-main">
   <div class="pedidos-wrapper">
-    <a class="back-link" routerLink="/perfil">← Volver al perfil</a>
+    <div class="acciones-header">
+      <a class="back-link" routerLink="/perfil">← Volver al perfil</a>
+      <button class="btn-filtro" (click)="toggleFiltroEntregados()">
+        {{ ocultarEntregados ? "👁 Ver todos" : "🔍 Ocultar entregados" }}
+      </button>
+    </div>
 
     <p *ngIf="cargando" class="estado-msg">Cargando pedidos…</p>
     <p *ngIf="error" class="estado-msg error-msg">{{ error }}</p>
 
-    <p *ngIf="!cargando && !error && pedidos.length === 0" class="estado-msg">
+    <p
+      *ngIf="!cargando && !error && pedidosVisibles.length === 0"
+      class="estado-msg"
+    >
       Aún no tienes pedidos registrados.
     </p>
 
     <div
-      *ngFor="let p of pedidos"
+      *ngFor="let p of pedidosVisibles"
       class="pedido-card"
       (click)="verDetalle(p.id)"
     >

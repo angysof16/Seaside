@@ -15,12 +15,12 @@
 
 <!-- ── Main ─────────────────────────────────────────────────────────────── -->
 <main class="pedido-main">
-
   <!-- ── Éxito ──────────────────────────────────────────────────────────── -->
   <div *ngIf="exito" class="exito-card">
     <h2>¡Pedido realizado!</h2>
     <p>
-      Tu pedido ha sido recibido. Pronto recibirás actualizaciones sobre su estado.
+      Tu pedido ha sido recibido. Pronto recibirás actualizaciones sobre su
+      estado.
     </p>
     <div class="exito-actions">
       <a routerLink="/perfil" class="btn-cta">Ver mi perfil</a>
@@ -35,27 +35,15 @@
   </div>
 
   <ng-container *ngIf="!exito">
-
     <!-- ── Stepper ─────────────────────────────────────────────────────── -->
     <div class="stepper">
       <button
         class="step"
-        [class.active]="paso >= 1"
-        [class.done]="paso > 1"
-        (click)="irPaso(1)"
-      >
-        <span class="step-number">1</span>
-        <span class="step-label">Plato principal</span>
-      </button>
-      <div class="step-line" [class.done]="paso > 1"></div>
-      <button
-        class="step"
         [class.active]="paso >= 2"
         [class.done]="paso > 2"
-        [disabled]="paso < 2"
         (click)="irPaso(2)"
       >
-        <span class="step-number">2</span>
+        <span class="step-number">1</span>
         <span class="step-label">Productos</span>
       </button>
       <div class="step-line" [class.done]="paso > 2"></div>
@@ -65,7 +53,7 @@
         [disabled]="paso < 3"
         (click)="irPaso(3)"
       >
-        <span class="step-number">3</span>
+        <span class="step-number">2</span>
         <span class="step-label">Confirmar</span>
       </button>
     </div>
@@ -74,52 +62,10 @@
     <div *ngIf="error" class="error-banner">{{ error }}</div>
 
     <!-- ════════════════════════════════════════════════════════════════════
-         PASO 1 — Plato principal
-         ════════════════════════════════════════════════════════════════════ -->
-    <section *ngIf="paso === 1" class="paso-section">
-      <h2 class="paso-title">¿Cuál será tu plato principal?</h2>
-      <p class="paso-subtitle">Escoge el plato estrella de tu pedido</p>
-
-      <div class="productos-grid">
-        <div
-          *ngFor="let producto of productos"
-          class="producto-card"
-          [class.seleccionado]="esPlatoPrincipal(producto)"
-          (click)="seleccionarPlatoPrincipal(producto)"
-          role="button"
-          [attr.aria-pressed]="esPlatoPrincipal(producto)"
-        >
-          <div class="producto-card-img-wrap">
-            <img
-              [src]="producto.imageUrl || 'assets/IMGS/menuHighlight1.jpeg'"
-              [alt]="producto.nombre"
-              class="producto-card-img"
-            />
-            <span *ngIf="esPlatoPrincipal(producto)" class="badge-check">✓</span>
-          </div>
-          <div class="producto-card-body">
-            <h3 class="producto-card-nombre">{{ producto.nombre }}</h3>
-            <p class="producto-card-precio">${{ producto.precio | number: '1.0-0' }}</p>
-            <p *ngIf="esPlatoPrincipal(producto)" class="badge-seleccionado">
-              Seleccionado
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="paso-actions">
-        <button class="btn-cta" [disabled]="!platoPrincipal" (click)="irPaso2()">
-          Continuar →
-        </button>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════════════════════════════════════
          PASO 2 — Productos y adicionales
          ════════════════════════════════════════════════════════════════════ -->
     <section *ngIf="paso === 2" class="paso-section">
       <div class="paso2-layout">
-
         <!-- Catálogo -->
         <div class="paso2-catalogo">
           <h2 class="paso-title paso-title--left">Agrega más productos</h2>
@@ -141,11 +87,15 @@
                   [alt]="producto.nombre"
                   class="producto-card-img"
                 />
-                <span *ngIf="estaEnPedido(producto)" class="badge-check">✓</span>
+                <span *ngIf="estaEnPedido(producto)" class="badge-check"
+                  >✓</span
+                >
               </div>
               <div class="producto-card-body">
                 <h3 class="producto-card-nombre">{{ producto.nombre }}</h3>
-                <p class="producto-card-precio">${{ producto.precio | number: '1.0-0' }}</p>
+                <p class="producto-card-precio">
+                  ${{ producto.precio | number: "1.0-0" }}
+                </p>
               </div>
             </div>
           </div>
@@ -160,28 +110,30 @@
           </div>
 
           <div *ngFor="let item of items; let i = index" class="item-card">
-
             <!-- Cabecera del item -->
             <div class="item-header">
               <div class="item-info">
                 <h4 class="item-nombre">{{ item.nombre }}</h4>
-                <span *ngIf="platoPrincipal?.id === item.productoId" class="badge-principal">
-                  Plato principal
-                </span>
               </div>
 
               <div class="item-qty">
-                <button class="qty-btn" (click)="decrementarCantidad(item)">−</button>
+                <button class="qty-btn" (click)="decrementarCantidad(item)">
+                  −
+                </button>
                 <span class="qty-val">{{ item.cantidad }}</span>
-                <button class="qty-btn" (click)="incrementarCantidad(item)">+</button>
+                <button class="qty-btn" (click)="incrementarCantidad(item)">
+                  +
+                </button>
               </div>
 
-              <span class="item-precio">${{ calcularSubtotalItem(item) | number: '1.0-0' }}</span>
+              <span class="item-precio"
+                >${{ calcularSubtotalItem(item) | number: "1.0-0" }}</span
+              >
 
               <button
                 class="btn-remove"
                 (click)="eliminarItem(i)"
-                [disabled]="platoPrincipal?.id === item.productoId && items.length === 1"
+                [disabled]="items.length === 1"
                 title="Eliminar producto"
               >
                 ✕
@@ -190,21 +142,33 @@
 
             <!-- Botón adicionales -->
             <button class="btn-adicionales" (click)="toggleAdicionales(i)">
-              {{ item.mostrarAdicionales ? '▲ Ocultar adicionales' : '▼ Adicionales opcionales' }}
+              {{
+                item.mostrarAdicionales
+                  ? "▲ Ocultar adicionales"
+                  : "▼ Adicionales opcionales"
+              }}
             </button>
 
             <!-- Panel adicionales -->
             <div *ngIf="item.mostrarAdicionales" class="adicionales-panel">
-              <p *ngIf="item.cargandoAdicionales" class="msg-cargando">Cargando…</p>
+              <p *ngIf="item.cargandoAdicionales" class="msg-cargando">
+                Cargando…
+              </p>
 
               <p
-                *ngIf="item.adicionalesCargados && item.adicionalesDisponibles.length === 0"
+                *ngIf="
+                  item.adicionalesCargados &&
+                  item.adicionalesDisponibles.length === 0
+                "
                 class="msg-sin"
               >
                 Este producto no tiene adicionales disponibles
               </p>
 
-              <div *ngFor="let adicional of item.adicionalesDisponibles" class="adicional-fila">
+              <div
+                *ngFor="let adicional of item.adicionalesDisponibles"
+                class="adicional-fila"
+              >
                 <label class="adicional-label">
                   <input
                     type="checkbox"
@@ -212,33 +176,51 @@
                     (change)="toggleAdicional(item, adicional)"
                   />
                   <span class="adicional-nombre">{{ adicional.nombre }}</span>
-                  <span class="adicional-precio">+${{ adicional.precio | number: '1.0-0' }}</span>
+                  <span class="adicional-precio"
+                    >+${{ adicional.precio | number: "1.0-0" }}</span
+                  >
                 </label>
 
-                <div *ngIf="isAdicionalSeleccionado(item, adicional)" class="adicional-qty">
-                  <button class="qty-btn qty-btn--xs" (click)="setAdicionalCantidad(item, adicional.id, -1)">−</button>
-                  <span class="qty-val qty-val--xs">{{ getAdicionalCantidad(item, adicional.id) }}</span>
-                  <button class="qty-btn qty-btn--xs" (click)="setAdicionalCantidad(item, adicional.id, 1)">+</button>
+                <div
+                  *ngIf="isAdicionalSeleccionado(item, adicional)"
+                  class="adicional-qty"
+                >
+                  <button
+                    class="qty-btn qty-btn--xs"
+                    (click)="setAdicionalCantidad(item, adicional.id, -1)"
+                  >
+                    −
+                  </button>
+                  <span class="qty-val qty-val--xs">{{
+                    getAdicionalCantidad(item, adicional.id)
+                  }}</span>
+                  <button
+                    class="qty-btn qty-btn--xs"
+                    (click)="setAdicionalCantidad(item, adicional.id, 1)"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
-
           </div>
 
           <!-- Total parcial -->
           <div *ngIf="items.length > 0" class="total-fila">
             <span>Total estimado</span>
-            <strong>${{ calcularTotal() | number: '1.0-0' }}</strong>
+            <strong>${{ calcularTotal() | number: "1.0-0" }}</strong>
           </div>
 
           <div class="paso-actions paso-actions--right">
-            <button class="btn-back" (click)="paso = 1">← Volver</button>
-            <button class="btn-cta" [disabled]="items.length === 0" (click)="irPaso3()">
+            <button
+              class="btn-cta"
+              [disabled]="items.length === 0"
+              (click)="irPaso3()"
+            >
               Continuar →
             </button>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -249,30 +231,27 @@
       <h2 class="paso-title">Confirma tu pedido</h2>
 
       <div class="confirmar-layout">
-
         <!-- Resumen -->
         <div class="resumen-card">
           <h3 class="card-title">Resumen</h3>
 
-          <div class="resumen-plato">
-            <span class="badge-principal">Plato principal</span>
-            <strong class="resumen-plato-nombre">{{ platoPrincipal?.nombre }}</strong>
-          </div>
-
           <div *ngFor="let item of items" class="resumen-item">
             <div class="resumen-item-row">
               <span>{{ item.nombre }} × {{ item.cantidad }}</span>
-              <span>${{ item.precio * item.cantidad | number: '1.0-0' }}</span>
+              <span>${{ item.precio * item.cantidad | number: "1.0-0" }}</span>
             </div>
-            <div *ngFor="let a of item.adicionales" class="resumen-adicional-row">
+            <div
+              *ngFor="let a of item.adicionales"
+              class="resumen-adicional-row"
+            >
               <span>↳ {{ a.nombre }} × {{ a.cantidad }}</span>
-              <span>+${{ a.precio * a.cantidad | number: '1.0-0' }}</span>
+              <span>+${{ a.precio * a.cantidad | number: "1.0-0" }}</span>
             </div>
           </div>
 
           <div class="resumen-total">
             <span>Total</span>
-            <strong>${{ calcularTotal() | number: '1.0-0' }}</strong>
+            <strong>${{ calcularTotal() | number: "1.0-0" }}</strong>
           </div>
         </div>
 
@@ -290,14 +269,14 @@
               [disabled]="enviando"
               (click)="confirmarPedido()"
             >
-              {{ enviando ? 'Enviando…' : '¡Confirmar pedido!' }}
+              {{ enviando ? "Enviando…" : "¡Confirmar pedido!" }}
             </button>
-            <button class="btn-back" (click)="paso = 2">← Volver a productos</button>
+            <button class="btn-back" (click)="paso = 2">
+              ← Volver a productos
+            </button>
           </div>
         </div>
-
       </div>
     </section>
-
   </ng-container>
 </main>

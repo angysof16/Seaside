@@ -11,7 +11,7 @@
       <button class="btn-filtro" (click)="toggleFiltro()">
         {{ soloActivos ? "👁 Ver todos" : "🔍 Solo activos" }}
       </button>
-      <a class="btn-back" routerLink="/">← Volver al sitio</a>
+      <a class="btn-back" routerLink="/admin/dashboard">← Volver al sitio</a>
     </div>
   </div>
 
@@ -86,8 +86,8 @@
     <h3 class="modal-title">Asignar Domiciliario</h3>
     <p class="modal-sub">
       Pedido #{{ pedidoSeleccionado?.id }} — Cliente
-      {{ pedidoSeleccionado?.cliente?.nombre }} {{ pedidoSeleccionado?.cliente?.apellido }}
-
+      {{ pedidoSeleccionado?.cliente?.nombre }}
+      {{ pedidoSeleccionado?.cliente?.apellido }}
     </p>
 
     <div class="form-group">
@@ -134,12 +134,28 @@
     <div class="form-group">
       <label>Nuevo estado</label>
       <select [(ngModel)]="nuevoEstado" name="estado">
-        <option *ngFor="let e of ESTADOS" [value]="e">{{ e }}</option>
+        <option
+          *ngFor="let e of ESTADOS"
+          [value]="e"
+          [disabled]="!estadoPermitidoParaPedido(e)"
+        >
+          {{ e }}
+        </option>
       </select>
+      <small
+        *ngIf="!pedidoEstado?.domiciliarioId"
+        style="display: block; margin-top: 6px; color: #8a6060"
+      >
+        Debes asignar un domiciliario antes de marcar EN_CAMINO o ENTREGADO.
+      </small>
     </div>
 
     <div class="modal-actions">
-      <button class="btn-confirmar" (click)="confirmarEstado()">
+      <button
+        class="btn-confirmar"
+        (click)="confirmarEstado()"
+        [disabled]="!estadoPermitidoParaPedido(nuevoEstado)"
+      >
         ✓ Guardar
       </button>
       <button class="btn-cancelar" (click)="cerrarModalEstado()">

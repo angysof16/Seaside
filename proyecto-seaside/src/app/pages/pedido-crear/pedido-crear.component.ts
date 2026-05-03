@@ -1,52 +1,48 @@
 // src/app/pages/pedido-crear/pedido-crear.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../service/producto.service';
 import { PedidoService } from '../../service/pedido.service';
 import { AuthService } from '../../service/auth.service';
+import {
+  CarritoService,
+  ItemCarrito,
+  EstadoCarrito,
+} from '../../service/carrito.service';
 import { Producto } from '../../components/producto/producto';
 import { AdicionalesCl } from '../../model/adicionales-cl';
 import { CrearPedidoRequest } from '../../model/crear-pedido-request';
+import { Subscription } from 'rxjs';
 
-interface AdicionalSeleccionado {
-  adicionalId: number;
-  nombre: string;
-  precio: number;
-  cantidad: number;
-}
-
-interface ItemEnPedido {
-  productoId: number;
-  nombre: string;
-  precio: number;
-  imagen?: string;
-  cantidad: number;
-  adicionales: AdicionalSeleccionado[];
-  adicionalesDisponibles: AdicionalesCl[];
-  adicionalesCargados: boolean;
-  mostrarAdicionales: boolean;
-  cargandoAdicionales: boolean;
-}
-
+/**
+ * Página de creación de pedidos.
+ * Guia al cliente en 3 pasos: selección del plato principal,
+ * elección de acompañamientos/adicionales y confirmación del pedido.
+ * Persiste el estado del carrito en localStorage para retomar después.
+ */
 @Component({
   selector: 'app-pedido-crear',
   templateUrl: './pedido-crear.component.html',
   styleUrls: ['./pedido-crear.component.css'],
 })
-export class PedidoCrearComponent implements OnInit {
-  paso = 1;
-  productos: Producto[] = [];
+export class PedidoCrearComponent implements OnInit, OnDestroy {
+  paso = 2;
   platoPrincipal: Producto | null = null;
-  items: ItemEnPedido[] = [];
+  items: ItemCarrito[] = [];
+  productos: Producto[] = [];
   enviando = false;
   error = '';
   exito = false;
+  pedidoConfirmado = false;
   pedidoId: number | null = null;
+
+  private sub: Subscription | null = null;
 
   constructor(
     private productoService: ProductoService,
     private pedidoService: PedidoService,
     public authService: AuthService,
+    public carritoService: CarritoService,
     private router: Router,
   ) {}
 
@@ -57,31 +53,46 @@ export class PedidoCrearComponent implements OnInit {
     }
 
     this.productoService.findAll().subscribe({
-      next: (p) => (this.productos = p),
+      next: (p) => {
+        this.productos = p;
+        this.restaurarEstado();
+      },
       error: () => (this.error = 'No se pudieron cargar los productos.'),
     });
+
+    this.sub = this.carritoService.estado$.subscribe();
   }
 
-  // ── Paso 1: Plato principal ──────────────────────────────────────────────
-
-  seleccionarPlatoPrincipal(producto: Producto): void {
-    this.platoPrincipal = producto;
-  }
-
-  esPlatoPrincipal(producto: Producto): boolean {
-    return this.platoPrincipal?.id === producto.id;
-  }
-
-  irPaso2(): void {
-    if (!this.platoPrincipal) return;
-    // Add plato principal to items if not already there
-    if (!this.items.some((i) => i.productoId === this.platoPrincipal!.id)) {
-      this.agregarItem(this.platoPrincipal);
+  ngOnDestroy(): void {
+    if (!this.pedidoConfirmado) {
+      this.persistirEstado();
     }
-    this.paso = 2;
+    this.sub?.unsubscribe();
   }
 
-  // ── Paso 2: Productos adicionales ────────────────────────────────────────
+  private restaurarEstado(): void {
+    const estado = this.carritoService.estado;
+    if (estado.items.length === 0) return;
+    this.paso = Math.max(2, estado.paso);
+    this.items = estado.items;
+    if (estado.platoPrincipalId) {
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === estado.platoPrincipalId) ?? null;
+    }
+    if (!this.platoPrincipal && this.items.length > 0) {
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === this.items[0].productoId) ?? null;
+    }
+  }
+
+  private persistirEstado(): void {
+    const estado: EstadoCarrito = {
+      paso: this.paso,
+      platoPrincipalId: this.platoPrincipal?.id ?? null,
+      items: this.items,
+    };
+    this.carritoService.guardarEstado(estado);
+  }
 
   agregarItem(producto: Producto): void {
     if (this.items.some((i) => i.productoId === producto.id)) return;
@@ -97,6 +108,10 @@ export class PedidoCrearComponent implements OnInit {
       mostrarAdicionales: false,
       cargandoAdicionales: false,
     });
+    if (!this.platoPrincipal) {
+      this.platoPrincipal = producto;
+    }
+    this.persistirEstado();
   }
 
   estaEnPedido(producto: Producto): boolean {
@@ -105,17 +120,25 @@ export class PedidoCrearComponent implements OnInit {
 
   eliminarItem(index: number): void {
     const item = this.items[index];
-    // Cannot remove the only item when it's the plato principal
-    if (this.platoPrincipal?.id === item.productoId && this.items.length === 1) return;
     this.items.splice(index, 1);
+    if (this.platoPrincipal?.id === item.productoId) {
+      this.platoPrincipal =
+        this.items.length > 0
+          ? (this.productos.find((p) => p.id === this.items[0].productoId) ??
+            null)
+          : null;
+    }
+    this.persistirEstado();
   }
 
-  incrementarCantidad(item: ItemEnPedido): void {
+  incrementarCantidad(item: ItemCarrito): void {
     item.cantidad++;
+    this.persistirEstado();
   }
 
-  decrementarCantidad(item: ItemEnPedido): void {
+  decrementarCantidad(item: ItemCarrito): void {
     if (item.cantidad > 1) item.cantidad--;
+    this.persistirEstado();
   }
 
   toggleAdicionales(index: number): void {
@@ -138,12 +161,17 @@ export class PedidoCrearComponent implements OnInit {
     }
   }
 
-  isAdicionalSeleccionado(item: ItemEnPedido, adicional: AdicionalesCl): boolean {
+  isAdicionalSeleccionado(
+    item: ItemCarrito,
+    adicional: AdicionalesCl,
+  ): boolean {
     return item.adicionales.some((a) => a.adicionalId === adicional.id);
   }
 
-  toggleAdicional(item: ItemEnPedido, adicional: AdicionalesCl): void {
-    const idx = item.adicionales.findIndex((a) => a.adicionalId === adicional.id);
+  toggleAdicional(item: ItemCarrito, adicional: AdicionalesCl): void {
+    const idx = item.adicionales.findIndex(
+      (a) => a.adicionalId === adicional.id,
+    );
     if (idx >= 0) {
       item.adicionales.splice(idx, 1);
     } else {
@@ -154,47 +182,59 @@ export class PedidoCrearComponent implements OnInit {
         cantidad: 1,
       });
     }
+    this.persistirEstado();
   }
 
-  getAdicionalCantidad(item: ItemEnPedido, adicionalId: number): number {
-    return item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1;
+  getAdicionalCantidad(item: ItemCarrito, adicionalId: number): number {
+    return (
+      item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1
+    );
   }
 
-  setAdicionalCantidad(item: ItemEnPedido, adicionalId: number, delta: number): void {
+  setAdicionalCantidad(
+    item: ItemCarrito,
+    adicionalId: number,
+    delta: number,
+  ): void {
     const a = item.adicionales.find((ad) => ad.adicionalId === adicionalId);
-    if (a) a.cantidad = Math.max(1, a.cantidad + delta);
+    if (a) {
+      a.cantidad = Math.max(1, a.cantidad + delta);
+      this.persistirEstado();
+    }
   }
 
   irPaso3(): void {
     if (this.items.length === 0) return;
     this.paso = 3;
+    this.persistirEstado();
   }
 
-  // ── Cálculos ─────────────────────────────────────────────────────────────
+  irPaso(n: number): void {
+    if (n >= 2 && n < this.paso) {
+      this.paso = n;
+      this.persistirEstado();
+    }
+  }
 
-  calcularSubtotalItem(item: ItemEnPedido): number {
-    const adicionalesTotales = item.adicionales.reduce(
-      (sum, a) => sum + a.precio * a.cantidad,
-      0,
-    );
-    return (item.precio + adicionalesTotales) * item.cantidad;
+  calcularSubtotalItem(item: ItemCarrito): number {
+    return this.carritoService.calcularSubtotalItem(item);
   }
 
   calcularTotal(): number {
-    return this.items.reduce((sum, item) => sum + this.calcularSubtotalItem(item), 0);
+    return this.carritoService.totalPrecio;
   }
 
-  // ── Paso 3: Confirmar ─────────────────────────────────────────────────────
-
   confirmarPedido(): void {
-    if (!this.platoPrincipal) return;
+    if (this.items.length === 0) return;
+    if (!this.platoPrincipal)
+      this.platoPrincipal =
+        this.productos.find((p) => p.id === this.items[0].productoId) ?? null;
     const cliente = this.authService.currentCliente;
     if (!cliente) return;
 
     this.enviando = true;
     this.error = '';
 
-    // Build request exactly matching backend PedidoRequest DTO
     const request: CrearPedidoRequest = {
       clienteId: cliente.id,
       items: this.items.map((item) => ({
@@ -212,6 +252,8 @@ export class PedidoCrearComponent implements OnInit {
         this.enviando = false;
         this.exito = true;
         this.pedidoId = response?.id ?? null;
+        this.pedidoConfirmado = true;
+        this.carritoService.vaciarCarrito();
       },
       error: (err) => {
         this.enviando = false;
@@ -220,9 +262,5 @@ export class PedidoCrearComponent implements OnInit {
           'Error al crear el pedido. Por favor intenta de nuevo.';
       },
     });
-  }
-
-  irPaso(n: number): void {
-    if (n < this.paso) this.paso = n;
   }
 }

@@ -1,0 +1,83 @@
+<!-- src/app/pages/carrito/carrito.component.html -->
+
+<section class="carrito-hero">
+  <div class="carrito-hero-overlay"></div>
+  <div class="carrito-hero-content">
+    <h1 class="carrito-hero-title">Mi Carrito</h1>
+  </div>
+</section>
+
+<section class="carrito-section">
+
+  <!-- Carrito vacío -->
+  <div *ngIf="items.length === 0" class="carrito-vacio">
+    <div class="vacio-icon">🛒</div>
+    <h2>Tu carrito está vacío</h2>
+    <p>Ve a "Hacer pedido" para armar tu pedido.</p>
+    <button class="btn-primario" (click)="irAHacerPedido()">Hacer pedido</button>
+  </div>
+
+  <!-- Ítems del pedido en progreso -->
+  <div *ngIf="items.length > 0" class="carrito-contenido">
+
+    <div class="carrito-items">
+
+      <!-- Banner indicando que es un pedido en progreso -->
+      <div class="banner-progreso">
+        <span>📋</span>
+        <span>
+          Pedido en progreso — paso {{ paso }} de 3.
+          <a (click)="continuarPedido()" class="link-continuar">Continuar donde lo dejaste →</a>
+        </span>
+      </div>
+
+      <div class="carrito-item" *ngFor="let item of items">
+        <img
+          [src]="item.imagen || 'assets/IMGS/menuHighlight1.jpeg'"
+          [alt]="item.nombre"
+          class="item-imagen"
+        />
+        <div class="item-info">
+          <h3 class="item-nombre">{{ item.nombre }}</h3>
+          <p class="item-precio">${{ item.precio | number:'1.0-0' }} c/u</p>
+          <!-- Adicionales seleccionados -->
+          <p class="item-adicionales" *ngIf="item.adicionales.length > 0">
+            + {{ item.adicionales.length }} adicional(es)
+          </p>
+        </div>
+        <div class="item-controles">
+          <button class="btn-cantidad" (click)="decrementar(item)">−</button>
+          <span class="item-cantidad">{{ item.cantidad }}</span>
+          <button class="btn-cantidad" (click)="incrementar(item)">+</button>
+        </div>
+        <div class="item-subtotal">
+          ${{ carritoService.calcularSubtotalItem(item) | number:'1.0-0' }}
+        </div>
+        <button class="btn-quitar" (click)="quitar(item.productoId)" title="Quitar">✕</button>
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="carrito-resumen">
+      <h2 class="resumen-titulo">Resumen</h2>
+
+      <div class="resumen-linea" *ngFor="let item of items">
+        <span>{{ item.nombre }} × {{ item.cantidad }}</span>
+        <span>${{ carritoService.calcularSubtotalItem(item) | number:'1.0-0' }}</span>
+      </div>
+
+      <div class="resumen-total">
+        <span>Total estimado</span>
+        <span>${{ total | number:'1.0-0' }}</span>
+      </div>
+
+      <button class="btn-primario btn-confirmar" (click)="continuarPedido()">
+        Continuar pedido →
+      </button>
+
+      <button class="btn-vaciar" (click)="vaciar()">Cancelar y vaciar carrito</button>
+    </div>
+
+  </div>
+
+</section>

@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Operador } from '../operador';
 import { OperadorService } from 'src/app/service/operador.service';
 
+/**
+ * Página de detalle de un operador.
+ * Carga el operador por id desde la ruta y permite editarlo o eliminarlo.
+ */
 @Component({
   selector: 'app-operador-detalle-page',
   templateUrl: './operador-detalle-page.component.html',

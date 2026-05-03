@@ -8,8 +8,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Cliente } from '../../model/cliente-cl';
+import { Cliente } from '../../../model/cliente-cl';
 
+/**
+ * Formulario reactivo de creación y edición de clientes.
+ * Detecta si hay un cliente a editar mediante @Input y emite el resultado
+ * al componente padre mediante @Output.
+ */
 @Component({
   selector: 'app-cliente-form',
   templateUrl: './cliente-form.component.html',
@@ -17,9 +22,9 @@ import { Cliente } from '../../model/cliente-cl';
 })
 export class ClienteFormComponent implements OnChanges {
   @Input() clienteEditar: Cliente | null = null;
-  @Output() addClienteEvent    = new EventEmitter<Cliente>();
+  @Output() addClienteEvent = new EventEmitter<Cliente>();
   @Output() updateClienteEvent = new EventEmitter<Cliente>();
-  @Output() cancelarEvent      = new EventEmitter<void>();
+  @Output() cancelarEvent = new EventEmitter<void>();
 
   editando = false;
   formCliente: Cliente = this.emptyForm();
@@ -56,6 +61,13 @@ export class ClienteFormComponent implements OnChanges {
   }
 
   private emptyForm(): Cliente {
-    return { id: 0, nombre: '', apellido: '', correo: '', telefono: '', direccion: '' };
+    return {
+      id: 0,
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: '',
+      direccion: '',
+    };
   }
 }

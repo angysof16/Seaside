@@ -74,6 +74,16 @@
           >Cerrar sesión</a
         >
       </li>
+
+      <li>
+        <a class="carrito-icon-link" routerLink="/carrito" title="Mi carrito">
+          <span class="carrito-icon">🛒</span>
+          <span class="carrito-badge" *ngIf="carritoService.totalItems > 0">
+            {{ carritoService.totalItems }}
+          </span>
+        </a>
+      </li>
+      
     </ul>
   </nav>
 </header>

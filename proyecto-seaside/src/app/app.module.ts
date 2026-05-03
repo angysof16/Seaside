@@ -6,7 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Layout
+/** Módulo raíz de la aplicación Angular.
+ * Declara todos los componentes y páginas, e importa los módulos necesarios.
+ */
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -17,6 +19,7 @@ import { MenuDestacadoComponent } from './components/menu-destacado/menu-destaca
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 // Pages
 import { LandingComponent } from './pages/landing/landing.component';
@@ -44,11 +47,11 @@ import { OperadorCrudTableComponent } from './components/operador/operador-crud-
 import { OperadorLoginComponent } from './pages/operador-login/operador-login.component';
 
 // CRUD Clientes
-import { ClienteCrudTableComponent } from './cliente/cliente-crud-table/cliente-crud-table.component';
-import { ClienteDetalleComponent } from './cliente/cliente-detalle/cliente-detalle.component';
-import { ClienteFormComponent } from './cliente/cliente-form/cliente-form.component';
-import { ClienteFormPageComponent } from './cliente/cliente-form-page/cliente-form-page.component';
-import { ClienteDetallePageComponent } from './cliente/cliente-detalle-page/cliente-detalle-page.component';
+import { ClienteCrudTableComponent } from './pages/cliente/cliente-crud-table/cliente-crud-table.component';
+import { ClienteDetalleComponent } from './pages/cliente/cliente-detalle/cliente-detalle.component';
+import { ClienteFormComponent } from './pages/cliente/cliente-form/cliente-form.component';
+import { ClienteFormPageComponent } from './pages/cliente/cliente-form-page/cliente-form-page.component';
+import { ClienteDetallePageComponent } from './pages/cliente/cliente-detalle-page/cliente-detalle-page.component';
 
 // CRUD Adicionales
 import { AdicionalCrudTableComponent } from './components/adicional/adicional-crud-table/adicional-crud-table.component';
@@ -58,6 +61,7 @@ import { AdicionalFormComponent } from './components/adicional/adicional-form/ad
 // Profile
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
+import { MisPedidosComponent } from './pages/mis-pedidos/mis-pedidos.component';
 
 // Pedido crear
 import { PedidoCrearComponent } from './pages/pedido-crear/pedido-crear.component';
@@ -100,6 +104,8 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     ProductoFormPageComponent,
     ProductoDetallePageComponent,
     ProductoCrearComponent,
+    //carrito
+    CarritoComponent,
     // Operadores
     OperadorTableComponent,
     OperadorFormComponent,
@@ -121,6 +127,7 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     // Profile
     ProfileComponent,
     ProfileEditComponent,
+    MisPedidosComponent,
     // Pedido
     PedidoCrearComponent,
     // Admin

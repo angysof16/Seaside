@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
-import { DomiciliarioService, Domiciliario } from 'src/app/service/domiciliario.service';
+import {
+  DomiciliarioService,
+  Domiciliario,
+} from 'src/app/service/domiciliario.service';
 
+/**
+ * Vista principal del portal de operador.
+ * Muestra los pedidos activos (o todos) y permite:
+ * - Asignar un domiciliario disponible a un pedido.
+ * - Actualizar el estado de un pedido.
+ * - Eliminar un pedido.
+ * Usa modales para confirmar la asignación y el cambio de estado.
+ */
 @Component({
   selector: 'app-operador-table',
   templateUrl: './operador-table.component.html',
@@ -31,6 +42,10 @@ export class OperadorTableComponent implements OnInit {
     'ENTREGADO',
     'CANCELADO',
   ];
+  private readonly ESTADOS_REQUIEREN_DOMICILIARIO = new Set([
+    'EN_CAMINO',
+    'ENTREGADO',
+  ]);
 
   constructor(
     private pedidoService: PedidoService,
@@ -39,8 +54,20 @@ export class OperadorTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarPedidos();
-    this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
-    this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
+    this.cargarDomiciliarios();
+  }
+
+  private cargarDomiciliarios(): void {
+    this.domiciliarioService
+      .findAll()
+      .subscribe((list) => (this.todosLosDomiciliarios = list));
+
+    this.domiciliarioService.findDisponibles().subscribe((list) => {
+      // Un domiciliario asignable debe estar disponible y además activo.
+      this.domiciliariosDisponibles = list.filter(
+        (d) => d.activo && d.disponible,
+      );
+    });
   }
 
   cargarPedidos(): void {
@@ -61,7 +88,9 @@ export class OperadorTableComponent implements OnInit {
     this.domiciliarioElegido = pedido.domiciliarioId ?? null;
     // Refrescar lista de disponibles antes de abrir el modal
     this.domiciliarioService.findDisponibles().subscribe((list) => {
-      this.domiciliariosDisponibles = list;
+      this.domiciliariosDisponibles = list.filter(
+        (d) => d.activo && d.disponible,
+      );
       this.modalAbierto = true;
     });
   }
@@ -78,9 +107,7 @@ export class OperadorTableComponent implements OnInit {
       .asignarDomiciliario(this.pedidoSeleccionado.id, this.domiciliarioElegido)
       .subscribe(() => {
         this.cargarPedidos();
-        // Actualizar lista de disponibles tras asignación
-        this.domiciliarioService.findDisponibles().subscribe((list) => (this.domiciliariosDisponibles = list));
-        this.domiciliarioService.findAll().subscribe((list) => (this.todosLosDomiciliarios = list));
+        this.cargarDomiciliarios();
         this.cerrarModal();
       });
   }
@@ -100,6 +127,17 @@ export class OperadorTableComponent implements OnInit {
 
   confirmarEstado(): void {
     if (!this.pedidoEstado || !this.nuevoEstado) return;
+
+    if (
+      this.estadoRequiereDomiciliario(this.nuevoEstado) &&
+      !this.pedidoEstado.domiciliarioId
+    ) {
+      alert(
+        'No puedes marcar este pedido como EN_CAMINO o ENTREGADO sin asignar un domiciliario.',
+      );
+      return;
+    }
+
     this.pedidoService
       .actualizarEstado(this.pedidoEstado.id, this.nuevoEstado)
       .subscribe(() => {
@@ -116,6 +154,15 @@ export class OperadorTableComponent implements OnInit {
   }
 
   // ── Helpers ───────────────────────────────────────────────
+  estadoRequiereDomiciliario(estado: string): boolean {
+    return this.ESTADOS_REQUIEREN_DOMICILIARIO.has(estado);
+  }
+
+  estadoPermitidoParaPedido(estado: string): boolean {
+    if (!this.estadoRequiereDomiciliario(estado)) return true;
+    return !!this.pedidoEstado?.domiciliarioId;
+  }
+
   getNombreDomiciliario(id?: number): string {
     if (!id) return '—';
     const d = this.todosLosDomiciliarios.find((d) => d.id === id);

@@ -13,34 +13,37 @@
 <main class="auth-main" *ngIf="client">
   <div class="auth-card profile-card">
     <ng-container *ngIf="client">
-    <div class="profile-row">
-      <span class="profile-label">Nombre</span>
-      <span>{{ client.nombre }}</span>
-    </div>
+      <div class="profile-row">
+        <span class="profile-label">Nombre</span>
+        <span>{{ client.nombre }}</span>
+      </div>
 
-    <div class="profile-row">
-      <span class="profile-label">Apellido</span>
-      <span>{{ client.apellido }}</span>
-    </div>
+      <div class="profile-row">
+        <span class="profile-label">Apellido</span>
+        <span>{{ client.apellido }}</span>
+      </div>
 
-    <div class="profile-row">
-      <span class="profile-label">Correo</span>
-      <span>{{ client.correo }}</span>
-    </div>
+      <div class="profile-row">
+        <span class="profile-label">Correo</span>
+        <span>{{ client.correo }}</span>
+      </div>
 
-    <div class="profile-row">
-      <span class="profile-label">Teléfono</span>
-      <span>{{ client.telefono }}</span>
-    </div>
+      <div class="profile-row">
+        <span class="profile-label">Teléfono</span>
+        <span>{{ client.telefono }}</span>
+      </div>
 
-    <div class="profile-row">
-      <span class="profile-label">Dirección</span>
-      <span>{{ client.direccion }}</span>
-    </div>
+      <div class="profile-row">
+        <span class="profile-label">Dirección</span>
+        <span>{{ client.direccion }}</span>
+      </div>
     </ng-container>
     <div class="profile-actions">
       <a class="auth-btn" routerLink="/perfil/editar">Editar Perfil</a>
-      <button class="auth-btn btn-danger" (click)="onDelete()">Eliminar Cuenta</button>
+      <a class="auth-btn" routerLink="/perfil/pedidos">Mis Pedidos</a>
+      <button class="auth-btn btn-danger" (click)="onDelete()">
+        Eliminar Cuenta
+      </button>
     </div>
   </div>
 </main>

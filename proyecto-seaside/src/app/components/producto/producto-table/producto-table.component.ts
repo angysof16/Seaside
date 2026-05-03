@@ -5,6 +5,10 @@ import { ProductoService } from 'src/app/service/producto.service';
 import { AdicionalService } from 'src/app/service/adicional.service';
 import { AdicionalesCl } from 'src/app/model/adicionales-cl';
 
+/**
+ * Tabla CRUD para la gestión de productos del menú desde el panel de administración.
+ * Permite ver detalle, editar, eliminar y gestionar los adicionales de cada producto.
+ */
 @Component({
   selector: 'app-producto-table',
   templateUrl: './producto-table.component.html',

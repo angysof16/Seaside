@@ -4,6 +4,11 @@ import { AuthService } from '../../service/auth.service';
 import { ClienteService } from '../../service/cliente.service';
 import { Cliente } from '../../model/cliente-cl';
 
+/**
+ * Página de edición del perfil del cliente autenticado.
+ * Carga los datos actuales del cliente y permite actualizarlos.
+ * Al guardar, actualiza también la sesión en el AuthService.
+ */
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',

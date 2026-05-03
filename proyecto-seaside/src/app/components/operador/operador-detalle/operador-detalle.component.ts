@@ -1,6 +1,10 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Operador } from '../operador';
 
+/**
+ * Componente de presentación del detalle de un operador.
+ * Recibe el operador a mostrar mediante @Input desde la página contenedora.
+ */
 @Component({
   selector: 'app-operador-detalle',
   templateUrl: './operador-detalle.component.html',

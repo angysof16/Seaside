@@ -9,6 +9,11 @@ import {
 import { NgForm } from '@angular/forms';
 import { Operador } from '../operador';
 
+/**
+ * Formulario reactivo de creación y edición de operadores.
+ * Detecta si hay un operador a editar mediante @Input y emite el resultado
+ * al componente padre mediante @Output.
+ */
 @Component({
   selector: 'app-operador-form',
   templateUrl: './operador-form.component.html',

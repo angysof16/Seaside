@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Cliente } from '../../model/cliente-cl';
 
+/**
+ * Página de autenticación de clientes.
+ * Permite iniciar sesión con correo y contraseña, o registrar una cuenta nueva.
+ * Alterna entre los formularios de login y registro mediante toggleRegistro().
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -39,7 +44,6 @@ export class LoginComponent {
           this.mensaje = `Bienvenido, ${cliente.nombre} ${cliente.apellido}`;
           this.error = '';
           setTimeout(() => this.router.navigate(['/']), 100);
-
         },
         error: (err) => {
           this.error = err.error?.error || 'Credenciales inválidas';

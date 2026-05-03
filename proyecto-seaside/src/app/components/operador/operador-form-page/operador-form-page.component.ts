@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Operador } from '../operador';
 import { OperadorService } from 'src/app/service/operador.service';
 
+/**
+ * Página contenedora del formulario de operador.
+ * Detecta si está en modo creación o edición según la ruta.
+ */
 @Component({
   selector: 'app-operador-form-page',
   templateUrl: './operador-form-page.component.html',

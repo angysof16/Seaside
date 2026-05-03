@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { Operador } from '../operador';
 import { OperadorService } from 'src/app/service/operador.service';
 
+/**
+ * Tabla CRUD para la gestión de operadores desde el panel de administración.
+ * Permite ver detalle, editar y eliminar operadores.
+ */
 @Component({
   selector: 'app-operador-crud-table',
   templateUrl: './operador-crud-table.component.html',
@@ -21,7 +25,9 @@ export class OperadorCrudTableComponent implements OnInit {
   }
 
   cargarOperadores(): void {
-    this.operadorService.findAll().subscribe((list) => (this.operadorList = list));
+    this.operadorService
+      .findAll()
+      .subscribe((list) => (this.operadorList = list));
   }
 
   verDetalle(operador: Operador): void {

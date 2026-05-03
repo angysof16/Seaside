@@ -3,6 +3,11 @@ import { MenuService, Categoria } from '../../service/menu.service';
 import { ProductoService } from '../../service/producto.service';
 import { Producto } from '../../components/producto/producto';
 
+/**
+ * Página del menú completo.
+ * Carga las categorías (excluyendo Acompañamientos) y agrupa
+ * los productos por categoría para mostrarlos al cliente.
+ */
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',

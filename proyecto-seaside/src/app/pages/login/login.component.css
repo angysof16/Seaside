@@ -161,6 +161,49 @@
   text-decoration: underline;
 }
 
+/* ─── Staff portal links ─────────────────────────────────── */
+.staff-portals {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(64, 1, 1, 0.1);
+  text-align: center;
+}
+
+.staff-portals-label {
+  display: block;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b09090;
+  margin-bottom: 8px;
+}
+
+.staff-portals-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.staff-portal-link {
+  font-family: "Fuzzy Bubbles", cursive;
+  font-size: 13px;
+  color: #8a6060;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.staff-portal-link:hover {
+  color: #400101;
+  text-decoration: underline;
+}
+
+.staff-portals-divider {
+  color: #c9a8a8;
+  font-size: 13px;
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;

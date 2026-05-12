@@ -151,5 +151,24 @@
     <p class="auth-switch">
       <a routerLink="/">← Volver al inicio</a>
     </p>
+
+    <div class="staff-portals">
+      <span class="staff-portals-label">¿Eres del equipo?</span>
+      <div class="staff-portals-links">
+        <a
+          routerLink="/admin/login"
+          class="staff-portal-link"
+          id="link-admin-login"
+          >Acceso Administrador</a
+        >
+        <span class="staff-portals-divider">|</span>
+        <a
+          routerLink="/operador/login"
+          class="staff-portal-link"
+          id="link-operador-login"
+          >Acceso Operador</a
+        >
+      </div>
+    </div>
   </div>
 </main>

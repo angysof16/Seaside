@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { AdminAuthService } from '../../service/admin-auth.service';
+import { OperadorAuthService } from '../../service/operador-auth.service';
 import { Cliente } from '../../model/cliente-cl';
 
 /**
@@ -13,7 +15,7 @@ import { Cliente } from '../../model/cliente-cl';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   // Login
   correo = '';
   contrasena = '';
@@ -32,28 +34,47 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
+    private adminAuthService: AdminAuthService,
+    private operadorAuthService: OperadorAuthService,
     private router: Router,
   ) {}
 
-onLogin(): void {
-  this.error = '';
-  this.authService
-    .login({ correo: this.correo, contrasena: this.contrasena })
-    .subscribe({
-      next: (response: any) => {
-        // Si el rol no es CLIENTE, rechaza el acceso
-        if (response.rol !== 'CLIENTE') {
-          this.authService.logout();
-          this.error = 'Esta cuenta no es de cliente. Usa el acceso correspondiente.';
-          return;
-        }
-        this.router.navigate(['/menu']);
-      },
-      error: () => {
-        this.error = 'Correo o contraseña incorrectos';
-      },
-    });
-}
+  ngOnInit(): void {
+    if (this.adminAuthService.isLoggedIn) {
+      this.router.navigate(['/admin/dashboard']);
+      return;
+    }
+
+    if (this.operadorAuthService.isLoggedIn) {
+      this.router.navigate(['/pedidos']);
+      return;
+    }
+
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/menu']);
+    }
+  }
+
+  onLogin(): void {
+    this.error = '';
+    this.authService
+      .login({ correo: this.correo, contrasena: this.contrasena })
+      .subscribe({
+        next: (response: any) => {
+          // Si el backend provee rol, valida que sea cliente.
+          if (response?.rol && response.rol !== 'CLIENTE') {
+            this.authService.logout();
+            this.error =
+              'Esta cuenta no es de cliente. Usa el acceso correspondiente.';
+            return;
+          }
+          this.router.navigate(['/menu']);
+        },
+        error: () => {
+          this.error = 'Correo o contraseña incorrectos';
+        },
+      });
+  }
 
   onSignup(): void {
     this.error = '';

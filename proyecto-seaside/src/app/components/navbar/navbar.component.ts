@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { AdminAuthService } from '../../service/admin-auth.service';
+import { OperadorAuthService } from '../../service/operador-auth.service';
 import { CarritoService } from '../../service/carrito.service';
 
 /**
@@ -17,9 +20,41 @@ export class NavbarComponent implements OnInit {
   isScrolled = false;
 
   constructor(
+    private router: Router,
     public authService: AuthService,
+    public adminAuthService: AdminAuthService,
+    public operadorAuthService: OperadorAuthService,
     public carritoService: CarritoService,
   ) {}
+
+  get isAnyLoggedIn(): boolean {
+    return (
+      this.authService.isLoggedIn ||
+      this.adminAuthService.isLoggedIn ||
+      this.operadorAuthService.isLoggedIn
+    );
+  }
+
+  get dashboardRoute(): string {
+    if (this.adminAuthService.isLoggedIn) return '/admin/dashboard';
+    if (this.operadorAuthService.isLoggedIn) return '/pedidos';
+    if (this.authService.isLoggedIn) return '/perfil';
+    return '/login';
+  }
+
+  get dashboardLabel(): string {
+    if (this.adminAuthService.isLoggedIn) return 'Panel Admin';
+    if (this.operadorAuthService.isLoggedIn) return 'Portal Operador';
+    if (this.authService.isLoggedIn) return 'Perfil';
+    return 'Log in';
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.adminAuthService.logout();
+    this.operadorAuthService.logout();
+    this.router.navigate(['/']);
+  }
 
   ngOnInit(): void {
     this.updateScrollState();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OperadorAuthService } from '../../service/operador-auth.service';
 
@@ -11,7 +11,7 @@ import { OperadorAuthService } from '../../service/operador-auth.service';
   templateUrl: './operador-login.component.html',
   styleUrls: ['./operador-login.component.css'],
 })
-export class OperadorLoginComponent {
+export class OperadorLoginComponent implements OnInit {
   usuario = '';
   contrasena = '';
   error = '';
@@ -22,31 +22,30 @@ export class OperadorLoginComponent {
     private router: Router,
   ) {}
 
-  onLogin(): void {
-  this.error = '';
-  this.loading = true;
-
-  this.operadorAuthService.login(this.usuario, this.contrasena).subscribe({
-    next: (response: any) => {
-      this.loading = false;
-      // Si el rol no es OPERADOR, rechaza el acceso
-      if (response.rol !== 'OPERADOR') {
-        this.operadorAuthService.logout();
-        this.error = 'Esta cuenta no tiene permisos de operador.';
-        return;
-      }
+  ngOnInit(): void {
+    if (this.operadorAuthService.isLoggedIn) {
       this.router.navigate(['/pedidos']);
-    },
-    error: () => {
-      this.loading = false;
-      this.error = 'Usuario o contraseña incorrectos';
-    },
-  });
+    }
+  }
+
+  onLogin(): void {
+    this.error = '';
+    this.loading = true;
+
+    this.operadorAuthService.login(this.usuario, this.contrasena).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/pedidos']);
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Usuario o contraseña incorrectos';
+      },
+    });
   }
 
   logout(): void {
     this.operadorAuthService.logout();
     this.router.navigate(['/']);
   }
-
 }

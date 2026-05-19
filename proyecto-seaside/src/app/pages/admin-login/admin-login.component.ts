@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminAuthService } from '../../service/admin-auth.service';
 
@@ -11,7 +11,7 @@ import { AdminAuthService } from '../../service/admin-auth.service';
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css'],
 })
-export class AdminLoginComponent {
+export class AdminLoginComponent implements OnInit {
   correo = '';
   contrasena = '';
   error = '';
@@ -22,25 +22,25 @@ export class AdminLoginComponent {
     private router: Router,
   ) {}
 
-  onLogin(): void {
-  this.error = '';
-  this.loading = true;
-
-  this.adminAuthService.login(this.correo, this.contrasena).subscribe({
-    next: (response: any) => {
-      this.loading = false;
-      // Si el rol no es ADMINISTRADOR, rechaza el acceso
-      if (response.rol !== 'ADMINISTRADOR') {
-        this.adminAuthService.logout();
-        this.error = 'Esta cuenta no tiene permisos de administrador.';
-        return;
-      }
+  ngOnInit(): void {
+    if (this.adminAuthService.isLoggedIn) {
       this.router.navigate(['/admin/dashboard']);
-    },
-    error: () => {
-      this.loading = false;
-      this.error = 'Correo o contraseña incorrectos';
-    },
-  });
-}
+    }
+  }
+
+  onLogin(): void {
+    this.error = '';
+    this.loading = true;
+
+    this.adminAuthService.login(this.correo, this.contrasena).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/admin/dashboard']);
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Correo o contraseña incorrectos';
+      },
+    });
+  }
 }

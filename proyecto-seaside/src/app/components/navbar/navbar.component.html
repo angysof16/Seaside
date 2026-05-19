@@ -61,7 +61,12 @@
           >Hacer pedido</a
         >
       </li>
-      <li *ngIf="!authService.isLoggedIn">
+      <li *ngIf="isAnyLoggedIn">
+        <a class="login-link" [routerLink]="dashboardRoute">{{
+          dashboardLabel
+        }}</a>
+      </li>
+      <li *ngIf="!isAnyLoggedIn">
         <a
           class="login-link"
           routerLink="/login"
@@ -69,8 +74,8 @@
           >Log in</a
         >
       </li>
-      <li *ngIf="authService.isLoggedIn">
-        <a class="login-link" routerLink="/" (click)="authService.logout()"
+      <li *ngIf="isAnyLoggedIn">
+        <a class="login-link" routerLink="/" (click)="logout()"
           >Cerrar sesión</a
         >
       </li>
@@ -83,7 +88,6 @@
           </span>
         </a>
       </li>
-      
     </ul>
   </nav>
 </header>

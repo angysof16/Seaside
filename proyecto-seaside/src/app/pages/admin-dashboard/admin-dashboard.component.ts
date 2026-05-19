@@ -7,7 +7,7 @@ import {
 
 /**
  * Dashboard del administrador.
- * Redirige a /admin/login si no hay sesión activa de admin.
+ * Redirige a ladingpage si no hay sesión activa de admin.
  * Proporciona la opción de cerrar sesión.
  */
 @Component({
@@ -32,6 +32,6 @@ export class AdminDashboardComponent implements OnInit {
 
   logout(): void {
     this.adminAuthService.logout();
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/']);
   }
 }

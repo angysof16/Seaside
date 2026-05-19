@@ -42,5 +42,11 @@ export class OperadorLoginComponent {
       this.error = 'Usuario o contraseña incorrectos';
     },
   });
-}
+  }
+
+  logout(): void {
+    this.operadorAuthService.logout();
+    this.router.navigate(['/']);
+  }
+
 }

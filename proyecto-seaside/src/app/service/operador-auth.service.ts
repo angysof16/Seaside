@@ -46,19 +46,19 @@ export class OperadorAuthService {
 
   /** Cierra la sesión del operador. */
   logout(): void {
-    sessionStorage.removeItem(OperadorAuthService.STORAGE_KEY);
+    localStorage.removeItem(OperadorAuthService.STORAGE_KEY);
     this.operadorSubject.next(null);
   }
 
-  /** Persiste el operador en sessionStorage y actualiza el BehaviorSubject. */
+  /** Persiste el operador en localStorage y actualiza el BehaviorSubject. */
   setOperador(op: OperadorSession): void {
-    sessionStorage.setItem(OperadorAuthService.STORAGE_KEY, JSON.stringify(op));
+    localStorage.setItem(OperadorAuthService.STORAGE_KEY, JSON.stringify(op));
     this.operadorSubject.next(op);
   }
 
-  /** Carga la sesión del operador desde sessionStorage al iniciar la app. */
+  /** Carga la sesión del operador desde localStorage al iniciar la app. */
   private loadFromStorage(): OperadorSession | null {
-    const raw = sessionStorage.getItem(OperadorAuthService.STORAGE_KEY);
+    const raw = localStorage.getItem(OperadorAuthService.STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   }
 }

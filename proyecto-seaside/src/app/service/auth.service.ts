@@ -62,19 +62,19 @@ export class AuthService {
 
   /** Cierra la sesión limpiando sessionStorage y el BehaviorSubject. */
   logout(): void {
-    sessionStorage.removeItem(AuthService.STORAGE_KEY);
+    localStorage.removeItem(AuthService.STORAGE_KEY);
     this.clienteSubject.next(null);
   }
 
-  /** Persiste el cliente en sessionStorage y actualiza el BehaviorSubject. */
+  /** Persiste el cliente en localStorage y actualiza el BehaviorSubject. */
   setCliente(cliente: Cliente): void {
-    sessionStorage.setItem(AuthService.STORAGE_KEY, JSON.stringify(cliente));
+    localStorage.setItem(AuthService.STORAGE_KEY, JSON.stringify(cliente));
     this.clienteSubject.next(cliente);
   }
 
-  /** Carga el cliente almacenado en sessionStorage al iniciar la app. */
+  /** Carga el cliente almacenado en localStorage al iniciar la app. */
   private loadFromStorage(): Cliente | null {
-    const raw = sessionStorage.getItem(AuthService.STORAGE_KEY);
+    const raw = localStorage.getItem(AuthService.STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   }
 }

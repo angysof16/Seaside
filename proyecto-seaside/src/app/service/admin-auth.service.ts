@@ -47,19 +47,19 @@ export class AdminAuthService {
 
   /** Cierra la sesión del administrador. */
   logout(): void {
-    sessionStorage.removeItem(AdminAuthService.STORAGE_KEY);
+    localStorage.removeItem(AdminAuthService.STORAGE_KEY);
     this.adminSubject.next(null);
   }
 
-  /** Persiste el admin en sessionStorage y actualiza el BehaviorSubject. */
+  /** Persiste el admin en localStorage y actualiza el BehaviorSubject. */
   setAdmin(admin: AdminSession): void {
-    sessionStorage.setItem(AdminAuthService.STORAGE_KEY, JSON.stringify(admin));
+    localStorage.setItem(AdminAuthService.STORAGE_KEY, JSON.stringify(admin));
     this.adminSubject.next(admin);
   }
 
-  /** Carga la sesión del admin desde sessionStorage al iniciar la app. */
+  /** Carga la sesión del admin desde localStorage al iniciar la app. */
   private loadFromStorage(): AdminSession | null {
-    const raw = sessionStorage.getItem(AdminAuthService.STORAGE_KEY);
+    const raw = localStorage.getItem(AdminAuthService.STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   }
 }

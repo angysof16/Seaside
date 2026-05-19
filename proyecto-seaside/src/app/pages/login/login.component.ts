@@ -47,7 +47,7 @@ onLogin(): void {
           this.error = 'Esta cuenta no es de cliente. Usa el acceso correspondiente.';
           return;
         }
-        this.router.navigate(['/']);
+        this.router.navigate(['/menu']);
       },
       error: () => {
         this.error = 'Correo o contraseña incorrectos';

@@ -23,19 +23,24 @@ export class OperadorLoginComponent {
   ) {}
 
   onLogin(): void {
-    this.error = '';
-    this.loading = true;
+  this.error = '';
+  this.loading = true;
 
-    this.operadorAuthService.login(this.usuario, this.contrasena).subscribe({
-      next: () => {
-        this.loading = false;
-        // Redirige al portal de operador (tabla de pedidos)
-        this.router.navigate(['/pedidos']);
-      },
-      error: (err) => {
-        this.loading = false;
-        this.error = err.error?.error || 'Usuario o contraseña incorrectos';
-      },
-    });
-  }
+  this.operadorAuthService.login(this.usuario, this.contrasena).subscribe({
+    next: (response: any) => {
+      this.loading = false;
+      // Si el rol no es OPERADOR, rechaza el acceso
+      if (response.rol !== 'OPERADOR') {
+        this.operadorAuthService.logout();
+        this.error = 'Esta cuenta no tiene permisos de operador.';
+        return;
+      }
+      this.router.navigate(['/pedidos']);
+    },
+    error: () => {
+      this.loading = false;
+      this.error = 'Usuario o contraseña incorrectos';
+    },
+  });
+}
 }

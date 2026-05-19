@@ -77,6 +77,10 @@ import { DomiciliarioFormPageComponent } from './components/domiciliario/domicil
 // Errors
 import { ErrorPageComponent } from './errors/error-page/error-page.component';
 
+// helpers seguridad
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './helpers/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,7 +144,11 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
     ErrorPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  },],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

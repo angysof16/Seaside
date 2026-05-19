@@ -35,22 +35,25 @@ export class LoginComponent {
     private router: Router,
   ) {}
 
-  onLogin(): void {
-    this.error = '';
-    this.authService
-      .login({ correo: this.correo, contrasena: this.contrasena })
-      .subscribe({
-        next: (cliente: Cliente) => {
-          this.mensaje = `Bienvenido, ${cliente.nombre} ${cliente.apellido}`;
-          this.error = '';
-          setTimeout(() => this.router.navigate(['/']), 100);
-        },
-        error: (err) => {
-          this.error = err.error?.error || 'Credenciales inválidas';
-          this.mensaje = '';
-        },
-      });
-  }
+onLogin(): void {
+  this.error = '';
+  this.authService
+    .login({ correo: this.correo, contrasena: this.contrasena })
+    .subscribe({
+      next: (response: any) => {
+        // Si el rol no es CLIENTE, rechaza el acceso
+        if (response.rol !== 'CLIENTE') {
+          this.authService.logout();
+          this.error = 'Esta cuenta no es de cliente. Usa el acceso correspondiente.';
+          return;
+        }
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.error = 'Correo o contraseña incorrectos';
+      },
+    });
+}
 
   onSignup(): void {
     this.error = '';

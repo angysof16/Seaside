@@ -23,18 +23,24 @@ export class AdminLoginComponent {
   ) {}
 
   onLogin(): void {
-    this.error = '';
-    this.loading = true;
+  this.error = '';
+  this.loading = true;
 
-    this.adminAuthService.login(this.correo, this.contrasena).subscribe({
-      next: () => {
-        this.loading = false;
-        this.router.navigate(['/admin/dashboard']);
-      },
-      error: (err) => {
-        this.loading = false;
-        this.error = err.error?.error || 'Correo o contraseña incorrectos';
-      },
-    });
-  }
+  this.adminAuthService.login(this.correo, this.contrasena).subscribe({
+    next: (response: any) => {
+      this.loading = false;
+      // Si el rol no es ADMINISTRADOR, rechaza el acceso
+      if (response.rol !== 'ADMINISTRADOR') {
+        this.adminAuthService.logout();
+        this.error = 'Esta cuenta no tiene permisos de administrador.';
+        return;
+      }
+      this.router.navigate(['/admin/dashboard']);
+    },
+    error: () => {
+      this.loading = false;
+      this.error = 'Correo o contraseña incorrectos';
+    },
+  });
+}
 }

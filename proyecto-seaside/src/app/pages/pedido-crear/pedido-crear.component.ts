@@ -236,7 +236,6 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     this.error = '';
 
     const request: CrearPedidoRequest = {
-      clienteId: cliente.id,
       items: this.items.map((item) => ({
         productoId: item.productoId,
         cantidad: item.cantidad,

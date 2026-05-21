@@ -13,6 +13,6 @@ export interface ItemPedidoRequest {
 }
 
 export interface CrearPedidoRequest {
-  clienteId: number;
+  clienteId?: number;
   items: ItemPedidoRequest[];
 }

@@ -26,6 +26,26 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
   }
 
+  /** Devuelve los datos del cliente autenticado actualmente. */
+  getCurrentClient(): Observable<Cliente> {
+    return this.http.get<Cliente>(`${environment.apiUrl}/api/auth/me`);
+  }
+
+  /** Actualiza nombre, apellido, teléfono y dirección del cliente autenticado. */
+  updateCurrentClient(cliente: Partial<Cliente>): Observable<Cliente> {
+    return this.http.put<Cliente>(`${environment.apiUrl}/api/auth/me`, {
+      nombre: cliente.nombre,
+      apellido: cliente.apellido,
+      telefono: cliente.telefono,
+      direccion: cliente.direccion,
+    });
+  }
+
+  /** Elimina la cuenta del cliente autenticado (usa JWT, no id). */
+  deleteCurrentClient(): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/api/auth/me`);
+  }
+
   /** Crea un nuevo cliente (excluye el id del body). */
   add(cliente: Cliente): Observable<any> {
     const { id, ...body } = cliente;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Cliente } from '../model/cliente-cl';
 import { environment } from '../../environments/environment';
 
@@ -50,9 +50,21 @@ export class AuthService {
 
   /** Envía las credenciales al backend y persiste la sesión en sessionStorage. */
   login(credentials: LoginRequest): Observable<Cliente> {
-    return this.http
-      .post<Cliente>(`${this.apiUrl}/login`, credentials)
-      .pipe(tap((cliente) => this.setCliente(cliente)));
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      map(
+        (response) =>
+          ({
+            id: 0,
+            nombre: '',
+            apellido: '',
+            correo: response.username ?? '',
+            telefono: '',
+            direccion: '',
+            token: response.token,
+          }) as Cliente,
+      ),
+      tap((cliente) => this.setCliente(cliente)),
+    );
   }
 
   /** Registra un nuevo cliente. */

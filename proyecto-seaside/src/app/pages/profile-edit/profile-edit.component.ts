@@ -38,17 +38,23 @@ export class ProfileEditComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    this.clienteService.findById(c.id).subscribe({
+    this.clienteService.getCurrentClient().subscribe({
       next: (cliente) => (this.client = { ...cliente }),
-      error: () => this.router.navigate(['/login']),
+      error: (err) => {
+        if (err.status === 401) this.authService.logout();
+        this.router.navigate(['/login']);
+      },
     });
   }
 
   onSubmit(): void {
     this.error = '';
-    this.clienteService.update(this.client).subscribe({
-      next: () => {
-        this.authService.setCliente(this.client);
+    this.clienteService.updateCurrentClient(this.client).subscribe({
+      next: (updated) => {
+        // Preservar el token al actualizar la sesión local
+        const token = this.authService.currentCliente?.token;
+        if (token) updated.token = token;
+        this.authService.setCliente(updated);
         this.router.navigate(['/perfil']);
       },
       error: (err) => {

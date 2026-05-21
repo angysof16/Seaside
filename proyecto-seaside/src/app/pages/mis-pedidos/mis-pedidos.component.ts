@@ -31,7 +31,7 @@ export class MisPedidosComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    this.pedidoService.findByClienteId(cliente.id).subscribe({
+    this.pedidoService.getMisPedidos().subscribe({
       next: (list) => {
         this.pedidos = list.sort(
           (a, b) =>

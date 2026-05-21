@@ -62,6 +62,11 @@ export class PedidoService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  /** Devuelve los pedidos del cliente autenticado (identificado por JWT). */
+  getMisPedidos(): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.apiUrl}/mis-pedidos`);
+  }
+
   /** Devuelve los pedidos de un cliente específico por su id. */
   findByClienteId(clienteId: number): Observable<Pedido[]> {
     const params = new HttpParams().set('clienteId', clienteId.toString());

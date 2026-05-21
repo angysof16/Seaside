@@ -29,13 +29,20 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    // Fetch fresh data from backend
-    this.clienteService.findById(c.id).subscribe({
+    // Usar /api/auth/me en lugar de /api/clients/:id (que requiere ADMINISTRADOR)
+    this.clienteService.getCurrentClient().subscribe({
       next: (cliente) => {
+        // Preservar el token: el backend no lo devuelve en /api/auth/me
+        const token = this.authService.currentCliente?.token;
+        if (token) cliente.token = token;
         this.client = cliente;
         this.authService.setCliente(cliente);
       },
-      error: () => this.router.navigate(['/login']),
+      error: (err) => {
+        // Si el token es inválido, limpiar sesión para evitar loop login→menu
+        if (err.status === 401) this.authService.logout();
+        this.router.navigate(['/login']);
+      },
     });
   }
 
@@ -48,7 +55,7 @@ export class ProfileComponent implements OnInit {
     )
       return;
 
-    this.clienteService.delete(this.client.id).subscribe({
+    this.clienteService.deleteCurrentClient().subscribe({
       next: () => {
         this.authService.logout();
         this.router.navigate(['/']);

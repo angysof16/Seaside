@@ -1,5 +1,5 @@
 export interface Cliente {
-  id: number;
+  id?: number;
   nombre: string;
   apellido: string;
   correo: string;
@@ -11,7 +11,7 @@ export interface Cliente {
 }
 
 export class ClienteCl implements Cliente {
-  id: number;
+  id?: number;
   nombre: string;
   apellido: string;
   correo: string;
@@ -20,13 +20,13 @@ export class ClienteCl implements Cliente {
   carrito?: { id: number; ultimaActualizacion: string };
 
   constructor(
-    id: number,
-    nombre: string,
-    apellido: string,
-    correo: string,
-    telefono: string,
-    direccion: string,
+    nombre: string = '',
+    apellido: string = '',
+    correo: string = '',
+    telefono: string = '',
+    direccion: string = '',
     carrito?: { id: number; ultimaActualizacion: string },
+    id?: number,
   ) {
     this.id = id;
     this.nombre = nombre;

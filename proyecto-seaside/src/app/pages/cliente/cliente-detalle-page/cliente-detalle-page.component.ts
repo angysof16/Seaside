@@ -40,7 +40,7 @@ export class ClienteDetallePageComponent implements OnInit {
 
   eliminar(): void {
     if (!confirm(`¿Eliminar al cliente ${this.cliente!.nombre}?`)) return;
-    this.clienteService.delete(this.cliente!.id).subscribe(() => {
+    this.clienteService.delete(this.cliente!.id!).subscribe(() => {
       this.router.navigate(['/clientes']);
     });
   }

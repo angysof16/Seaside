@@ -42,7 +42,7 @@ export class ClienteCrudTableComponent implements OnInit {
   eliminarCliente(cliente: Cliente): void {
     if (!confirm(`¿Eliminar al cliente ${cliente.nombre} ${cliente.apellido}?`))
       return;
-    this.clienteService.delete(cliente.id).subscribe(() => {
+    this.clienteService.delete(cliente.id!).subscribe(() => {
       this.cargarClientes();
     });
   }

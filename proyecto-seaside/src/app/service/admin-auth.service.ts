@@ -39,11 +39,16 @@ export class AdminAuthService {
   }
 
   /** Envía las credenciales al backend y persiste la sesión en sessionStorage. */
-  login(correo: string, contrasena: string): Observable<AdminSession> {
-    return this.http
-      .post<AdminSession>(`${this.apiUrl}/login`, { correo, contrasena })
-      .pipe(tap((admin) => this.setAdmin(admin)));
-  }
+  login(correo: string, contrasena: string): Observable<any> {
+  return this.http
+    .post<any>(`${this.apiUrl}/login`, { correo, contrasena })
+    .pipe(
+      tap((response) => {
+        localStorage.setItem(AdminAuthService.STORAGE_KEY, JSON.stringify(response));
+        this.adminSubject.next(response);
+      })
+    );
+}
 
   /** Cierra la sesión del administrador. */
   logout(): void {

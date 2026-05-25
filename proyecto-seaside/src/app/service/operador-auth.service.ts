@@ -38,11 +38,16 @@ export class OperadorAuthService {
   }
 
   /** Envía las credenciales al backend y persiste la sesión en sessionStorage. */
-  login(usuario: string, contrasena: string): Observable<OperadorSession> {
-    return this.http
-      .post<OperadorSession>(`${this.apiUrl}/login`, { usuario, contrasena })
-      .pipe(tap((op) => this.setOperador(op)));
-  }
+  login(usuario: string, contrasena: string): Observable<any> {
+  return this.http
+    .post<any>(`${this.apiUrl}/login`, { usuario, contrasena })
+    .pipe(
+      tap((response) => {
+        localStorage.setItem(OperadorAuthService.STORAGE_KEY, JSON.stringify(response));
+        this.operadorSubject.next(response);
+      })
+    );
+}
 
   /** Cierra la sesión del operador. */
   logout(): void {

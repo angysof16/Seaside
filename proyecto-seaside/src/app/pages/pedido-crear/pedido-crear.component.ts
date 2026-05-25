@@ -13,6 +13,7 @@ import { Producto } from '../../components/producto/producto';
 import { AdicionalesCl } from '../../model/adicionales-cl';
 import { CrearPedidoRequest } from '../../model/crear-pedido-request';
 import { Subscription } from 'rxjs';
+import { PagoService } from '../../service/pago.service';
 
 /**
  * Página de creación de pedidos.
@@ -44,6 +45,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     public carritoService: CarritoService,
     private router: Router,
+    private pagoService: PagoService,
   ) {}
 
   ngOnInit(): void {
@@ -249,11 +251,31 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     this.pedidoService.crear(request).subscribe({
       next: (response) => {
         this.enviando = false;
-        this.exito = true;
         this.pedidoId = response?.id ?? null;
         this.pedidoConfirmado = true;
         this.carritoService.vaciarCarrito();
+
+        //crear preferencia de pago y redirigir a MercadoPago
+        if (this.pedidoId) {
+          this.pagoService.crearPreferencia(this.pedidoId).subscribe({
+            next: (pago) => {
+            console.log('Respuesta pago:', pago);
+            const url = pago.sandBoxURL || pago.initPoint;
+            if (url) {
+              window.location.href = url;
+            } else {
+              console.error('No se recibió URL de pago', pago);
+              this.exito = true;
+            }
+          },
+            error:()=>{
+              this.exito = true;
+              this.error = 'Error al crear el pedido. Por favor intenta de nuevo.'
+            }
+          });
+        }
       },
+
       error: (err) => {
         this.enviando = false;
         this.error =

@@ -11,7 +11,8 @@ export interface Pedido {
   fechaEntrega: string;
   estado: string;
   total: number;
-  cliente: { id: number; nombre: string; apellido: string };
+  // cliente: { id: number; nombre: string; apellido: string };
+  cliente: { id: number; nombre: string; apellido: string; telefono?: string };
   domiciliarioId?: number;
 }
 

@@ -405,3 +405,39 @@
     margin: 0 16px;
   }
 }
+
+
+
+
+.btn-whatsapp {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: "Fuzzy Bubbles", cursive;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  white-space: nowrap;
+  background: rgba(37, 211, 102, 0.15);
+  color: #1a7a3f;
+  border: 1px solid rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:hover:not(:disabled) {
+  background: #25d366;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-whatsapp--modal {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 12px;
+}

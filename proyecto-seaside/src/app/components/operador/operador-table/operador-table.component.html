@@ -55,16 +55,16 @@
             </td>
             <td>{{ getNombreDomiciliario(pedido.domiciliarioId) }}</td>
             <td>
+              <!-- Reemplaza el bloque action-btns existente por este: -->
               <div class="action-btns">
-                <button class="btn-estado" (click)="abrirModalEstado(pedido)">
-                  📋 Estado
+                <button class="btn-estado"   (click)="abrirModalEstado(pedido)">📋 Estado</button>
+                <button class="btn-asignar"  (click)="abrirModalAsignar(pedido)">🛵 Asignar</button>
+                <button class="btn-whatsapp" (click)="enviarSms(pedido)"
+                        [disabled]="!pedido.cliente.telefono"
+                        title="Notificar por SMS">
+                  📱 SMS
                 </button>
-                <button class="btn-asignar" (click)="abrirModalAsignar(pedido)">
-                  🛵 Asignar
-                </button>
-                <button class="btn-delete" (click)="eliminarPedido(pedido)">
-                  🗑 Eliminar
-                </button>
+                <button class="btn-delete"   (click)="eliminarPedido(pedido)">🗑 Eliminar</button>
               </div>
             </td>
           </tr>
@@ -109,6 +109,12 @@
         ✓ Confirmar
       </button>
       <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+      <!-- operador pueda notificar al cliente en el mismo flujo -->
+      <button class="btn-whatsapp btn-whatsapp--modal"
+              *ngIf="pedidoEstado?.cliente?.telefono"
+              (click)="enviarSms(pedidoEstado!)">
+        📱 Notificar por SMS
+      </button>
     </div>
   </div>
 </div>

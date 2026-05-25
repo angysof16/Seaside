@@ -5,6 +5,11 @@ import {
   Domiciliario,
 } from 'src/app/service/domiciliario.service';
 
+import { HttpClient } from '@angular/common/http';
+
+
+
+
 /**
  * Vista principal del portal de operador.
  * Muestra los pedidos activos (o todos) y permite:
@@ -50,6 +55,7 @@ export class OperadorTableComponent implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private domiciliarioService: DomiciliarioService,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -178,5 +184,24 @@ export class OperadorTableComponent implements OnInit {
       CANCELADO: 'badge-cancelado',
     };
     return map[estado] ?? '';
+  }
+
+  // SERVICIO DE MENSAJERÍA
+  enviarSms(pedido: Pedido): void {
+    const tel = (pedido.cliente.telefono ?? '').replace(/\D/g, '');
+    if (!tel) {
+      alert('Este cliente no tiene teléfono registrado.');
+      return;
+    }
+
+    const mensaje = `Hola ${pedido.cliente.nombre}, tu pedido #${pedido.id} en SeaSide esta en estado: ${pedido.estado}. Gracias por tu preferencia!`;
+
+    this.http.post('http://localhost:8080/api/notificaciones/sms', {
+      telefono: tel,
+      mensaje
+    }).subscribe({
+      next: () => alert('✅ SMS enviado al cliente'),
+      error: (err) => alert('❌ Error: ' + (err.error?.error ?? 'No se pudo enviar'))
+    });
   }
 }

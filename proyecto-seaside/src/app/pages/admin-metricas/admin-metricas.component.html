@@ -1,0 +1,72 @@
+<div class="metricas-wrapper">
+
+  <header class="metricas-header">
+    <div>
+      <h1 class="metricas-title">Métricas</h1>
+      <p class="metricas-sub">Productos más pedidos</p>
+    </div>
+    <button class="btn-volver" (click)="volver()">← Volver al dashboard</button>
+  </header>
+
+  <!-- Stat card -->
+  <div class="stats-row" *ngIf="!cargando && !error">
+    <div class="stat-card">
+      <span class="stat-num">{{ totalPedidos }}</span>
+      <span class="stat-label">Pedidos totales</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">{{ ranking.length }}</span>
+      <span class="stat-label">Productos distintos</span>
+    </div>
+    <div class="stat-card stat-card--accent" *ngIf="ranking.length > 0">
+      <span class="stat-num">{{ ranking[0].nombre }}</span>
+      <span class="stat-label">El más pedido</span>
+    </div>
+  </div>
+
+  <!-- Loading / Error -->
+  <div *ngIf="cargando" class="estado-msg">Cargando métricas…</div>
+  <div *ngIf="error" class="estado-msg estado-msg--error">{{ error }}</div>
+
+  <!-- Tabla ranking -->
+  <div class="tabla-wrap" *ngIf="!cargando && ranking.length > 0">
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Producto</th>
+          <th>Veces en pedidos</th>
+          <th>Unidades vendidas</th>
+          <th>Popularidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ranking; let i = index" [class.fila-top]="i < 3">
+          <td class="col-pos">
+            <span *ngIf="i === 0" class="medalla">🥇</span>
+            <span *ngIf="i === 1" class="medalla">🥈</span>
+            <span *ngIf="i === 2" class="medalla">🥉</span>
+            <span *ngIf="i >= 3" class="pos-num">{{ i + 1 }}</span>
+          </td>
+          <td class="col-nombre">{{ item.nombre }}</td>
+          <td class="col-num">{{ item.totalPedidos }}</td>
+          <td class="col-num">{{ item.totalUnidades }}</td>
+          <td class="col-barra">
+            <div class="barra-bg">
+              <div
+                class="barra-fill"
+                [style.width.%]="(item.totalUnidades / ranking[0].totalUnidades) * 100"
+                [class.barra-gold]="i === 0"
+              ></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!cargando && !error && ranking.length === 0" class="estado-msg">
+    Aún no hay pedidos registrados.
+  </p>
+
+</div>

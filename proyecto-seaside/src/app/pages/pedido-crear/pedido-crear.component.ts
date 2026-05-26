@@ -262,7 +262,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
               console.log('Respuesta pago:', pago);
               const url = pago.sandBoxURL || pago.initPoint;
               if (url) {
-                window.open(url, '_blank'); // 👈 abre MercadoPago en nueva pestaña
+                window.open(url, '_blank'); // abre MercadoPago en nueva pestaña
               } else {
                 console.error('No se recibió URL de pago', pago);
               }

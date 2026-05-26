@@ -1,18 +1,3 @@
-<!-- Notificación de resultado del pago -->
-<div *ngIf="notificacionPago" class="notificacion-pago" [ngClass]="'notif-' + notificacionPago">
-  <span class="notif-icono">
-    <ng-container *ngIf="notificacionPago === 'exitoso'">✅</ng-container>
-    <ng-container *ngIf="notificacionPago === 'fallido'">❌</ng-container>
-    <ng-container *ngIf="notificacionPago === 'pendiente'">⏳</ng-container>
-  </span>
-  <span class="notif-texto">
-    <ng-container *ngIf="notificacionPago === 'exitoso'">¡Pago realizado con éxito! Tu pedido está siendo procesado.</ng-container>
-    <ng-container *ngIf="notificacionPago === 'fallido'">El pago no pudo completarse. Podés intentarlo de nuevo.</ng-container>
-    <ng-container *ngIf="notificacionPago === 'pendiente'">Tu pago está pendiente de confirmación.</ng-container>
-  </span>
-  <button class="notif-cerrar" (click)="cerrarNotificacion()">✕</button>
-</div>
-
 <div class="auth-hero">
   <div class="auth-hero-overlay"></div>
   <div class="auth-hero-content">

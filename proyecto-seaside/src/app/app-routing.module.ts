@@ -37,6 +37,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { DomiciliarioCrudTableComponent } from './components/domiciliario/domiciliario-crud-table/domiciliario-crud-table.component';
 import { DomiciliarioFormPageComponent } from './components/domiciliario/domiciliario-form-page/domiciliario-form-page.component';
 
+import { AdminMetricasComponent } from './pages/admin-metricas/admin-metricas.component';
 /** Módulo de enrutamiento principal de la aplicación Angular.
  * Define todas las rutas públicas y protegidas del sitio,
  * incluyendo páginas de cliente, administrador, operador y CRUD de entidades.
@@ -102,7 +103,10 @@ const routes: Routes = [
     component: DomiciliarioFormPageComponent,
   },
 
+  { path: 'admin/metricas', component: AdminMetricasComponent },
+
   { path: '**', component: ErrorPageComponent },
+
 ];
 
 @NgModule({

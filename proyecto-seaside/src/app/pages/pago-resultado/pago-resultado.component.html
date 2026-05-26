@@ -1,0 +1,93 @@
+<!-- src/app/pages/pago-resultado/pago-resultado.component.html -->
+
+<section class="resultado-hero">
+  <div class="resultado-hero-overlay"></div>
+  <div class="resultado-hero-content">
+    <h1 class="resultado-hero-title" [ngClass]="estado">
+      <span *ngIf="estado === 'cargando'">⏳ Verificando pago...</span>
+      <span *ngIf="estado === 'exitoso'">¡Pago exitoso!</span>
+      <span *ngIf="estado === 'fallido'">Pago rechazado</span>
+      <span *ngIf="estado === 'pendiente'">Pago pendiente</span>
+    </h1>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" />
+    </svg>
+  </div>
+</section>
+
+<main class="resultado-main">
+
+  <!-- Cargando -->
+  <div *ngIf="estado === 'cargando'" class="resultado-card cargando-card">
+    <div class="spinner"></div>
+    <p>Confirmando tu pago con MercadoPago...</p>
+  </div>
+
+  <!-- Éxito -->
+  <div *ngIf="estado === 'exitoso'" class="resultado-card exito-card">
+    <div class="resultado-icon">🎉</div>
+    <h2>¡Tu pedido está en camino!</h2>
+    <p>Tu pago fue procesado correctamente. Nuestro equipo ya está preparando tu pedido.</p>
+    <p *ngIf="pedidoId" class="pedido-ref">Pedido <strong>#{{ pedidoId }}</strong></p>
+    <p *ngIf="total" class="pedido-total">Total pagado: <strong>{{ total | currency:'COP':'$':'1.0-0' }}</strong></p>
+
+    <div class="resultado-acciones">
+      <button class="btn-cta" (click)="verPedido()" *ngIf="pedidoId">
+        Ver detalle del pedido
+      </button>
+      <button class="btn-secundario" (click)="irAPerfil()">
+        Mis pedidos
+      </button>
+      <button class="btn-secundario" (click)="irAMenu()">
+        Seguir comprando
+      </button>
+    </div>
+  </div>
+
+  <!-- Fallido -->
+  <div *ngIf="estado === 'fallido'" class="resultado-card fallido-card">
+    <div class="resultado-icon">😞</div>
+    <h2>Pago rechazado</h2>
+    <p>Tu pago no pudo procesarse. Puede ser por fondos insuficientes, datos incorrectos o rechazo del banco.</p>
+    <p *ngIf="pedidoId" class="pedido-ref">Tu pedido <strong>#{{ pedidoId }}</strong> quedó en estado <em>Pendiente</em>.</p>
+
+    <div class="resultado-acciones">
+      <button class="btn-cta" (click)="reintentar()">
+        Ver el pedido
+      </button>
+      <button class="btn-secundario" (click)="irAPerfil()">
+        Mis pedidos
+      </button>
+    </div>
+
+    <div class="fallido-tips">
+      <h3>Posibles causas</h3>
+      <ul>
+        <li>Fondos insuficientes en la tarjeta</li>
+        <li>Datos de la tarjeta incorrectos</li>
+        <li>El banco rechazó la transacción</li>
+        <li>En modo sandbox: verifica que el CVC no sea el que dice "rechazo claro"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pendiente -->
+  <div *ngIf="estado === 'pendiente'" class="resultado-card pendiente-card">
+    <div class="resultado-icon">⏳</div>
+    <h2>Pago en proceso</h2>
+    <p>Tu pago está siendo procesado. Esto puede tardar unos minutos. Te notificaremos cuando se confirme.</p>
+    <p *ngIf="pedidoId" class="pedido-ref">Pedido <strong>#{{ pedidoId }}</strong></p>
+
+    <div class="resultado-acciones">
+      <button class="btn-cta" (click)="verPedido()" *ngIf="pedidoId">
+        Ver estado del pedido
+      </button>
+      <button class="btn-secundario" (click)="irAPerfil()">
+        Mis pedidos
+      </button>
+    </div>
+  </div>
+
+</main>

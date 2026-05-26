@@ -26,7 +26,6 @@ import { PedidoCrearComponent } from './pages/pedido-crear/pedido-crear.componen
 import { AdicionalCrudTableComponent } from './components/adicional/adicional-crud-table/adicional-crud-table.component';
 import { AdicionalFormPageComponent } from './components/adicional/adicional-form-page/adicional-form-page.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
-
 import { MisPedidosComponent } from './pages/mis-pedidos/mis-pedidos.component';
 
 // Admin
@@ -37,10 +36,9 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { DomiciliarioCrudTableComponent } from './components/domiciliario/domiciliario-crud-table/domiciliario-crud-table.component';
 import { DomiciliarioFormPageComponent } from './components/domiciliario/domiciliario-form-page/domiciliario-form-page.component';
 
-/** Módulo de enrutamiento principal de la aplicación Angular.
- * Define todas las rutas públicas y protegidas del sitio,
- * incluyendo páginas de cliente, administrador, operador y CRUD de entidades.
- */
+// ── NUEVO: Resultado de pago ──────────────────────────────────────────────
+import { PagoResultadoComponent } from './pages/pago-resultado/pago-resultado.component';
+
 const routes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'menu', component: MenuComponent },
@@ -64,7 +62,10 @@ const routes: Routes = [
   { path: 'pedido/nuevo', component: PedidoCrearComponent },
   { path: 'detallePedido', component: PedidoDetalleComponent },
 
-  // Carrito de compras
+  // ── Resultado de pago (MercadoPago redirige aquí) ─────────────────────
+  { path: 'pago/resultado', component: PagoResultadoComponent },
+
+  // Carrito
   { path: 'carrito', component: CarritoComponent },
 
   // Operadores
@@ -91,16 +92,10 @@ const routes: Routes = [
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/dashboard', component: AdminDashboardComponent },
 
-  // CRUD Domiciliarios (admin)
+  // CRUD Domiciliarios
   { path: 'admin/domiciliarios', component: DomiciliarioCrudTableComponent },
-  {
-    path: 'admin/domiciliarios/nuevo',
-    component: DomiciliarioFormPageComponent,
-  },
-  {
-    path: 'admin/domiciliarios/editar/:id',
-    component: DomiciliarioFormPageComponent,
-  },
+  { path: 'admin/domiciliarios/nuevo', component: DomiciliarioFormPageComponent },
+  { path: 'admin/domiciliarios/editar/:id', component: DomiciliarioFormPageComponent },
 
   { path: '**', component: ErrorPageComponent },
 ];

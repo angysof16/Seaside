@@ -81,6 +81,8 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 
+import { PagoResultadoComponent } from './pages/pago-resultado/pago-resultado.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -142,6 +144,8 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     DomiciliarioFormPageComponent,
     // Errors
     ErrorPageComponent,
+    
+    PagoResultadoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [{

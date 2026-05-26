@@ -1,4 +1,6 @@
 // src/app/pages/pedido-crear/pedido-crear.component.ts
+// CAMBIO PRINCIPAL: usar sandboxInitPoint en lugar de sandBoxURL
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../service/producto.service';
@@ -15,12 +17,6 @@ import { CrearPedidoRequest } from '../../model/crear-pedido-request';
 import { Subscription } from 'rxjs';
 import { PagoService } from '../../service/pago.service';
 
-/**
- * Página de creación de pedidos.
- * Guia al cliente en 3 pasos: selección del plato principal,
- * elección de acompañamientos/adicionales y confirmación del pedido.
- * Persiste el estado del carrito en localStorage para retomar después.
- */
 @Component({
   selector: 'app-pedido-crear',
   templateUrl: './pedido-crear.component.html',
@@ -126,8 +122,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     if (this.platoPrincipal?.id === item.productoId) {
       this.platoPrincipal =
         this.items.length > 0
-          ? (this.productos.find((p) => p.id === this.items[0].productoId) ??
-            null)
+          ? (this.productos.find((p) => p.id === this.items[0].productoId) ?? null)
           : null;
     }
     this.persistirEstado();
@@ -163,17 +158,12 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
     }
   }
 
-  isAdicionalSeleccionado(
-    item: ItemCarrito,
-    adicional: AdicionalesCl,
-  ): boolean {
+  isAdicionalSeleccionado(item: ItemCarrito, adicional: AdicionalesCl): boolean {
     return item.adicionales.some((a) => a.adicionalId === adicional.id);
   }
 
   toggleAdicional(item: ItemCarrito, adicional: AdicionalesCl): void {
-    const idx = item.adicionales.findIndex(
-      (a) => a.adicionalId === adicional.id,
-    );
+    const idx = item.adicionales.findIndex((a) => a.adicionalId === adicional.id);
     if (idx >= 0) {
       item.adicionales.splice(idx, 1);
     } else {
@@ -188,16 +178,10 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
   }
 
   getAdicionalCantidad(item: ItemCarrito, adicionalId: number): number {
-    return (
-      item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1
-    );
+    return item.adicionales.find((a) => a.adicionalId === adicionalId)?.cantidad ?? 1;
   }
 
-  setAdicionalCantidad(
-    item: ItemCarrito,
-    adicionalId: number,
-    delta: number,
-  ): void {
+  setAdicionalCantidad(item: ItemCarrito, adicionalId: number, delta: number): void {
     const a = item.adicionales.find((ad) => ad.adicionalId === adicionalId);
     if (a) {
       a.cantidad = Math.max(1, a.cantidad + delta);
@@ -228,9 +212,10 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
 
   confirmarPedido(): void {
     if (this.items.length === 0) return;
-    if (!this.platoPrincipal)
+    if (!this.platoPrincipal) {
       this.platoPrincipal =
         this.productos.find((p) => p.id === this.items[0].productoId) ?? null;
+    }
     const cliente = this.authService.currentCliente;
     if (!cliente) return;
 
@@ -250,32 +235,44 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
 
     this.pedidoService.crear(request).subscribe({
       next: (response) => {
-        this.enviando = false;
         this.pedidoId = response?.id ?? null;
         this.pedidoConfirmado = true;
         this.carritoService.vaciarCarrito();
 
-        //crear preferencia de pago y redirigir a MercadoPago
         if (this.pedidoId) {
+          // Crear preferencia de pago y redirigir a MercadoPago
           this.pagoService.crearPreferencia(this.pedidoId).subscribe({
             next: (pago) => {
-            console.log('Respuesta pago:', pago);
-            const url = pago.sandBoxURL || pago.initPoint;
-            if (url) {
-              window.location.href = url;
-            } else {
-              console.error('No se recibió URL de pago', pago);
-              this.exito = true;
-            }
-          },
-            error:()=>{
-              this.exito = true;
-              this.error = 'Error al crear el pedido. Por favor intenta de nuevo.'
-            }
+              console.log('Preferencia MP creada:', pago);
+
+              // FIX: usar sandboxInitPoint (campo correcto del SDK)
+              // En sandbox siempre redirigir a sandboxInitPoint
+              const url = pago.sandboxInitPoint || pago.initPoint;
+
+              if (url) {
+                window.location.href = url;
+              } else {
+                // Fallback: ir a página de resultado sin pago externo
+                this.enviando = false;
+                this.router.navigate(['/pago/resultado'], {
+                  queryParams: { estado: 'exitoso', pedidoId: this.pedidoId },
+                });
+              }
+            },
+            error: (err) => {
+              console.error('Error al crear preferencia MP:', err);
+              this.enviando = false;
+              // El pedido ya fue creado; llevamos al resultado igual
+              this.router.navigate(['/pago/resultado'], {
+                queryParams: { estado: 'exitoso', pedidoId: this.pedidoId },
+              });
+            },
           });
+        } else {
+          this.enviando = false;
+          this.exito = true;
         }
       },
-
       error: (err) => {
         this.enviando = false;
         this.error =

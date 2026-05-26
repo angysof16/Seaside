@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { PedidoService, Pedido } from '../../service/pedido.service';
 
@@ -7,6 +7,7 @@ import { PedidoService, Pedido } from '../../service/pedido.service';
  * Página que muestra el historial de pedidos del cliente autenticado.
  * Redirige a /login si no hay sesión activa.
  * Ordena los pedidos del más reciente al más antiguo.
+ * Muestra notificación de resultado del pago si viene de MercadoPago.
  */
 @Component({
   selector: 'app-mis-pedidos',
@@ -19,13 +20,31 @@ export class MisPedidosComponent implements OnInit {
   cargando = true;
   error = '';
 
+  // Notificación de pago
+  notificacionPago: 'exitoso' | 'fallido' | 'pendiente' | null = null;
+
   constructor(
     private authService: AuthService,
     private pedidoService: PedidoService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    // Leer resultado del pago desde query params (viene de MercadoPago)
+    const estadoPago = this.route.snapshot.queryParamMap.get('pago');
+    if (estadoPago === 'exitoso' || estadoPago === 'fallido' || estadoPago === 'pendiente') {
+      this.notificacionPago = estadoPago;
+      // Limpiar el query param de la URL sin recargar la página
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {},
+        replaceUrl: true,
+      });
+      // Auto-ocultar la notificación después de 6 segundos
+      setTimeout(() => (this.notificacionPago = null), 6000);
+    }
+
     const cliente = this.authService.currentCliente;
     if (!cliente) {
       this.router.navigate(['/login']);
@@ -45,6 +64,10 @@ export class MisPedidosComponent implements OnInit {
         this.cargando = false;
       },
     });
+  }
+
+  cerrarNotificacion(): void {
+    this.notificacionPago = null;
   }
 
   verDetalle(id: number): void {

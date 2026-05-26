@@ -81,6 +81,9 @@ import { ErrorPageComponent } from './errors/error-page/error-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 
+//metricas admin
+import { AdminMetricasComponent } from './pages/admin-metricas/admin-metricas.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -142,6 +145,7 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     DomiciliarioFormPageComponent,
     // Errors
     ErrorPageComponent,
+    AdminMetricasComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [{

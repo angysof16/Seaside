@@ -259,15 +259,15 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
         if (this.pedidoId) {
           this.pagoService.crearPreferencia(this.pedidoId).subscribe({
             next: (pago) => {
-            console.log('Respuesta pago:', pago);
-            const url = pago.sandBoxURL || pago.initPoint;
-            if (url) {
-              window.location.href = url;
-            } else {
-              console.error('No se recibió URL de pago', pago);
-              this.exito = true;
-            }
-          },
+              console.log('Respuesta pago:', pago);
+              const url = pago.sandBoxURL || pago.initPoint;
+              if (url) {
+                window.open(url, '_blank'); // abre MercadoPago en nueva pestaña
+              } else {
+                console.error('No se recibió URL de pago', pago);
+              }
+              this.exito = true; // 👈 muestra pedido exitoso en tu app siempre
+            },
             error:()=>{
               this.exito = true;
               this.error = 'Error al crear el pedido. Por favor intenta de nuevo.'

@@ -17,22 +17,26 @@
 <main class="pedido-main">
   <!-- ── Éxito ──────────────────────────────────────────────────────────── -->
   <div *ngIf="exito" class="exito-card">
-    <h2>¡Pedido realizado!</h2>
+    <div class="exito-icon">🎉</div>
+    <h2>¡Pedido creado!</h2>
     <p>
-      Tu pedido ha sido recibido. Pronto recibirás actualizaciones sobre su
-      estado.
+      Se abrió una pestaña con MercadoPago para completar tu pago.
+      Una vez que pagues, vuelve aquí y revisa el estado de tu pedido.
     </p>
     <div class="exito-actions">
-      <a routerLink="/perfil" class="btn-cta">Ver mi perfil</a>
       <a
         *ngIf="pedidoId"
         [routerLink]="['/pedidos', pedidoId]"
-        class="btn-cta btn-cta--secondary"
+        class="btn-cta"
       >
-        Ver detalle del pedido
+        Ver mi pedido
+      </a>
+      <a routerLink="/perfil/pedidos" class="btn-cta btn-cta--secondary">
+        Mis pedidos
       </a>
     </div>
   </div>
+ 
 
   <ng-container *ngIf="!exito">
     <!-- ── Stepper ─────────────────────────────────────────────────────── -->

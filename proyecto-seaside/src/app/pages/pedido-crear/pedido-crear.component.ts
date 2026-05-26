@@ -1,5 +1,4 @@
 // src/app/pages/pedido-crear/pedido-crear.component.ts
-// CAMBIO PRINCIPAL: usar sandboxInitPoint en lugar de sandBoxURL
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -240,19 +239,23 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
         this.carritoService.vaciarCarrito();
 
         if (this.pedidoId) {
-          // Crear preferencia de pago y redirigir a MercadoPago
+          // Guardar pedidoId en localStorage ANTES de salir a MP
+          // para poder recuperarlo al volver
+          localStorage.setItem('seaside_ultimo_pedido', String(this.pedidoId));
+
           this.pagoService.crearPreferencia(this.pedidoId).subscribe({
             next: (pago) => {
               console.log('Preferencia MP creada:', pago);
-
-              // FIX: usar sandboxInitPoint (campo correcto del SDK)
-              // En sandbox siempre redirigir a sandboxInitPoint
+              // sandboxInitPoint: URL correcta para modo prueba
               const url = pago.sandboxInitPoint || pago.initPoint;
 
               if (url) {
-                window.location.href = url;
+                // Abrir MP en nueva pestaña para evitar perder el contexto de Angular
+                window.open(url, '_blank');
+                // Mostrar pantalla de éxito local mientras el usuario paga en MP
+                this.enviando = false;
+                this.exito = true;
               } else {
-                // Fallback: ir a página de resultado sin pago externo
                 this.enviando = false;
                 this.router.navigate(['/pago/resultado'], {
                   queryParams: { estado: 'exitoso', pedidoId: this.pedidoId },
@@ -262,7 +265,7 @@ export class PedidoCrearComponent implements OnInit, OnDestroy {
             error: (err) => {
               console.error('Error al crear preferencia MP:', err);
               this.enviando = false;
-              // El pedido ya fue creado; llevamos al resultado igual
+              // Pedido creado pero MP falló — llevar al resultado igual
               this.router.navigate(['/pago/resultado'], {
                 queryParams: { estado: 'exitoso', pedidoId: this.pedidoId },
               });

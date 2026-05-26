@@ -44,11 +44,13 @@ export class PagoResultadoComponent implements OnInit {
           } else if (est === 'CANCELADO' || estadoParam === 'fallido') {
             this.estado = 'fallido';
           } else {
-            this.estado = 'pendiente';
+            // Pendiente: el pago fue aprobado pero el operador aún no procesó
+            // Si MP redirigió con estado=exitoso, mostrarlo como exitoso de todas formas
+            this.estado = estadoParam === 'exitoso' ? 'exitoso' : 'pendiente';
           }
         },
         error: () => {
-          // Si falla la consulta usamos el param de la URL
+          // Si falla la consulta usamos el param de la URL como fallback
           this.estado = (estadoParam as any) ?? 'pendiente';
         },
       });
@@ -73,8 +75,6 @@ export class PagoResultadoComponent implements OnInit {
 
   reintentar(): void {
     if (this.pedidoId) {
-      // Volver al paso 3 del pedido existente no es posible (ya fue creado),
-      // solo podemos llevarlos al detalle del pedido
       this.router.navigate(['/pedidos', this.pedidoId]);
     } else {
       this.router.navigate(['/pedido/nuevo']);

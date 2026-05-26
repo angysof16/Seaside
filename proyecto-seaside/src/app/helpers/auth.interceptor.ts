@@ -21,38 +21,29 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${token}`,
         },
       });
+
       return next.handle(authRequest);
     }
 
     return next.handle(request);
   }
 
-<<<<<<< Updated upstream
   private getToken(): string | null {
-=======
-    private getToken(): string | null {
     // Sesión de cliente
->>>>>>> Stashed changes
     const clienteRaw = localStorage.getItem('seaside_client');
     if (clienteRaw) {
       const cliente = JSON.parse(clienteRaw);
       if (cliente?.token) return cliente.token;
     }
 
-<<<<<<< Updated upstream
-=======
     // Sesión de admin
->>>>>>> Stashed changes
     const adminRaw = localStorage.getItem('seaside_admin');
     if (adminRaw) {
       const admin = JSON.parse(adminRaw);
       if (admin?.token) return admin.token;
     }
 
-<<<<<<< Updated upstream
-=======
     // Sesión de operador
->>>>>>> Stashed changes
     const operadorRaw = localStorage.getItem('seaside_operador');
     if (operadorRaw) {
       const operador = JSON.parse(operadorRaw);

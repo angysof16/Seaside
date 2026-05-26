@@ -49,7 +49,6 @@ export class AuthService {
   }
 
   /** Envía las credenciales al backend y persiste la sesión en sessionStorage. */
-<<<<<<< Updated upstream
   login(credentials: LoginRequest): Observable<Cliente> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       map(
@@ -67,18 +66,6 @@ export class AuthService {
       tap((cliente) => this.setCliente(cliente)),
     );
   }
-=======
-  login(credentials: LoginRequest): Observable<any> {
-  return this.http
-    .post<any>(`${this.apiUrl}/login`, credentials)
-    .pipe(
-      tap((response) => {
-        localStorage.setItem(AuthService.STORAGE_KEY, JSON.stringify(response));
-        this.clienteSubject.next(response);
-      })
-    );
-}
->>>>>>> Stashed changes
 
   /** Registra un nuevo cliente. */
   signup(data: SignupRequest): Observable<Cliente> {

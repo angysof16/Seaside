@@ -2,10 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService, Pedido } from 'src/app/service/pedido.service';
-import {
-  DomiciliarioService,
-  Domiciliario,
-} from 'src/app/service/domiciliario.service';
+import { Domiciliario } from 'src/app/service/domiciliario.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -54,7 +51,6 @@ export class PedidoDetalleComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pedidoService: PedidoService,
-    private domiciliarioService: DomiciliarioService,
     private http: HttpClient,
   ) {}
 
@@ -78,10 +74,14 @@ export class PedidoDetalleComponent implements OnInit {
         this.pedido = pedido;
 
         if (pedido.domiciliarioId) {
-          this.domiciliarioService.findById(pedido.domiciliarioId).subscribe({
-            next: (d) => (this.domiciliario = d),
-            error: () => (this.domiciliario = null),
-          });
+          this.http
+            .get<Domiciliario>(
+              `${environment.apiUrl}/api/pedidos/${id}/domiciliario`,
+            )
+            .subscribe({
+              next: (d) => (this.domiciliario = d),
+              error: () => (this.domiciliario = null),
+            });
         }
 
         this.http
